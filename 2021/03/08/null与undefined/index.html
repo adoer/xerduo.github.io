@@ -3,24 +3,27 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>小耳朵</title>
+  <title>null与undefined | 小耳朵</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
+    <meta name="keywords" content="demo">
   
   
   
-  <meta name="description" content="google-site-verification: google184e1e684149229c.html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小耳朵">
-<meta property="og:url" content="http://xerduo.com/google184e1e684149229c.html">
+  
+  <meta name="description" content="undefined与null ECMAScript 的原始类型中，是有Undefined 和 Null 类型的。 这两种类型都分别对应了属于自己的唯一专用值，即undefined 和 null。  ECMAScript 有 6 种简单数据类型（也称为原始类型）： Undefined、Null、Boolean、Number、String 和 Symbol 。Symbol（符号）是 ECMAScrip">
+<meta name="keywords" content="demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="null与undefined">
+<meta property="og:url" content="http://xerduo.com/2021/03/08/null与undefined/index.html">
 <meta property="og:site_name" content="小耳朵">
-<meta property="og:description" content="google-site-verification: google184e1e684149229c.html">
+<meta property="og:description" content="undefined与null ECMAScript 的原始类型中，是有Undefined 和 Null 类型的。 这两种类型都分别对应了属于自己的唯一专用值，即undefined 和 null。  ECMAScript 有 6 种简单数据类型（也称为原始类型）： Undefined、Null、Boolean、Number、String 和 Symbol 。Symbol（符号）是 ECMAScrip">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-03-05T13:58:59.927Z">
+<meta property="og:updated_time" content="2021-03-08T12:39:16.281Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小耳朵">
-<meta name="twitter:description" content="google-site-verification: google184e1e684149229c.html">
+<meta name="twitter:title" content="null与undefined">
+<meta name="twitter:description" content="undefined与null ECMAScript 的原始类型中，是有Undefined 和 Null 类型的。 这两种类型都分别对应了属于自己的唯一专用值，即undefined 和 null。  ECMAScript 有 6 种简单数据类型（也称为原始类型）： Undefined、Null、Boolean、Number、String 和 Symbol 。Symbol（符号）是 ECMAScrip">
   
     <link rel="alternate" href="/atom.xml" title="小耳朵" type="application/atom+xml">
   
@@ -67,7 +70,7 @@ var themeMenus = {};
 </script>
 
 
-  <body>
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
   <header id="allheader" class="site-header" role="banner">
@@ -176,17 +179,28 @@ var themeMenus = {};
             
       <div id="content" class="outer">
         
-          <section id="main"><article id="page-"  class="article article-type-
-        page" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-null与undefined" style="width: 66%; float:left;"
+     class="article article-type-
+        post" itemscope itemprop="blogPost" >
             <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
                 
                     
+                        <header class="article-header">
+                            
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      null与undefined
+    </h1>
+  
+
+                        </header>
+                        
                             <div class="article-meta">
                                 
     发表于
-    <a href="/google184e1e684149229c.html" class="article-date">
-        <time datetime="2021-03-05T13:58:59.927Z" itemprop="datePublished">
-            2021-03-05 21:03:92
+    <a href="/2021/03/08/null与undefined/" class="article-date">
+        <time datetime="2021-03-08T02:50:11.000Z" itemprop="datePublished">
+            2021-03-08 10:03:00
         </time>
     </a>
     
@@ -194,12 +208,43 @@ var themeMenus = {};
                             </div>
                             <div class="article-entry" itemprop="articleBody">
                                 
-                                                                        google-site-verification: google184e1e684149229c.html
+                                                                        <h1 id="undefined与null"><a href="#undefined与null" class="headerlink" title="undefined与null"></a>undefined与null</h1><p> ECMAScript 的原始类型中，是有Undefined 和 Null 类型的。 这两种类型都分别对应了属于自己的唯一专用值，即undefined 和 null。</p>
+<blockquote>
+<p>ECMAScript 有 6 种简单数据类型（也称为原始类型）：<font color="red"> Undefined、Null、Boolean、Number、<br>String 和 Symbol </font>。Symbol（符号）是 ECMAScript 6 新增的。还有一种复杂数据类型叫 Object（对<br>象）。Object 是一种无序名值对的集合。<br><a id="more"></a></p>
+</blockquote>
+<h1 id="undefined"><a href="#undefined" class="headerlink" title="undefined"></a>undefined</h1><p>表示”缺少值”，就是此处应该有一个值，但是还没有定义<br>（1）变量被声明了，但没有赋值时，就等于undefined。</p>
+<p>（2) 调用函数时，应该提供的参数没有提供，该参数等于undefined。</p>
+<p>（3）对象没有赋值的属性，该属性的值为undefined。</p>
+<p>（4）函数没有返回值时，默认返回undefined。</p>
+<blockquote>
+<p>一般来说，永远不用显式地给某个变量设置 undefined 值。字面值 undefined<br> 主要用于比较，而且在 ECMA-262 第 3 版之前是不存在的。<font color="red">增加这个特殊值的目的就是为<br> 了正式明确空对象指针（null）和未初始化变量的区别<font>。</font></font></p>
+</blockquote>
+<h1 id="null"><a href="#null" class="headerlink" title="null"></a>null</h1><blockquote>
+<p>Null 类型同样只有一个值，即特殊值 null。逻辑上讲，null 值表示一个空对象指针，这也是给<br>typeof 传一个 null 会返回”object”的原因：<br>let car = null;<br>console.log(typeof car); // “object”<br>在定义将来要保存对象值的变量时，建议使用 null 来初始化，不要使用其他值。这样，只要检查<br>这个变量的值是不是 null 就可以知道这个变量是否在后来被重新赋予了一个对象的引用</p>
+</blockquote>
+<p>（1）在定义将来要保存对象值的变量时，建议使用 null 来初始化，不要使用其他值。</p>
+<p>// （1） 作为函数的参数，表示该函数的参数不是对象。</p>
+<p>（2） 作为对象原型链的终点。<br>Object.getPrototypeOf(Object.prototype)<br>// null</p>
+<h1 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h1><p>1、可以使用 String()转型函数，它始终会返回表示相应类型值的字符串<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String(null) // &apos;null&apos; ,</span><br><span class="line">String(undefined) // &apos;undefined&apos;</span><br></pre></td></tr></table></figure></p>
+<p>2、使用 Object.prototype.toString.call(arg)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object.prototype.toString.call(undefined) ; // &quot;[object Undefined]&quot;</span><br><span class="line">Object.prototype.toString.call(null) ; // &quot;[object Null]&quot;</span><br></pre></td></tr></table></figure></p>
+<h1 id="历史原因"><a href="#历史原因" class="headerlink" title="历史原因"></a>历史原因</h1><p>1995年JavaScript诞生时，最初像Java一样，只设置了null作为表示”无”的值。<br>根据C语言的传统，null被设计成可以自动转为0。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Number(null)</span><br><span class="line">// 0</span><br><span class="line">5 + null</span><br><span class="line">// 5</span><br></pre></td></tr></table></figure>
+<p>但是，JavaScript的设计者Brendan Eich（布兰登·艾克），觉得这样做还不够，有两个原因。</p>
+<p>首先，null像在Java里一样，被当成一个对象。但是，JavaScript的数据类型分成原始类型（primitive）和合成类型（complex）两大类，Brendan Eich觉得表示”无”的值最好不是对象。</p>
+<p>其次，JavaScript的最初版本没有包括错误处理机制，发生数据类型不匹配时，往往是自动转换类型或者默默地失败。Brendan Eich觉得，如果null自动转为0，很不容易发现错误。</p>
+<p>因此，Brendan Eich又设计了一个undefined。</p>
+
                                                                             
                                                         </div>
                                                         <footer class="entry-meta entry-footer">
                                                             
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+
                                                                 
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
                                                                 
                                                                 
                                                                 
@@ -224,233 +269,41 @@ var themeMenus = {};
                                         </div>
                                         
                                             
+<nav id="article-nav">
+  
+    <a href="/2021/03/08/js类型检测/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS类型检测
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/01/03/基于canvas的俄罗斯方块游戏/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">🎮基于canvas的俄罗斯方块游戏</div>
+    </a>
+  
+</nav>
+
                                                 
 </article>
 
 <!-- Table of Contents -->
-</section>
-          <aside id="sidebar">
-  
-    <div class="widget-wrap" style="margin: 20px 0;">
-	<div id="search-form-wrap">
-    
-        <form class="search-form">
-            <label style="width: 75%;">
-                <span class="screen-reader-text">Search for:</span>
-                <input type="search" class="search-field" style="height: 42px;" placeholder=" 搜索…" value="" name="s" title="">
-            </label>
-            <input type="submit" class="search-form-submit" value="搜索">
-        </form>
-        <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: '文章',
-            PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
-            UNTITLED: '(无标题)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
+
+    <aside id="sidebar">
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">
+                文章目录
+            </strong>
             
-</div>
-</div>
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">联系我吧</h3>
-    <div class="widget widget_athemes_social_icons">
-
-    	<ul class="clearfix widget-social-icons">   
-    	
-          
-            <li><a href="mailto:?subject=请联系我&body=我能帮你什么" title="email"><i class="fa fa-envelope" aria-hidden="true"></i></a></li> 
-          
-   		
-   		</ul>
-
-
-   		<!--
-   		<ul class="clearfix widget-social-icons">   		
-   		<li class="widget-si-twitter"><a href="http://twitter.com" title="Twitter"><i class="ico-twitter"></i></a></li> 
-		<li class="widget-si-facebook"><a href="http://facebook.com" title="Facebook"><i class="ico-facebook"></i></a></li>
-			<li class="widget-si-gplus"><a href="http://plus.google.com" title="Google+"><i class="ico-gplus"></i></a></li>
-			<li class="widget-si-pinterest"><a href="http://pinterest.com" title="Pinterest"><i class="ico-pinterest"></i></a></li>
-			<li class="widget-si-flickr"><a href="http://flickr.com" title="Flickr"><i class="ico-flickr"></i></a></li>
-			<li class="widget-si-instagram"><a href="http://instagram.com" title="Instagram"><i class="ico-instagram"></i></a></li>
-		</ul> -->
-
-    </div>
-  </div>
-
-
-  
-    
-    <div class="widget_athemes_tabs">
-        <ul id="widget-tab" class="clearfix widget-tab-nav">
-            <li class="active">
-                <a>
-                    最新文章
-                </a>
-            </li>
-        </ul>
-        <div class="widget">
-            <ul>
-                
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/03/08/js类型检测/">
-                                                    JS类型检测
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-03-08
-                                            </span>
-                                    </div>
-
-                    </li>
+                <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined与null"><span class="nav-number">1.</span> <span class="nav-text">undefined与null</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">undefined</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">null</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#检测"><span class="nav-number">4.</span> <span class="nav-text">检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#历史原因"><span class="nav-number">5.</span> <span class="nav-text">历史原因</span></a></li></ol>
                     
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/03/08/null与undefined/">
-                                                    null与undefined
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-03-08
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/01/03/基于canvas的俄罗斯方块游戏/">
-                                                    🎮基于canvas的俄罗斯方块游戏
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-01-03
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/01/01/两数相加/">
-                                                    两数相加
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-01-01
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2018/01/18/TwoSum/">
-                                                    两数之和
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2018-01-18
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-            </ul>
-            </div>
         </div>
-        
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">5</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/刷题/">刷题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/游戏/">游戏</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/刷题/" style="font-size: 20px;">刷题</a> <a href="/tags/游戏/" style="font-size: 10px;">游戏</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-
-  
-</aside>
+    </aside>
+    </section>
         
       </div>
       <footer id="footer" class="site-footer">
