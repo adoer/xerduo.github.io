@@ -1185,7 +1185,7 @@ body.search .page .entry-footer {
 	padding: 18px 0;
 	color: #999; 
 	font-size: .9em;
-	/* border-top: 1px solid #f3efef; */
+	border-top: 1px solid #f3efef;
 	/* background: #16171b; */
 	}
 .site-footer a {
@@ -1645,11 +1645,12 @@ body.search .page .entry-footer {
 
 	/* 底部茶杯 */
 	.cup-wrap {
-		width: 294px;
+		width: 400px;
     height: 152px;
     position: absolute;
     transform: scale(0.2);
     top: -95px;
+		background: #fff;
 	}
 	
 	.cup {
@@ -1665,7 +1666,7 @@ body.search .page .entry-footer {
 		border: 3px solid #000;
 		position: absolute;
 		bottom: 0;
-		left: 40px;
+		left: 90px;
 		z-index: 2;
 	}
 	.cup::before {
@@ -1696,7 +1697,7 @@ body.search .page .entry-footer {
 		right: -25px;
 	}
 	.cup__mouse {
-		top: 45px;
+		top: 68px;
 		left: 75px;
 		position: absolute;
 		height: 30px;
@@ -1768,7 +1769,7 @@ body.search .page .entry-footer {
 						animation: .4s linear 0s infinite alternate shadow;
 		position: absolute;
 		bottom: -20px;
-		left: 55px;
+		left: 108px;
 		z-index: 1;
 	}
 	.cup-shadow::after {
