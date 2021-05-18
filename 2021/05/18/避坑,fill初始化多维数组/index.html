@@ -3,20 +3,27 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>归档: 2018 | 小耳朵</title>
+  <title>避坑,fill初始化多维数组 | 小耳朵</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
+    <meta name="keywords" content="demo">
   
   
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="小耳朵">
-<meta property="og:url" content="http://xerduo.com/archives/2018/index.html">
+  
+  <meta name="description" content="避坑,fill初始化多维数组数组实例的 fill(),使用给定值，填充一个数组。例如： 12let a = new Array(5).fill(0);console.log(a); // 输出结果为[0, 0, 0, 0, 0]  使用fill()创建二维数组12let arr=new Array(3).fill(new Array(3).fill(0))console.log(arr); //">
+<meta name="keywords" content="demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="避坑,fill初始化多维数组">
+<meta property="og:url" content="http://xerduo.com/2021/05/18/避坑,fill初始化多维数组/index.html">
 <meta property="og:site_name" content="小耳朵">
+<meta property="og:description" content="避坑,fill初始化多维数组数组实例的 fill(),使用给定值，填充一个数组。例如： 12let a = new Array(5).fill(0);console.log(a); // 输出结果为[0, 0, 0, 0, 0]  使用fill()创建二维数组12let arr=new Array(3).fill(new Array(3).fill(0))console.log(arr); //">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-05-18T14:49:02.455Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小耳朵">
+<meta name="twitter:title" content="避坑,fill初始化多维数组">
+<meta name="twitter:description" content="避坑,fill初始化多维数组数组实例的 fill(),使用给定值，填充一个数组。例如： 12let a = new Array(5).fill(0);console.log(a); // 输出结果为[0, 0, 0, 0, 0]  使用fill()创建二维数组12let arr=new Array(3).fill(new Array(3).fill(0))console.log(arr); //">
   
     <link rel="alternate" href="/atom.xml" title="小耳朵" type="application/atom+xml">
   
@@ -63,7 +70,7 @@ var themeMenus = {};
 </script>
 
 
-  <body>
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
   <header id="allheader" class="site-header" role="banner">
@@ -174,269 +181,104 @@ var themeMenus = {};
             
       <div id="content" class="outer">
         
-          <section id="main">
-  <div class="archives-tags-wrap"><blockquote><span>嗯，目前共计10篇文章</span></blockquote>
-
-
-
-
-	<!-- 分页显示 -->
-	
-	
-		
-		
-		  
-		  
-		  <section class="archives-wrap">
-		    <div class="archive-year-wrap">
-		      <h1><a href="/archives/2018" class="archive-year">2018</a></h1>
-		    </div>
-		    <div class="archives">
-		
-		<article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <header class="archive-article-header">
-
-            <a href="/2018/01/18/TwoSum/" class="archive-article-date">
-                <time datetime="2018-01-18T05:06:00.000Z" itemprop="datePublished">
-                    2018-01-18
-                </time>
-            </a>
-            
+          <section id="main" style="float:none;"><article id="post-避坑,fill初始化多维数组" style="width: 66%; float:left;"
+     class="article article-type-
+        post" itemscope itemprop="blogPost" >
+            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+                
+                    
+                        <header class="article-header">
+                            
   
-    <h1 class="thumb" itemprop="name">
-      <a class="archive-article-title" href="/2018/01/18/TwoSum/">两数之和</a>
+    <h1 class="thumb" class="article-title" itemprop="name">
+      避坑,fill初始化多维数组
     </h1>
   
 
-        </header>
-    </div>
+                        </header>
+                        
+                            <div class="article-meta">
+                                
+    发表于
+    <a href="/2021/05/18/避坑,fill初始化多维数组/" class="article-date">
+        <time datetime="2021-05-18T14:39:17.000Z" itemprop="datePublished">
+            2021-05-18 22:05:00
+        </time>
+    </a>
+    
+                                    
+                            </div>
+                            <div class="article-entry" itemprop="articleBody">
+                                
+                                                                        <h1 id="避坑-fill初始化多维数组"><a href="#避坑-fill初始化多维数组" class="headerlink" title="避坑,fill初始化多维数组"></a>避坑,fill初始化多维数组</h1><p>数组实例的 fill(),使用给定值，填充一个数组。例如：<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">5</span>).fill(<span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 输出结果为[0, 0, 0, 0, 0]</span></span><br></pre></td></tr></table></figure></p>
+<p> 使用fill()创建二维数组<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>).fill(<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>).fill(<span class="number">0</span>))</span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// 输出结果为[[0,0,0],[0,0,0],[0,0,0]]</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>看似没问题，当给某个元素赋值时如下：<br>每个第一行每一列1的元素的值都改变了。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr[<span class="number">1</span>][<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(arr) <span class="comment">// 输出结果为[[0,1,0],[0,1,0],[0,1,0]]</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p> fill()的参数不是基本类型时，好比数组、对象，并非将它的值填充到数组，而是将它的地址填充到数组，因此填充后数组的每一项都指向的是同一个对象，就会出现”牵一发而动全身”的现象。</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>可以使用map遍历<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>).fill(<span class="number">0</span>).map(<span class="function"><span class="params">item</span>=&gt;</span><span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>).fill(<span class="number">0</span>))</span><br><span class="line">arr[<span class="number">1</span>][<span class="number">1</span>]=<span class="number">1</span></span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// 输出结果为[[0,0,0],[0,1,0],[0,0,0]]</span></span><br></pre></td></tr></table></figure></p>
+<p>这样就只有arr[1][1]发生改变了。</p>
+
+                                                                            
+                                                        </div>
+                                                        <footer class="entry-meta entry-footer">
+                                                            
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+
+                                                                
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+                                                                
+                                                                
+                                                                
+                                                                    
+                        <div id="vcomments" style="margin-top: 20px;"></div>
+                        <script src="/js/Valine.min.js"></script>
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <script type="text/javascript">
+                            new Valine({
+                                el: '#vcomments',
+                                placeholder: '说点什么吧...',
+                                appId: 'ukMmYdN5OJN3yJ6reejhduyJ-9Nh9j0Va',
+                                appKey: 'K0KrIsh1h4zVTP6xds7nh5Qe',
+                                avatar:'hide' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                                // avatar:'wavatar' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                            })
+                        </script>
+                        
+                                                                
+                                                        </footer>
+                                        </div>
+                                        
+                                            
+<nav id="article-nav">
+  
+  
+    <a href="/2021/04/10/forEach,for in,for of三者区别/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">forEach、for in 、 for of三者的区别</div>
+    </a>
+  
+</nav>
+
+                                                
 </article>
-	
-	
-		</div></section>
-	
 
-	<!-- 页数指示器 -->
-	
+<!-- Table of Contents -->
 
-
-
-</section>
-          <aside id="sidebar">
-  
-    <div class="widget-wrap" style="margin: 20px 0;">
-	<div id="search-form-wrap">
-    
-        <form class="search-form">
-            <label style="width: 75%;">
-                <span class="screen-reader-text">Search for:</span>
-                <input type="search" class="search-field" style="height: 42px;" placeholder=" 搜索…" value="" name="s" title="">
-            </label>
-            <input type="submit" class="search-form-submit" value="搜索">
-        </form>
-        <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: '文章',
-            PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
-            UNTITLED: '(无标题)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
+    <aside id="sidebar">
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">
+                文章目录
+            </strong>
             
-</div>
-</div>
-  
-    
-
-  
-    
-    <div class="widget_athemes_tabs">
-        <ul id="widget-tab" class="clearfix widget-tab-nav">
-            <li class="active">
-                <a>
-                    最新文章
-                </a>
-            </li>
-        </ul>
-        <div class="widget">
-            <ul>
-                
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/05/18/避坑,fill初始化多维数组/">
-                                                    避坑,fill初始化多维数组
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-05-18
-                                            </span>
-                                    </div>
-
-                    </li>
+                <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#避坑-fill初始化多维数组"><span class="nav-number">1.</span> <span class="nav-text">避坑,fill初始化多维数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方法"><span class="nav-number">3.</span> <span class="nav-text">解决方法</span></a></li></ol>
                     
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/04/10/forEach,for in,for of三者区别/">
-                                                    forEach、for in 、 for of三者的区别
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-04-10
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/04/01/函数参数是按值传递的/">
-                                                    函数参数是按值传递的
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-04-01
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/03/10/前端页面自动渲染AE动画方案/">
-                                                    前端页面自动渲染AE动画方案
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-03-10
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/03/08/Windows结束某个端口的进程/">
-                                                    Windows结束某个端口的进程
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-03-08
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/03/08/js类型检测/">
-                                                    JS类型检测
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-03-08
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-            </ul>
-            </div>
         </div>
-        
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">9</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/刷题/">刷题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/游戏/">游戏</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/刷题/" style="font-size: 15px;">刷题</a> <a href="/tags/游戏/" style="font-size: 10px;">游戏</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-
-  
-</aside>
+    </aside>
+    </section>
         
       </div>
       <footer id="footer" class="site-footer">
