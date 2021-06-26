@@ -3,24 +3,27 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>小耳朵</title>
+  <title>call,apply,bind的用法区别解析 | 小耳朵</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
+    <meta name="keywords" content="demo">
   
   
   
-  <meta name="description" content="google-site-verification: google184e1e684149229c.html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小耳朵">
-<meta property="og:url" content="http://xerduo.com/google184e1e684149229c.html">
+  
+  <meta name="description" content="call、apply、bind异同 由于call()、apply()与bind()都是属于Function.prototype对象下的方法，所以每个function实例都拥有有call、apply与bind属性。 相同点：都是为改变this指向而存在的。 异同点：使用call()方法时，传递给函数的参数必须逐个列举出来，使用apply()方法时，传递给函数的是参数数组。bind()和call()很">
+<meta name="keywords" content="demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="call,apply,bind的用法区别解析">
+<meta property="og:url" content="http://xerduo.com/2021/06/26/call,apply,bind的用法区别解析/index.html">
 <meta property="og:site_name" content="小耳朵">
-<meta property="og:description" content="google-site-verification: google184e1e684149229c.html">
+<meta property="og:description" content="call、apply、bind异同 由于call()、apply()与bind()都是属于Function.prototype对象下的方法，所以每个function实例都拥有有call、apply与bind属性。 相同点：都是为改变this指向而存在的。 异同点：使用call()方法时，传递给函数的参数必须逐个列举出来，使用apply()方法时，传递给函数的是参数数组。bind()和call()很">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-03-05T13:58:59.927Z">
+<meta property="og:updated_time" content="2021-06-26T11:22:58.896Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小耳朵">
-<meta name="twitter:description" content="google-site-verification: google184e1e684149229c.html">
+<meta name="twitter:title" content="call,apply,bind的用法区别解析">
+<meta name="twitter:description" content="call、apply、bind异同 由于call()、apply()与bind()都是属于Function.prototype对象下的方法，所以每个function实例都拥有有call、apply与bind属性。 相同点：都是为改变this指向而存在的。 异同点：使用call()方法时，传递给函数的参数必须逐个列举出来，使用apply()方法时，传递给函数的是参数数组。bind()和call()很">
   
     <link rel="alternate" href="/atom.xml" title="小耳朵" type="application/atom+xml">
   
@@ -67,7 +70,7 @@ var themeMenus = {};
 </script>
 
 
-  <body>
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
   <header id="allheader" class="site-header" role="banner">
@@ -160,17 +163,28 @@ var themeMenus = {};
             
       <div id="content" class="outer">
         
-          <section id="main"><article id="page-"  class="article article-type-
-        page" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-call,apply,bind的用法区别解析" style="width: 66%; float:left;"
+     class="article article-type-
+        post" itemscope itemprop="blogPost" >
             <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
                 
                     
+                        <header class="article-header">
+                            
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      call,apply,bind的用法区别解析
+    </h1>
+  
+
+                        </header>
+                        
                             <div class="article-meta">
                                 
     发表于
-    <a href="/google184e1e684149229c.html" class="article-date">
-        <time datetime="2021-03-05T13:58:59.927Z" itemprop="datePublished">
-            2021-03-05 21:03:92
+    <a href="/2021/06/26/call,apply,bind的用法区别解析/" class="article-date">
+        <time datetime="2021-06-26T09:05:46.000Z" itemprop="datePublished">
+            2021-06-26 17:06:00
         </time>
     </a>
     
@@ -178,12 +192,28 @@ var themeMenus = {};
                             </div>
                             <div class="article-entry" itemprop="articleBody">
                                 
-                                                                        google-site-verification: google184e1e684149229c.html
+                                                                        <h1 id="call、apply、bind异同"><a href="#call、apply、bind异同" class="headerlink" title="call、apply、bind异同"></a>call、apply、bind异同</h1><ul>
+<li>由于<strong>call()、apply()与bind()</strong>都是属于Function.prototype对象下的方法，所以每个function实例都拥有有call、apply与bind属性。</li>
+<li>相同点：都是为改变this指向而存在的。</li>
+<li>异同点：使用call()方法时，传递给函数的参数必须逐个列举出来，使用apply()方法时，传递给函数的是参数数组。bind()和call()很相似，第一个参数是this的指向，从第二个参数开始是接收的参数列表。bind()方法不会立即执行，而是返回一个改变了上下文 this后的函数，用于稍后调用。 call()、apply()则是立即调用。  </li>
+</ul>
+<a id="more"></a>
+<p><strong>这里的this指向window对象</strong><br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">funciton foo () &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// window对象</span></span><br><span class="line">&#125;</span><br><span class="line">foo() <span class="comment">// window对象</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>这里的this指向调用者，谁调用this就指向谁</strong></p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'王小二'</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  age:<span class="number">20</span>,</span><br><span class="line">  name:<span class="string">'张小二'</span>,</span><br><span class="line">  foo:<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age + <span class="string">'---'</span> + <span class="keyword">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.foo() <span class="comment">// 20---张小二</span></span><br><span class="line"><span class="keyword">var</span> fun = obj.foo</span><br><span class="line">fun() <span class="comment">// undefined---王小二</span></span><br></pre></td></tr></table></figure>
+<p> <strong>使用call()、apply()、bind()改变this的上下文：</strong><br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">'张小二'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">sex,age</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>---<span class="subst">$&#123;sex&#125;</span>---<span class="subst">$&#123;age&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  name : <span class="string">'王小二'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="string">'男'</span>,<span class="number">18</span>) <span class="comment">// 张小二---男---18</span></span><br><span class="line">foo.call(obj,<span class="string">'男'</span>,<span class="number">18</span>) <span class="comment">// 王小二---男---18</span></span><br><span class="line">foo.apply(obj,[<span class="string">'男'</span>,<span class="number">18</span>]) <span class="comment">// 王小二---男---18</span></span><br><span class="line">foo.bind(obj,<span class="string">'男'</span>,<span class="number">18</span>)() <span class="comment">// 王小二---男---18</span></span><br></pre></td></tr></table></figure></p>
+
                                                                             
                                                         </div>
                                                         <footer class="entry-meta entry-footer">
                                                             
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+
                                                                 
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
                                                                 
                                                                 
                                                                 
@@ -208,225 +238,32 @@ var themeMenus = {};
                                         </div>
                                         
                                             
+<nav id="article-nav">
+  
+  
+    <a href="/2021/06/25/JavaScript中的new操作符的原理解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JavaScript中的new操作符的原理解析</div>
+    </a>
+  
+</nav>
+
                                                 
 </article>
 
 <!-- Table of Contents -->
-</section>
-          <aside id="sidebar">
-  
-    <div class="widget-wrap" style="margin: 20px 0;">
-	<div id="search-form-wrap">
-    
-        <form class="search-form">
-            <label style="width: 75%;">
-                <span class="screen-reader-text">Search for:</span>
-                <input type="search" class="search-field" style="height: 42px;" placeholder=" 搜索…" value="" name="s" title="">
-            </label>
-            <input type="submit" class="search-form-submit" value="搜索">
-        </form>
-        <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: '文章',
-            PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
-            UNTITLED: '(无标题)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
+
+    <aside id="sidebar">
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">
+                文章目录
+            </strong>
             
-</div>
-</div>
-  
-    
-
-  
-    
-    <div class="widget_athemes_tabs">
-        <ul id="widget-tab" class="clearfix widget-tab-nav">
-            <li class="active">
-                <a>
-                    最新文章
-                </a>
-            </li>
-        </ul>
-        <div class="widget">
-            <ul>
-                
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/06/26/call,apply,bind的用法区别解析/">
-                                                    call,apply,bind的用法区别解析
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-06-26
-                                            </span>
-                                    </div>
-
-                    </li>
+                <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#call、apply、bind异同"><span class="nav-number">1.</span> <span class="nav-text">call、apply、bind异同</span></a></li></ol>
                     
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/06/25/JavaScript中的new操作符的原理解析/">
-                                                    JavaScript中的new操作符的原理解析
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-06-25
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/06/20/JS原型与原型链/">
-                                                    JS原型与原型链
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-06-20
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/05/18/避坑,fill初始化多维数组/">
-                                                    避坑,fill初始化多维数组
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-05-18
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/04/10/forEach,for in,for of三者区别/">
-                                                    forEach、for in 、 for of三者的区别
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-04-10
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/04/01/函数参数是按值传递的/">
-                                                    函数参数是按值传递的
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-04-01
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-            </ul>
-            </div>
         </div>
-        
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">10</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/游戏/">游戏</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/游戏/" style="font-size: 10px;">游戏</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-
-  
-</aside>
+    </aside>
+    </section>
         
       </div>
       <footer id="footer" class="site-footer">
