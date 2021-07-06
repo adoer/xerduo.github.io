@@ -153,25 +153,7 @@ var themeMenus = {};
     </div>
 </header>
 
-<!-- 
-  <div style="background: #fff; width: 100%;">
-
-      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
-        <img id="originBg" width="100%" alt="" src="">
-      </div>
-
-  </div>
-
-  <script>
-      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
-      var random = Math.floor((Math.random() * imgUrls.length ));
-      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
-        document.getElementById("originBg").src=imgUrls[random];
-      } else {
-        document.getElementById("originBg").src='/' + imgUrls[random];
-      }
-  </script>
- -->
+<!--  -->
 
   <div id="container">
     <div id="wrap">
@@ -583,7 +565,8 @@ var themeMenus = {};
 
   <a id="rocket" href="#top" class=""></a>
   <script type="text/javascript" src="/js/totop.js" async=""></script>
-  <script src="/js/three.min.js"></script>
+  <!-- 飞鸟动画背景 -->
+  <!-- <script src="/js/three.min.js"></script>
   <script src="/js/vanta.birds.min.js"></script>
   <script>
     const effect = VANTA.BIRDS({
@@ -597,12 +580,13 @@ var themeMenus = {};
       scaleMobile: 1.00,
       backgroundColor: 0xffffff,
       birdSize: 0.50,
-      speedLimit: 3.00,
-      separation: 72.00,
-      alignment: 57.00,
-      cohesion: 63.00,
-      quantity: 2.00
+      wingSpan: 15.00,
+      speedLimit: 2.00,
+      separation: 100.00,
+      alignment: 48.00,
+      cohesion: 41.00,
+      quantity: 3.00
     })
-  </script>
+  </script> -->
 </body>
 </html>
