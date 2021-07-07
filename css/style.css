@@ -474,10 +474,59 @@ body {
   -moz-transition: color 0.2s;
   -ms-transition: color 0.2s;
   transition: color 0.2s;
+  position: relative;
 }
 a.article-title:hover {
   color: #ff2828;
   text-decoration: none;
+}
+a.article-title:hover .t1 {
+  opacity: 0;
+  -webkit-transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  -moz-transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  -ms-transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+a.article-title:hover .text-gradient {
+  background: -webkit-linear-gradient(355.77deg, #5374fa 12.41%, #fd9179 52.55%, #ff6969 89.95%);
+  background: -moz-linear-gradient(355.77deg, #5374fa 12.41%, #fd9179 52.55%, #ff6969 89.95%);
+  background: -ms-linear-gradient(355.77deg, #5374fa 12.41%, #fd9179 52.55%, #ff6969 89.95%);
+  background: linear-gradient(94.23deg, #5374fa 12.41%, #fd9179 52.55%, #ff6969 89.95%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 1;
+}
+a.article-title:hover .text-gradient span {
+  -webkit-background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
+.article-title .text-gradient {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 0;
+  z-index: 2;
+  -webkit-transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  -moz-transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  -ms-transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  opacity: 0;
+  line-height: 25px;
+}
+.article-title .text-gradient span {
+  background-image: -webkit-linear-gradient(270deg, transparent 97.5%, #035bd6 0);
+  background-image: -moz-linear-gradient(270deg, transparent 97.5%, #035bd6 0);
+  background-image: -ms-linear-gradient(270deg, transparent 97.5%, #035bd6 0);
+  background-image: linear-gradient(180deg, transparent 97.5%, #035bd6 0);
+  background-repeat: no-repeat;
+  -webkit-background-size: 0 100%;
+  -moz-background-size: 0 100%;
+  background-size: 0 100%;
+  -webkit-transition: background-size 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  -moz-transition: background-size 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  -ms-transition: background-size 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: background-size 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 .article-entry {
   color: #333;

@@ -149,7 +149,25 @@ var themeMenus = {};
     </div>
 </header>
 
-<!--  -->
+<!-- 
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  </script>
+ -->
 
   <div id="container">
     <div id="wrap">
@@ -186,8 +204,15 @@ var themeMenus = {};
             </a>
             
   
-    <h1 class="thumb" itemprop="name">
-      <a class="archive-article-title" href="/2021/07/01/谈谈this对象的理解/">谈谈this对象的理解</a>
+    <h1 class="thumb bb" itemprop="name">
+      <a class="archive-article-title" href="/2021/07/01/谈谈this对象的理解/">
+        <span class="t1">谈谈this对象的理解</span>
+        <span class="t2 text-gradient">
+          <span>
+            谈谈this对象的理解
+          </span>
+        </span>
+      </a>
     </h1>
   
 
@@ -208,8 +233,15 @@ var themeMenus = {};
             </a>
             
   
-    <h1 class="thumb" itemprop="name">
-      <a class="archive-article-title" href="/2021/07/01/说说你对作用域链的理解/">说说你对作用域链的理解</a>
+    <h1 class="thumb bb" itemprop="name">
+      <a class="archive-article-title" href="/2021/07/01/说说你对作用域链的理解/">
+        <span class="t1">说说你对作用域链的理解</span>
+        <span class="t2 text-gradient">
+          <span>
+            说说你对作用域链的理解
+          </span>
+        </span>
+      </a>
     </h1>
   
 
@@ -230,8 +262,15 @@ var themeMenus = {};
             </a>
             
   
-    <h1 class="thumb" itemprop="name">
-      <a class="archive-article-title" href="/2021/07/01/对闭包的理解？闭包使用场景/">对闭包的理解？闭包使用场景</a>
+    <h1 class="thumb bb" itemprop="name">
+      <a class="archive-article-title" href="/2021/07/01/对闭包的理解？闭包使用场景/">
+        <span class="t1">对闭包的理解？闭包使用场景</span>
+        <span class="t2 text-gradient">
+          <span>
+            对闭包的理解？闭包使用场景
+          </span>
+        </span>
+      </a>
     </h1>
   
 
