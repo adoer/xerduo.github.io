@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>js事件循环的理解 | 小耳朵</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <meta name="keywords" content="demo">
+  
+  
+  
+  
+  <meta name="description" content="一、是什么JavaScript 在设计之初便是单线程，即指程序运行时，只有一个线程存在，同一时间只能做一件事 为什么要这么设计，跟JavaScript的应用场景有关 JavaScript 初期作为一门浏览器脚本语言，通常用于操作 DOM ，如果是多线程，一个线程进行了删除 DOM ，另一个添加 DOM，此时浏览器该如何处理？ 为了解决单线程运行阻塞问题，JavaScript用到了计算机系统的一种">
+<meta name="keywords" content="demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS事件循环的理解">
+<meta property="og:url" content="http://xerduo.com/2021/07/10/JS事件循环的理解/index.html">
+<meta property="og:site_name" content="小耳朵">
+<meta property="og:description" content="一、是什么JavaScript 在设计之初便是单线程，即指程序运行时，只有一个线程存在，同一时间只能做一件事 为什么要这么设计，跟JavaScript的应用场景有关 JavaScript 初期作为一门浏览器脚本语言，通常用于操作 DOM ，如果是多线程，一个线程进行了删除 DOM ，另一个添加 DOM，此时浏览器该如何处理？ 为了解决单线程运行阻塞问题，JavaScript用到了计算机系统的一种">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://camo.githubusercontent.com/c68bd454d45cadde69d5ad0530a058ea6f85536735c61db1d166e544f0357859/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f35306630363264302d376362382d313165622d616239302d6439616538313462323430642e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/e25d50e7473d8a8d90bd58b8e3b09c1ec301fd9b9ea25488c9c08e988ba5747a/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f36316566626332302d376362382d313165622d383566362d3666616337376330633962332e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/a2cc376af23e060505a7e07c3dd6bfe955f60d38f82941dc308ae92a18a2604a/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f36653830653565302d376362382d313165622d383566362d3666616337376330633962332e706e67">
+<meta property="og:updated_time" content="2021-07-10T14:52:06.479Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS事件循环的理解">
+<meta name="twitter:description" content="一、是什么JavaScript 在设计之初便是单线程，即指程序运行时，只有一个线程存在，同一时间只能做一件事 为什么要这么设计，跟JavaScript的应用场景有关 JavaScript 初期作为一门浏览器脚本语言，通常用于操作 DOM ，如果是多线程，一个线程进行了删除 DOM ，另一个添加 DOM，此时浏览器该如何处理？ 为了解决单线程运行阻塞问题，JavaScript用到了计算机系统的一种">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/c68bd454d45cadde69d5ad0530a058ea6f85536735c61db1d166e544f0357859/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f35306630363264302d376362382d313165622d616239302d6439616538313462323430642e706e67">
+  
+    <link rel="alternate" href="/atom.xml" title="小耳朵" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  
+  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css"> -->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <!-- <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style> -->
+    
+  <!-- <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all"> -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50" id="cbody">
+
+
+  <header id="allheader" class="site-header" role="banner">
+    <div id="marco">
+        <div id="cielo"></div>
+        <div id="luna"></div>
+        <div id="gato"></div>
+        <div id="muro"></div>
+        <div id="edificios"></div>
+    </div>
+    <div class="clearfix container headCon">
+        <div class="site-branding">
+
+            <div class="site-title">
+                <!-- 
+                    <a href="/" title="小耳朵" rel="home">
+                        小耳朵
+                    </a>
+                 -->
+                <div class="titleText">小耳朵</div>
+                <!-- <div class="decText">让世界听见我们的声音</div> -->
+            </div>
+
+            <div class="cat">
+                <div class="ear ear--left"></div>
+                <div class="ear ear--right"></div>
+                <div class="face">
+                    <div class="eye eye--left">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="eye eye--right">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="muzzle"></div>
+                </div>
+            </div>
+
+            
+
+                    <nav id="main-navigation" class="main-navigation" role="navigation">
+                        <a class="nav-open">导航</a>
+                        <a class="nav-close">Close</a>
+                        <div class="clearfix sf-menu">
+
+                            <ul id="main-nav" class="nmenu sf-js-enabled">
+                                
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/">
+                                            首页
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/archives">
+                                            归档
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/categories">
+                                            分类
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/tags">
+                                            标签
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/about">
+                                            关于
+                                        </a>
+                                    </li>
+                                    
+                            </ul>
+                        </div>
+                    </nav>
+
+
+        </div>
+    </div>
+</header>
+
+<!--  -->
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS事件循环的理解" style="width: 66%; float:left;"
+     class="article article-type-
+        post" itemscope itemprop="blogPost" >
+            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+                
+                    
+                        <header class="article-header">
+                            
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS事件循环的理解
+    </h1>
+  
+
+                        </header>
+                        
+                            <div class="article-meta">
+                                
+    发表于
+    <a href="/2021/07/10/JS事件循环的理解/" class="article-date">
+        <time datetime="2021-07-09T16:12:02.000Z" itemprop="datePublished">
+            <!-- 2021-07-10 00:07:00 -->
+            2021-07-10 00:12:02
+        </time>
+    </a>
+    
+                                    
+                            </div>
+                            <div class="article-entry" itemprop="articleBody">
+                                
+                                                                        <p><img src="https://camo.githubusercontent.com/c68bd454d45cadde69d5ad0530a058ea6f85536735c61db1d166e544f0357859/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f35306630363264302d376362382d313165622d616239302d6439616538313462323430642e706e67" alt></p>
+<h1 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h1><p><strong><code>JavaScript</code> 在设计之初便是单线程，即指程序运行时，只有一个线程存在，同一时间只能做一件事</strong></p>
+<p>为什么要这么设计，跟<code>JavaScript</code>的应用场景有关</p>
+<p><code>JavaScript</code> 初期作为一门浏览器脚本语言，通常用于操作 <code>DOM</code> ，如果是多线程，一个线程进行了删除 <code>DOM</code> ，另一个添加 <code>DOM</code>，此时浏览器该如何处理？</p>
+<p>为了解决单线程运行阻塞问题，<code>JavaScript</code>用到了计算机系统的一种运行机制，这种机制就叫做事件循环（Event Loop）<br><a id="more"></a><br><strong>事件循环（Event Loop）</strong><br>在<code>JavaScript</code>中，所有的任务都可以分为</p>
+<ul>
+<li>同步任务：立即执行的任务，同步任务一般会直接进入到主线程中执行</li>
+<li>异步任务：异步执行的任务，比如<code>ajax</code>网络请求，<code>setTimeout</code>定时函数等</li>
+</ul>
+<p>同步任务与异步任务的运行流程图如下：</p>
+<p><img src="https://camo.githubusercontent.com/e25d50e7473d8a8d90bd58b8e3b09c1ec301fd9b9ea25488c9c08e988ba5747a/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f36316566626332302d376362382d313165622d383566362d3666616337376330633962332e706e67" alt></p>
+<p>从上面我们可以看到，同步任务进入主线程，即主执行栈，异步任务进入任务队列，主线程内的任务执行完毕为空，会去任务队列读取对应的任务，推入主线程执行。上述过程的不断重复就是事件循环</p>
+<h1 id="二、宏任务与微任务"><a href="#二、宏任务与微任务" class="headerlink" title="二、宏任务与微任务"></a>二、宏任务与微任务</h1><p>如果将任务划分为同步任务和异步任务并不是那么的准确，举个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'new Promise'</span>)</span><br><span class="line">    resolve()</span><br><span class="line">&#125;).then(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'then'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>如果按照上面流程图来分析代码，我们会得到下面的执行步骤：</p>
+<ul>
+<li><code>console.log(1)</code>，同步任务，主线程中执行</li>
+<li><code>setTimeout()</code> ，异步任务，放到 <code>Event Table</code>，0 毫秒后<code>console.log(2)</code>回调推入 <code>Event Queue</code> 中</li>
+<li><code>new Promise</code> ，同步任务，主线程直接执行</li>
+<li><code>.then</code> ，异步任务，放到 <code>Event Table</code></li>
+<li><code>console.log(3)</code>，同步任务，主线程执行</li>
+</ul>
+<p>所以按照分析，它的结果应该是 <code>1</code> =<code>&#39;new Promise&#39;</code> =<code>3</code> =<code>2</code> =<code>&#39;then&#39;</code></p>
+<p>但是实际结果是：<code>1</code>=&gt;<code>&#39;new Promise&#39;</code>=<code>3</code> =<code>&#39;then&#39;</code> =<code>2</code></p>
+<p>出现分歧的原因在于异步任务执行顺序，事件队列其实是一个“先进先出”的数据结构，排在前面的事件会优先被主线程读取</p>
+<p>例子中 <code>setTimeout</code>回调事件是先进入队列中的，按理说应该先于 <code>.then</code> 中的执行，但是结果却偏偏相反</p>
+<p>原因在于异步任务还可以细分为微任务与宏任务</p>
+<h2 id="微任务"><a href="#微任务" class="headerlink" title="微任务"></a>微任务</h2><p>一个需要异步执行的函数，执行时机是在主函数执行结束之后、当前宏任务结束之前</p>
+<p>常见的微任务有：</p>
+<ul>
+<li>Promise.then</li>
+<li>MutaionObserver</li>
+<li>Object.observe（已废弃；Proxy 对象替代）</li>
+<li>process.nextTick（Node.js）</li>
+</ul>
+<h2 id="宏任务"><a href="#宏任务" class="headerlink" title="宏任务"></a>宏任务</h2><p>宏任务的时间粒度比较大，执行的时间间隔是不能精确控制的，对一些高实时性的需求就不太符合</p>
+<p>常见的宏任务有：</p>
+<ul>
+<li>script (可以理解为外层同步代码)</li>
+<li>setTimeout/setInterval</li>
+<li>UI rendering/UI事件</li>
+<li>postMessage、MessageChannel</li>
+<li>setImmediate、I/O（Node.js）</li>
+</ul>
+<p>这时候，事件循环，宏任务，微任务的关系如图所示</p>
+<p><img src="https://camo.githubusercontent.com/a2cc376af23e060505a7e07c3dd6bfe955f60d38f82941dc308ae92a18a2604a/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f36653830653565302d376362382d313165622d383566362d3666616337376330633962332e706e67" alt></p>
+<p>按照这个流程，它的执行机制是：</p>
+<ul>
+<li>执行一个宏任务，如果遇到微任务就将它放到微任务的事件队列中</li>
+<li>当前宏任务执行完成后，会查看微任务的事件队列，然后将里面的所有微任务依次执行完</li>
+</ul>
+<p>回到上面的题目</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'new Promise'</span>)</span><br><span class="line">    resolve()</span><br><span class="line">&#125;).then(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'then'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>流程如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 遇到 console.log(1) ，直接打印 1</span></span><br><span class="line"><span class="comment">// 遇到定时器，属于新的宏任务，留着后面执行</span></span><br><span class="line"><span class="comment">// 遇到 new Promise，这个是直接执行的，打印 'new Promise'</span></span><br><span class="line"><span class="comment">// .then 属于微任务，放入微任务队列，后面再执行</span></span><br><span class="line"><span class="comment">// 遇到 console.log(3) 直接打印 3</span></span><br><span class="line"><span class="comment">// 好了本轮宏任务执行完毕，现在去微任务列表查看是否有微任务，发现 .then 的回调，执行它，打印 'then'</span></span><br><span class="line"><span class="comment">// 当一次宏任务执行完，再去执行新的宏任务，这里就剩一个定时器的宏任务了，执行它，打印 2</span></span><br></pre></td></tr></table></figure>
+<h1 id="三、async与await"><a href="#三、async与await" class="headerlink" title="三、async与await"></a>三、async与await</h1><p><code>async</code> 是异步的意思，<code>await</code>则可以理解为等待</p>
+<p>放到一起可以理解<code>async</code>就是用来声明一个异步方法，而 <code>await</code>是用来等待异步方法执行</p>
+<h2 id="async"><a href="#async" class="headerlink" title="async"></a>async</h2><p><code>async</code>函数返回一个<code>promise</code>对象，下面两种方法是等效的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="string">'TEST'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// asyncF is equivalent to f!</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">asyncF</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'TEST'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="await"><a href="#await" class="headerlink" title="await"></a>await</h2><p>正常情况下，<code>await</code>命令后面是一个 <code>Promise</code>对象，返回该对象的结果。如果不是 <code>Promise</code>对象，就直接返回对应的值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 等同于</span></span><br><span class="line">    <span class="comment">// return 123</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="number">123</span></span><br><span class="line">&#125;</span><br><span class="line">f().then(v =<span class="built_in">console</span>.log(v)) <span class="comment">// 123</span></span><br></pre></td></tr></table></figure>
+<p>不管<code>await</code>后面跟着的是什么，<code>await</code>都会阻塞后面的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fn1</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">await</span> fn2()</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>) <span class="comment">// 阻塞</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fn2</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'fn2'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn1()</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>上面的例子中，<code>await</code> 会阻塞下面的代码（即加入微任务队列），先执行 <code>async</code>外面的同步代码，同步代码执行完，再回到 <code>async</code> 函数中，再执行之前阻塞的代码</p>
+<p>所以上述输出结果为：<code>1</code>，<code>fn2</code>，<code>3</code>，<code>2</code></p>
+<h1 id="四、流程分析"><a href="#四、流程分析" class="headerlink" title="四、流程分析"></a>四、流程分析</h1><p>通过对上面的了解，我们对<code>JavaScript</code>对各种场景的执行顺序有了大致的了解</p>
+<p>这里直接上代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">async1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'async1 start'</span>)</span><br><span class="line">    <span class="keyword">await</span> async2()</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'async1 end'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">async2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'async2'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script start'</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'settimeout'</span>)</span><br><span class="line">&#125;)</span><br><span class="line">async1()</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>)</span><br><span class="line">    resolve()</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script end'</span>)</span><br></pre></td></tr></table></figure>
+<p>分析过程：</p>
+<ol>
+<li>执行整段代码，遇到 <code>console.log(&#39;script start&#39;)</code> 直接打印结果，输出 <code>script start</code></li>
+<li>遇到定时器了，它是宏任务，先放着不执行</li>
+<li>遇到 <code>async1()</code>，执行 <code>async1</code> 函数，先打印 <code>async1 start</code>，下面遇到<code>await</code>怎么办？先执行 <code>async2</code>，打印 <code>async2</code>，然后阻塞下面代码（即加入微任务列表），跳出去执行同步代码</li>
+<li>跳到 <code>new Promise</code> 这里，直接执行，打印 <code>promise1</code>，下面遇到 <code>.then()</code>，它是微任务，放到微任务列表等待执行</li>
+<li>最后一行直接打印 <code>script end</code>，现在同步代码执行完了，开始执行微任务，即 <code>await</code>下面的代码，打印 <code>async1 end</code></li>
+<li>继续执行下一个微任务，即执行 <code>then</code> 的回调，打印 <code>promise2</code></li>
+<li>上一个宏任务所有事都做完了，开始下一个宏任务，就是定时器，打印 <code>settimeout</code></li>
+</ol>
+<p>所以最后的结果是：<code>script start</code>、<code>async1 start</code>、<code>async2</code>、<code>promise1</code>、<code>script end</code>、<code>async1 end</code>、<code>promise2</code>、<code>settimeout</code></p>
+
+                                                                            
+                                                        </div>
+                                                        <footer class="entry-meta entry-footer">
+                                                            
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+
+                                                                
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+                                                                
+                                                                
+                                                                
+                                                                    
+                        <div id="vcomments" style="margin-top: 20px;"></div>
+                        <script src="/js/Valine.min.js"></script>
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <script type="text/javascript">
+                            new Valine({
+                                el: '#vcomments',
+                                placeholder: '说点什么吧...',
+                                appId: 'ukMmYdN5OJN3yJ6reejhduyJ-9Nh9j0Va',
+                                appKey: 'K0KrIsh1h4zVTP6xds7nh5Qe',
+                                avatar:'hide' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                                // avatar:'wavatar' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                            })
+                        </script>
+                        
+                                                                
+                                                        </footer>
+                                        </div>
+                                        
+                                            
+<nav id="article-nav">
+  
+    <a href="/2021/07/10/执行上下文和执行栈是什么？/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          执行上下文和执行栈是什么？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/10/对正则表达式的理解？应用场景？/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">对正则表达式的理解？应用场景？</div>
+    </a>
+  
+</nav>
+
+                                                
+</article>
+
+<!-- Table of Contents -->
+
+    <aside id="sidebar">
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">
+                文章目录
+            </strong>
+            
+                <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、是什么"><span class="nav-number">1.</span> <span class="nav-text">一、是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、宏任务与微任务"><span class="nav-number">2.</span> <span class="nav-text">二、宏任务与微任务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#微任务"><span class="nav-number">2.1.</span> <span class="nav-text">微任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#宏任务"><span class="nav-number">2.2.</span> <span class="nav-text">宏任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、async与await"><span class="nav-number">3.</span> <span class="nav-text">三、async与await</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#async"><span class="nav-number">3.1.</span> <span class="nav-text">async</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#await"><span class="nav-number">3.2.</span> <span class="nav-text">await</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、流程分析"><span class="nav-number">4.</span> <span class="nav-text">四、流程分析</span></a></li></ol>
+                    
+        </div>
+    </aside>
+    </section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+    
+                <div class="clearfix container footCon">
+                    <div class="cup-wrap">
+                        <div class="cup">
+                            <div class="cup__mouse"></div>
+                            <div class="cup__eyes"></div>
+                            <!-- <div class="cup__label"></div> -->
+                        </div>
+                        <div class="cup-shadow"></div>
+                    </div>
+                    <!-- 小耳朵 All Rights Reserved.  -->
+                    <div class="footText">小耳朵，让世界听见我们的声音。</div>
+                    <div class="site-info">
+                        Copyright © 
+                        2021 xerduo. 
+                        <!-- All rights reserved.  -->
+                            
+                    </div>
+                    <!-- <div class="site-credit">
+                        Theme by
+                            <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+                    </div> -->
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/cursor-effects.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script  src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+<script>
+  // https://github.com/stevenjoezhang/live2d-widget
+  // https://blog.csdn.net/wang_123_zy/article/details/87181892
+  L2Dwidget.init({
+      "model": {
+          jsonPath: "https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.model.json",
+          "scale": 1
+      },
+      "display": {
+          "position": "left",
+          "width": 100,
+          "height": 200,
+          "hOffset": 30, // 水平
+          "vOffset": -108 // 垂直
+      },
+      "mobile": {
+          "show": false,
+          "scale": 0.5
+      },
+      "react": {
+          "opacityDefault": 0.9,
+          "opacityOnHover": 0.2
+      }
+  });
+</script>
+<!-- 文章被访问时页面URL会自动推送给百度 -->
+<!-- <script>
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script> -->
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  <!-- 飞鸟动画背景 -->
+  <!-- <script src="/js/three.min.js"></script>
+  <script src="/js/vanta.birds.min.js"></script>
+  <script>
+    const effect = VANTA.BIRDS({
+      el: "#container",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      backgroundColor: 0xffffff,
+      birdSize: 0.50,
+      wingSpan: 15.00,
+      speedLimit: 2.00,
+      separation: 100.00,
+      alignment: 48.00,
+      cohesion: 41.00,
+      quantity: 3.00
+    })
+  </script> -->
+</body>
+</html>
