@@ -480,14 +480,14 @@ a.article-title:hover {
   color: #ff2828;
   text-decoration: none;
 }
-a.article-title:hover .t1 {
+.text-gradient-a:hover .t1 {
   opacity: 0;
   -webkit-transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
   -moz-transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
   -ms-transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
-a.article-title:hover .text-gradient {
+.text-gradient-a:hover .text-gradient {
   background: -webkit-linear-gradient(355.77deg, #5374fa 12.41%, #fd9179 52.55%, #ff6969 89.95%);
   background: -moz-linear-gradient(355.77deg, #5374fa 12.41%, #fd9179 52.55%, #ff6969 89.95%);
   background: -ms-linear-gradient(355.77deg, #5374fa 12.41%, #fd9179 52.55%, #ff6969 89.95%);
@@ -496,12 +496,12 @@ a.article-title:hover .text-gradient {
   -webkit-text-fill-color: transparent;
   opacity: 1;
 }
-a.article-title:hover .text-gradient span {
+.text-gradient-a:hover .text-gradient span {
   -webkit-background-size: 100% 100%;
   -moz-background-size: 100% 100%;
   background-size: 100% 100%;
 }
-.article-title .text-gradient {
+.text-gradient-a .text-gradient {
   position: absolute;
   top: 0;
   width: 100%;
@@ -514,7 +514,7 @@ a.article-title:hover .text-gradient span {
   opacity: 0;
   line-height: 25px;
 }
-.article-title .text-gradient span {
+.text-gradient-a .text-gradient span {
   background-image: -webkit-linear-gradient(270deg, transparent 97.5%, #035bd6 0);
   background-image: -moz-linear-gradient(270deg, transparent 97.5%, #035bd6 0);
   background-image: -ms-linear-gradient(270deg, transparent 97.5%, #035bd6 0);
@@ -1168,9 +1168,13 @@ a.article-title:hover .text-gradient span {
   line-height: 1.6em;
   border-left: 1px solid #9e9d9d;
   padding-left: 15px;
+  position: relative;
 }
 .archive-article-title:hover {
   color: #ff2828;
+}
+.archive-article-title .text-gradient {
+  left: 15px;
 }
 .archive-article-footer {
   margin-top: 1em;
