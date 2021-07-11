@@ -482,6 +482,7 @@ a.article-title:hover {
 }
 .text-gradient-a {
   text-decoration: none !important;
+  display: inline-block;
 }
 .text-gradient-a:hover .t1 {
   opacity: 0;
@@ -516,7 +517,6 @@ a.article-title:hover {
   -ms-transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
   opacity: 0;
-  line-height: 25px;
 }
 .text-gradient-a .text-gradient span {
   background-image: -webkit-linear-gradient(270deg, transparent 97.5%, #035bd6 0);
