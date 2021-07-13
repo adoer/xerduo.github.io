@@ -567,7 +567,7 @@ a.article-title:hover {
   margin: 1.1em 0;
 }
 .article-entry a {
-  color: color-link;
+  color: #f9fbfd;
   text-decoration: none;
 }
 .article-entry a:hover {
@@ -1025,7 +1025,7 @@ a.article-title:hover {
 }
 .nav-link {
   font-family: "futura-pt", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", Microsoft JhengHei, WenQuanYi Micro Hei, "Microsoft YaHei", sans-serif;
-  color: color-link;
+  color: #f9fbfd;
   padding: 1px !important;
 }
 .nav-link:hover {
@@ -1039,7 +1039,7 @@ a.article-title:hover {
   margin: 50px 0;
 }
 #comments a {
-  color: color-link;
+  color: #f9fbfd;
 }
 .archives-wrap {
   margin: 50px 0;
@@ -1265,18 +1265,15 @@ a.article-title:hover {
 }
 #page-nav .page-number {
   display: inline-block;
-}
-@media screen and (max-width: 479px) {
-  #page-nav .page-number {
-    display: none;
-  }
+/* @media mq-mobile
+      display: none */
 }
 #page-nav .current {
   color: #333;
   font-weight: bold;
 }
 #page-nav .space {
-  color: #eef1f8;
+  color: #16171b;
 }
 .article-entry pre,
 .article-entry .highlight {
@@ -1389,7 +1386,7 @@ a.article-title:hover {
   margin-left: 20px;
 }
 .article-entry .gist .gist-file .gist-meta a {
-  color: color-link;
+  color: #f9fbfd;
   font-weight: normal;
 }
 .article-entry .gist .gist-file .gist-meta a:hover {
