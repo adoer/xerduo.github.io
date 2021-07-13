@@ -1157,6 +1157,22 @@ a.article-title:hover {
   overflow: hidden;
   break-inside: avoid-column;
 }
+.archive-article-header {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.archive-article-header .thumb {
+  margin: 0;
+}
 .archive-article-inner {
   padding: 0px;
   margin-bottom: 0px;
@@ -1187,7 +1203,6 @@ a.article-title:hover {
   min-width: 85px;
   float: left;
   color: #999;
-  padding-top: 3px;
   text-decoration: none;
   line-height: 1.6em;
   margin-right: 8px;
