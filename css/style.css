@@ -1169,6 +1169,7 @@ a.article-title:hover {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+  margin: 6px 0;
 }
 .archive-article-header .thumb {
   margin: 0;
