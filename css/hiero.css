@@ -1637,6 +1637,9 @@ body.search .page .entry-footer {
 	.entry-summary {
 		margin-left: 0;
 	}
+	#page-nav{
+		border: none;
+	}
 	#page-nav .prev{
 		width: 100%;
     display: block;
