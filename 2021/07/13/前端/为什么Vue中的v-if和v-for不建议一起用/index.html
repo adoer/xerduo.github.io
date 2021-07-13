@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>为什么vue中的v-if和v-for不建议一起用 | 小耳朵</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <meta name="keywords" content="demo">
+  
+  
+  
+  
+  <meta name="description" content="一、作用v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 true值的时候被渲染 v-for 指令基于一个数组来渲染一个列表。v-for 指令需要使用 item in items 形式的特殊语法，其中 items 是源数据数组或者对象，而 item 则是被迭代的数组元素的别名 在 v-for 的时候，建议设置key值，并且保证每个key值是独一无二的，这便于diff算法进行优">
+<meta name="keywords" content="demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么Vue中的v-if和v-for不建议一起用">
+<meta property="og:url" content="http://xerduo.com/2021/07/13/前端/为什么Vue中的v-if和v-for不建议一起用/index.html">
+<meta property="og:site_name" content="小耳朵">
+<meta property="og:description" content="一、作用v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 true值的时候被渲染 v-for 指令基于一个数组来渲染一个列表。v-for 指令需要使用 item in items 形式的特殊语法，其中 items 是源数据数组或者对象，而 item 则是被迭代的数组元素的别名 在 v-for 的时候，建议设置key值，并且保证每个key值是独一无二的，这便于diff算法进行优">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-07-13T15:11:59.900Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="为什么Vue中的v-if和v-for不建议一起用">
+<meta name="twitter:description" content="一、作用v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 true值的时候被渲染 v-for 指令基于一个数组来渲染一个列表。v-for 指令需要使用 item in items 形式的特殊语法，其中 items 是源数据数组或者对象，而 item 则是被迭代的数组元素的别名 在 v-for 的时候，建议设置key值，并且保证每个key值是独一无二的，这便于diff算法进行优">
+  
+    <link rel="alternate" href="/atom.xml" title="小耳朵" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  
+  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css"> -->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <!-- <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style> -->
+    
+  <!-- <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all"> -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50" id="cbody">
+
+
+  <header id="allheader" class="site-header" role="banner">
+    <div id="marco">
+        <div id="cielo"></div>
+        <div id="luna"></div>
+        <div id="gato"></div>
+        <div id="muro"></div>
+        <div id="edificios"></div>
+    </div>
+    <div class="clearfix container headCon">
+        <div class="site-branding">
+
+            <div class="site-title">
+                <!-- 
+                    <a href="/" title="小耳朵" rel="home">
+                        小耳朵
+                    </a>
+                 -->
+                <div class="titleText">小耳朵</div>
+                <!-- <div class="decText">让世界听见我们的声音</div> -->
+            </div>
+
+            <div class="cat">
+                <div class="ear ear--left"></div>
+                <div class="ear ear--right"></div>
+                <div class="face">
+                    <div class="eye eye--left">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="eye eye--right">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="muzzle"></div>
+                </div>
+            </div>
+
+            
+
+                    <nav id="main-navigation" class="main-navigation" role="navigation">
+                        <a class="nav-open">导航</a>
+                        <a class="nav-close">Close</a>
+                        <div class="clearfix sf-menu">
+
+                            <ul id="main-nav" class="nmenu sf-js-enabled">
+                                
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/">
+                                            首页
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/archives">
+                                            归档
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/categories">
+                                            分类
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/tags">
+                                            标签
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/about">
+                                            关于
+                                        </a>
+                                    </li>
+                                    
+                            </ul>
+                        </div>
+                    </nav>
+
+
+        </div>
+    </div>
+</header>
+
+<!-- 
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  </script>
+ -->
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-前端/为什么Vue中的v-if和v-for不建议一起用" style="width: 66%; float:left;"
+     class="article article-type-
+        post" itemscope itemprop="blogPost" >
+            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+                
+                    
+                        <header class="article-header">
+                            
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      为什么Vue中的v-if和v-for不建议一起用
+    </h1>
+  
+
+                        </header>
+                        
+                            <div class="article-meta">
+                                
+    发表于
+    <a href="/2021/07/13/前端/为什么Vue中的v-if和v-for不建议一起用/" class="article-date">
+        <time datetime="2021-07-13T15:06:05.000Z" itemprop="datePublished">
+            <!-- 2021-07-13 23:07:00 -->
+            2021-07-13 23:06:05
+        </time>
+    </a>
+    
+                                    
+                            </div>
+                            <div class="article-entry" itemprop="articleBody">
+                                
+                                                                        <h2 id="一、作用"><a href="#一、作用" class="headerlink" title="一、作用"></a>一、作用</h2><p><code>v-if</code> 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 <code>true</code>值的时候被渲染</p>
+<p><code>v-for</code> 指令基于一个数组来渲染一个列表。<code>v-for</code> 指令需要使用 <code>item in items</code> 形式的特殊语法，其中 <code>items</code> 是源数据数组或者对象，而 <code>item</code> 则是被迭代的数组元素的别名</p>
+<p>在 <code>v-for</code> 的时候，建议设置<code>key</code>值，并且保证每个<code>key</code>值是独一无二的，这便于<code>diff</code>算法进行优化<br><a id="more"></a><br>两者在用法上</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Modal v-<span class="keyword">if</span>=<span class="string">"isShow"</span> /&gt;</span><br><span class="line"></span><br><span class="line">&lt;li v-<span class="keyword">for</span>=<span class="string">"item in items"</span> :key=<span class="string">"item.id"</span>&gt;</span><br><span class="line">    &#123;&#123; item.label &#125;&#125;</span><br><span class="line">&lt;<span class="regexp">/li&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="二、优先级"><a href="#二、优先级" class="headerlink" title="二、优先级"></a>二、优先级</h2><p><code>v-if</code>与<code>v-for</code>都是<code>vue</code>模板系统中的指令</p>
+<p>在<code>vue</code>模板编译的时候，会将指令系统转化成可执行的<code>render</code>函数</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>编写一个<code>p</code>标签，同时使用<code>v-if</code>与 <code>v-for</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;p v-if=&quot;isShow&quot; v-for=&quot;item in items&quot;&gt;</span><br><span class="line">        &#123;&#123; item.title &#125;&#125;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>创建<code>vue</code>实例，存放<code>isShow</code>与<code>items</code>数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">"#app"</span>,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      items: [</span><br><span class="line">        &#123; <span class="attr">title</span>: <span class="string">"foo"</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">title</span>: <span class="string">"baz"</span> &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    isShow() &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.items &amp;&amp; <span class="keyword">this</span>.items.length <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>模板指令的代码都会生成在<code>render</code>函数中，通过<code>app.$options.render</code>就能得到渲染函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ƒ anonymous() &#123;</span><br><span class="line">  <span class="keyword">with</span> (<span class="keyword">this</span>) &#123; <span class="keyword">return</span> </span><br><span class="line">    _c(<span class="string">'div'</span>, &#123; <span class="attr">attrs</span>: &#123; <span class="string">"id"</span>: <span class="string">"app"</span> &#125; &#125;, </span><br><span class="line">    _l((items), <span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span></span><br><span class="line"><span class="function">    </span>&#123; <span class="keyword">return</span> (isShow) ? _c(<span class="string">'p'</span>, [_v(<span class="string">"\n"</span> + _s(item.title) + <span class="string">"\n"</span>)]) : _e() &#125;), <span class="number">0</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>_l</code>是<code>vue</code>的列表渲染函数，函数内部都会进行一次<code>if</code>判断</p>
+<p>初步得到结论：<code>v-for</code>优先级是比<code>v-if</code>高</p>
+<p>再将<code>v-for</code>与<code>v-if</code>置于不同标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;template v-if=&quot;isShow&quot;&gt;</span><br><span class="line">        &lt;p v-for=&quot;item in items&quot;&gt;&#123;&#123;item.title&#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>再输出下<code>render</code>函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ƒ anonymous() &#123;</span><br><span class="line">  <span class="keyword">with</span>(<span class="keyword">this</span>)&#123;<span class="keyword">return</span> </span><br><span class="line">    _c(<span class="string">'div'</span>,&#123;<span class="attr">attrs</span>:&#123;<span class="string">"id"</span>:<span class="string">"app"</span>&#125;&#125;,</span><br><span class="line">    [(isShow)?[_v(<span class="string">"\n"</span>),</span><br><span class="line">    _l((items),<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;<span class="keyword">return</span> _c(<span class="string">'p'</span>,[_v(_s(item.title))])&#125;)]:_e()],<span class="number">2</span>)&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时候我们可以看到，<code>v-for</code>与<code>v-if</code>作用在不同标签时候，是先进行判断，再进行列表的渲染</p>
+<p>我们再在查看下<code>vue</code>源码</p>
+<p>源码位置：<code>\vue-dev\src\compiler\codegen\index.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">genElement</span> (<span class="params">el: ASTElement, state: CodegenState</span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (el.parent) &#123;</span><br><span class="line">    el.pre = el.pre || el.parent.pre</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (el.staticRoot &amp;&amp; !el.staticProcessed) &#123;</span><br><span class="line">    <span class="keyword">return</span> genStatic(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.once &amp;&amp; !el.onceProcessed) &#123;</span><br><span class="line">    <span class="keyword">return</span> genOnce(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.for &amp;&amp; !el.forProcessed) &#123;</span><br><span class="line">    <span class="keyword">return</span> genFor(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.if &amp;&amp; !el.ifProcessed) &#123;</span><br><span class="line">    <span class="keyword">return</span> genIf(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.tag === <span class="string">'template'</span> &amp;&amp; !el.slotTarget &amp;&amp; !state.pre) &#123;</span><br><span class="line">    <span class="keyword">return</span> genChildren(el, state) || <span class="string">'void 0'</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.tag === <span class="string">'slot'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> genSlot(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// component or element</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在进行<code>if</code>判断的时候，<code>v-for</code>是比<code>v-if</code>先进行判断</p>
+<p><strong>最终结论：<code>v-for</code>优先级比<code>v-if</code>高</strong></p>
+<h2 id="三、注意事项"><a href="#三、注意事项" class="headerlink" title="三、注意事项"></a>三、注意事项</h2><p><strong>1. 永远不要把 <code>v-if</code> 和 <code>v-for</code> 同时用在同一个元素上，带来性能方面的浪费（每次渲染都会先循环再进行条件判断）</strong><br><strong>2. 如果避免出现这种情况，则在外层嵌套<code>template</code>（页面渲染不生成<code>dom</code>节点），在这一层进行v-if判断，然后在内部进行v-for循环</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;template v-<span class="keyword">if</span>=<span class="string">"isShow"</span>&gt;</span><br><span class="line">    &lt;p v-<span class="keyword">for</span>=<span class="string">"item in items"</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>3. 如果条件出现在循环内部，可通过计算属性<code>computed</code>提前过滤掉那些不需要显示的项</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    items: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.list.filter(<span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> item.isShow</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+                                                                            
+                                                        </div>
+                                                        <footer class="entry-meta entry-footer">
+                                                            
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+
+                                                                
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue2/">Vue2</a></li></ul>
+
+                                                                
+                                                                
+                                                                
+                                                                    
+                        <div id="vcomments" style="margin-top: 20px;"></div>
+                        <script src="/js/Valine.min.js"></script>
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <script type="text/javascript">
+                            new Valine({
+                                el: '#vcomments',
+                                placeholder: '说点什么吧...',
+                                appId: 'ukMmYdN5OJN3yJ6reejhduyJ-9Nh9j0Va',
+                                appKey: 'K0KrIsh1h4zVTP6xds7nh5Qe',
+                                avatar:'hide' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                                // avatar:'wavatar' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                            })
+                        </script>
+                        
+                                                                
+                                                        </footer>
+                                        </div>
+                                        
+                                            
+<nav id="article-nav">
+  
+    <a href="/2021/07/13/后端/Java程序基本结构/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Java程序基本结构
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/13/前端/Vue渲染器的核心Diff算法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Vue渲染器的核心Diff算法</div>
+    </a>
+  
+</nav>
+
+                                                
+</article>
+
+<!-- Table of Contents -->
+
+    <aside id="sidebar">
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">
+                文章目录
+            </strong>
+            
+                <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、作用"><span class="nav-number">1.</span> <span class="nav-text">一、作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、优先级"><span class="nav-number">2.</span> <span class="nav-text">二、优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">2.1.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、注意事项"><span class="nav-number">3.</span> <span class="nav-text">三、注意事项</span></a></li></ol>
+                    
+        </div>
+    </aside>
+    </section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+    
+                <div class="clearfix container footCon">
+                    <div class="cup-wrap">
+                        <div class="cup">
+                            <div class="cup__mouse"></div>
+                            <div class="cup__eyes"></div>
+                            <!-- <div class="cup__label"></div> -->
+                        </div>
+                        <div class="cup-shadow"></div>
+                    </div>
+                    <!-- 小耳朵 All Rights Reserved.  -->
+                    <div class="footText">小耳朵，让世界听见我们的声音。</div>
+                    <div class="site-info">
+                        Copyright © 
+                        2021 xerduo. 
+                        <!-- All rights reserved.  -->
+                            
+                    </div>
+                    <!-- <div class="site-credit">
+                        Theme by
+                            <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+                    </div> -->
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/cursor-effects.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script  src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+<script>
+  // https://github.com/stevenjoezhang/live2d-widget
+  // https://blog.csdn.net/wang_123_zy/article/details/87181892
+  L2Dwidget.init({
+      "model": {
+          jsonPath: "https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.model.json",
+          "scale": 1
+      },
+      "display": {
+          "position": "left",
+          "width": 100,
+          "height": 200,
+          "hOffset": 30, // 水平
+          "vOffset": -108 // 垂直
+      },
+      "mobile": {
+          "show": false,
+          "scale": 0.5
+      },
+      "react": {
+          "opacityDefault": 0.9,
+          "opacityOnHover": 0.2
+      }
+  });
+</script>
+<!-- 文章被访问时页面URL会自动推送给百度 -->
+<!-- <script>
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script> -->
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  <!-- 飞鸟动画背景 -->
+  <!-- <script src="/js/three.min.js"></script>
+  <script src="/js/vanta.birds.min.js"></script>
+  <script>
+    const effect = VANTA.BIRDS({
+      el: "#container",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      backgroundColor: 0xffffff,
+      birdSize: 0.50,
+      wingSpan: 15.00,
+      speedLimit: 2.00,
+      separation: 100.00,
+      alignment: 48.00,
+      cohesion: 41.00,
+      quantity: 3.00
+    })
+  </script> -->
+</body>
+</html>

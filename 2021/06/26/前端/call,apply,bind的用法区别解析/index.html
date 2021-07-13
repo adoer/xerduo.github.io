@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>call,apply,bind的用法区别解析 | 小耳朵</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <meta name="keywords" content="demo">
+  
+  
+  
+  
+  <meta name="description" content="call、apply、bind异同 由于call()、apply()与bind()都是属于Function.prototype对象下的方法，所以每个function实例都拥有有call、apply与bind属性。 相同点：都是为改变this指向而存在的。 异同点：使用call()方法时，传递给函数的参数必须逐个列举出来，使用apply()方法时，传递给函数的是参数数组。bind()和call()很">
+<meta name="keywords" content="demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="call,apply,bind的用法区别解析">
+<meta property="og:url" content="http://xerduo.com/2021/06/26/前端/call,apply,bind的用法区别解析/index.html">
+<meta property="og:site_name" content="小耳朵">
+<meta property="og:description" content="call、apply、bind异同 由于call()、apply()与bind()都是属于Function.prototype对象下的方法，所以每个function实例都拥有有call、apply与bind属性。 相同点：都是为改变this指向而存在的。 异同点：使用call()方法时，传递给函数的参数必须逐个列举出来，使用apply()方法时，传递给函数的是参数数组。bind()和call()很">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-06-26T11:22:58.896Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="call,apply,bind的用法区别解析">
+<meta name="twitter:description" content="call、apply、bind异同 由于call()、apply()与bind()都是属于Function.prototype对象下的方法，所以每个function实例都拥有有call、apply与bind属性。 相同点：都是为改变this指向而存在的。 异同点：使用call()方法时，传递给函数的参数必须逐个列举出来，使用apply()方法时，传递给函数的是参数数组。bind()和call()很">
+  
+    <link rel="alternate" href="/atom.xml" title="小耳朵" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  
+  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css"> -->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <!-- <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style> -->
+    
+  <!-- <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all"> -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50" id="cbody">
+
+
+  <header id="allheader" class="site-header" role="banner">
+    <div id="marco">
+        <div id="cielo"></div>
+        <div id="luna"></div>
+        <div id="gato"></div>
+        <div id="muro"></div>
+        <div id="edificios"></div>
+    </div>
+    <div class="clearfix container headCon">
+        <div class="site-branding">
+
+            <div class="site-title">
+                <!-- 
+                    <a href="/" title="小耳朵" rel="home">
+                        小耳朵
+                    </a>
+                 -->
+                <div class="titleText">小耳朵</div>
+                <!-- <div class="decText">让世界听见我们的声音</div> -->
+            </div>
+
+            <div class="cat">
+                <div class="ear ear--left"></div>
+                <div class="ear ear--right"></div>
+                <div class="face">
+                    <div class="eye eye--left">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="eye eye--right">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="muzzle"></div>
+                </div>
+            </div>
+
+            
+
+                    <nav id="main-navigation" class="main-navigation" role="navigation">
+                        <a class="nav-open">导航</a>
+                        <a class="nav-close">Close</a>
+                        <div class="clearfix sf-menu">
+
+                            <ul id="main-nav" class="nmenu sf-js-enabled">
+                                
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/">
+                                            首页
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/archives">
+                                            归档
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/categories">
+                                            分类
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/tags">
+                                            标签
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/about">
+                                            关于
+                                        </a>
+                                    </li>
+                                    
+                            </ul>
+                        </div>
+                    </nav>
+
+
+        </div>
+    </div>
+</header>
+
+<!-- 
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  </script>
+ -->
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-前端/call,apply,bind的用法区别解析" style="width: 66%; float:left;"
+     class="article article-type-
+        post" itemscope itemprop="blogPost" >
+            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+                
+                    
+                        <header class="article-header">
+                            
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      call,apply,bind的用法区别解析
+    </h1>
+  
+
+                        </header>
+                        
+                            <div class="article-meta">
+                                
+    发表于
+    <a href="/2021/06/26/前端/call,apply,bind的用法区别解析/" class="article-date">
+        <time datetime="2021-06-26T09:05:46.000Z" itemprop="datePublished">
+            <!-- 2021-06-26 17:06:00 -->
+            2021-06-26 17:05:46
+        </time>
+    </a>
+    
+                                    
+                            </div>
+                            <div class="article-entry" itemprop="articleBody">
+                                
+                                                                        <h1 id="call、apply、bind异同"><a href="#call、apply、bind异同" class="headerlink" title="call、apply、bind异同"></a>call、apply、bind异同</h1><ul>
+<li>由于<strong>call()、apply()与bind()</strong>都是属于Function.prototype对象下的方法，所以每个function实例都拥有有call、apply与bind属性。</li>
+<li>相同点：都是为改变this指向而存在的。</li>
+<li>异同点：使用call()方法时，传递给函数的参数必须逐个列举出来，使用apply()方法时，传递给函数的是参数数组。bind()和call()很相似，第一个参数是this的指向，从第二个参数开始是接收的参数列表。bind()方法不会立即执行，而是返回一个改变了上下文 this后的函数，用于稍后调用。 call()、apply()则是立即调用。  </li>
+</ul>
+<a id="more"></a>
+<p><strong>这里的this指向window对象</strong><br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">funciton foo () &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// window对象</span></span><br><span class="line">&#125;</span><br><span class="line">foo() <span class="comment">// window对象</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>这里的this指向调用者，谁调用this就指向谁</strong></p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'王小二'</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  age:<span class="number">20</span>,</span><br><span class="line">  name:<span class="string">'张小二'</span>,</span><br><span class="line">  foo:<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age + <span class="string">'---'</span> + <span class="keyword">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.foo() <span class="comment">// 20---张小二</span></span><br><span class="line"><span class="keyword">var</span> fun = obj.foo</span><br><span class="line">fun() <span class="comment">// undefined---王小二</span></span><br></pre></td></tr></table></figure>
+<p> <strong>使用call()、apply()、bind()改变this的上下文：</strong><br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">'张小二'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">sex,age</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>---<span class="subst">$&#123;sex&#125;</span>---<span class="subst">$&#123;age&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  name : <span class="string">'王小二'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="string">'男'</span>,<span class="number">18</span>) <span class="comment">// 张小二---男---18</span></span><br><span class="line">foo.call(obj,<span class="string">'男'</span>,<span class="number">18</span>) <span class="comment">// 王小二---男---18</span></span><br><span class="line">foo.apply(obj,[<span class="string">'男'</span>,<span class="number">18</span>]) <span class="comment">// 王小二---男---18</span></span><br><span class="line">foo.bind(obj,<span class="string">'男'</span>,<span class="number">18</span>)() <span class="comment">// 王小二---男---18</span></span><br></pre></td></tr></table></figure></p>
+
+                                                                            
+                                                        </div>
+                                                        <footer class="entry-meta entry-footer">
+                                                            
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+
+                                                                
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+                                                                
+                                                                
+                                                                
+                                                                    
+                        <div id="vcomments" style="margin-top: 20px;"></div>
+                        <script src="/js/Valine.min.js"></script>
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <script type="text/javascript">
+                            new Valine({
+                                el: '#vcomments',
+                                placeholder: '说点什么吧...',
+                                appId: 'ukMmYdN5OJN3yJ6reejhduyJ-9Nh9j0Va',
+                                appKey: 'K0KrIsh1h4zVTP6xds7nh5Qe',
+                                avatar:'hide' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                                // avatar:'wavatar' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                            })
+                        </script>
+                        
+                                                                
+                                                        </footer>
+                                        </div>
+                                        
+                                            
+<nav id="article-nav">
+  
+    <a href="/2021/06/28/前端/JS中的数据类型以及区别/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS中的数据类型以及区别
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/06/25/前端/JS中的new操作符的原理解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS中的new操作符的原理解析</div>
+    </a>
+  
+</nav>
+
+                                                
+</article>
+
+<!-- Table of Contents -->
+
+    <aside id="sidebar">
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">
+                文章目录
+            </strong>
+            
+                <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#call、apply、bind异同"><span class="nav-number">1.</span> <span class="nav-text">call、apply、bind异同</span></a></li></ol>
+                    
+        </div>
+    </aside>
+    </section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+    
+                <div class="clearfix container footCon">
+                    <div class="cup-wrap">
+                        <div class="cup">
+                            <div class="cup__mouse"></div>
+                            <div class="cup__eyes"></div>
+                            <!-- <div class="cup__label"></div> -->
+                        </div>
+                        <div class="cup-shadow"></div>
+                    </div>
+                    <!-- 小耳朵 All Rights Reserved.  -->
+                    <div class="footText">小耳朵，让世界听见我们的声音。</div>
+                    <div class="site-info">
+                        Copyright © 
+                        2021 xerduo. 
+                        <!-- All rights reserved.  -->
+                            
+                    </div>
+                    <!-- <div class="site-credit">
+                        Theme by
+                            <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+                    </div> -->
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/cursor-effects.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script  src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+<script>
+  // https://github.com/stevenjoezhang/live2d-widget
+  // https://blog.csdn.net/wang_123_zy/article/details/87181892
+  L2Dwidget.init({
+      "model": {
+          jsonPath: "https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.model.json",
+          "scale": 1
+      },
+      "display": {
+          "position": "left",
+          "width": 100,
+          "height": 200,
+          "hOffset": 30, // 水平
+          "vOffset": -108 // 垂直
+      },
+      "mobile": {
+          "show": false,
+          "scale": 0.5
+      },
+      "react": {
+          "opacityDefault": 0.9,
+          "opacityOnHover": 0.2
+      }
+  });
+</script>
+<!-- 文章被访问时页面URL会自动推送给百度 -->
+<!-- <script>
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script> -->
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  <!-- 飞鸟动画背景 -->
+  <!-- <script src="/js/three.min.js"></script>
+  <script src="/js/vanta.birds.min.js"></script>
+  <script>
+    const effect = VANTA.BIRDS({
+      el: "#container",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      backgroundColor: 0xffffff,
+      birdSize: 0.50,
+      wingSpan: 15.00,
+      speedLimit: 2.00,
+      separation: 100.00,
+      alignment: 48.00,
+      cohesion: 41.00,
+      quantity: 3.00
+    })
+  </script> -->
+</body>
+</html>

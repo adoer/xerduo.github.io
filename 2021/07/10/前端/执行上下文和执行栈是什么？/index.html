@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>执行上下文和执行栈是什么？ | 小耳朵</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <meta name="keywords" content="demo">
+  
+  
+  
+  
+  <meta name="description" content="一、执行上下文简单的来说，执行上下文是一种对Javascript代码执行环境的抽象概念，也就是说只要有Javascript代码运行，那么它就一定是运行在执行上下文中">
+<meta name="keywords" content="demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="执行上下文和执行栈是什么？">
+<meta property="og:url" content="http://xerduo.com/2021/07/10/前端/执行上下文和执行栈是什么？/index.html">
+<meta property="og:site_name" content="小耳朵">
+<meta property="og:description" content="一、执行上下文简单的来说，执行上下文是一种对Javascript代码执行环境的抽象概念，也就是说只要有Javascript代码运行，那么它就一定是运行在执行上下文中">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://camo.githubusercontent.com/b8e3838eeccbca09b5bcd5500565007465d9b78fb31f4feaebcfd0460088ee5d/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f38363532623731302d373463312d313165622d383566362d3666616337376330633962332e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/bf3e37b530742a332f574326e94cd5479b327f3871aafeab588ded7bd16eb5cf/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f39306464336236302d373463312d313165622d383566362d3666616337376330633962332e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/6459d6b614b5c2fe391d71c26ed81c18adcdd6f85c55780ebb8b1940d44259cc/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f39656461303331302d373463312d313165622d616239302d6439616538313462323430642e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/1d18ad66da5b95d98fe93481d1a7f537ab14e8c4974f70fb7210657c622ba1d2/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f61633131613630302d373463312d313165622d616239302d6439616538313462323430642e706e67">
+<meta property="og:updated_time" content="2021-07-10T02:27:49.463Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="执行上下文和执行栈是什么？">
+<meta name="twitter:description" content="一、执行上下文简单的来说，执行上下文是一种对Javascript代码执行环境的抽象概念，也就是说只要有Javascript代码运行，那么它就一定是运行在执行上下文中">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/b8e3838eeccbca09b5bcd5500565007465d9b78fb31f4feaebcfd0460088ee5d/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f38363532623731302d373463312d313165622d383566362d3666616337376330633962332e706e67">
+  
+    <link rel="alternate" href="/atom.xml" title="小耳朵" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  
+  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css"> -->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <!-- <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style> -->
+    
+  <!-- <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all"> -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50" id="cbody">
+
+
+  <header id="allheader" class="site-header" role="banner">
+    <div id="marco">
+        <div id="cielo"></div>
+        <div id="luna"></div>
+        <div id="gato"></div>
+        <div id="muro"></div>
+        <div id="edificios"></div>
+    </div>
+    <div class="clearfix container headCon">
+        <div class="site-branding">
+
+            <div class="site-title">
+                <!-- 
+                    <a href="/" title="小耳朵" rel="home">
+                        小耳朵
+                    </a>
+                 -->
+                <div class="titleText">小耳朵</div>
+                <!-- <div class="decText">让世界听见我们的声音</div> -->
+            </div>
+
+            <div class="cat">
+                <div class="ear ear--left"></div>
+                <div class="ear ear--right"></div>
+                <div class="face">
+                    <div class="eye eye--left">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="eye eye--right">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="muzzle"></div>
+                </div>
+            </div>
+
+            
+
+                    <nav id="main-navigation" class="main-navigation" role="navigation">
+                        <a class="nav-open">导航</a>
+                        <a class="nav-close">Close</a>
+                        <div class="clearfix sf-menu">
+
+                            <ul id="main-nav" class="nmenu sf-js-enabled">
+                                
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/">
+                                            首页
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/archives">
+                                            归档
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/categories">
+                                            分类
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/tags">
+                                            标签
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/about">
+                                            关于
+                                        </a>
+                                    </li>
+                                    
+                            </ul>
+                        </div>
+                    </nav>
+
+
+        </div>
+    </div>
+</header>
+
+<!-- 
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  </script>
+ -->
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-前端/执行上下文和执行栈是什么？" style="width: 66%; float:left;"
+     class="article article-type-
+        post" itemscope itemprop="blogPost" >
+            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+                
+                    
+                        <header class="article-header">
+                            
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      执行上下文和执行栈是什么？
+    </h1>
+  
+
+                        </header>
+                        
+                            <div class="article-meta">
+                                
+    发表于
+    <a href="/2021/07/10/前端/执行上下文和执行栈是什么？/" class="article-date">
+        <time datetime="2021-07-10T00:36:03.000Z" itemprop="datePublished">
+            <!-- 2021-07-10 08:07:00 -->
+            2021-07-10 08:36:03
+        </time>
+    </a>
+    
+                                    
+                            </div>
+                            <div class="article-entry" itemprop="articleBody">
+                                
+                                                                        <p><img src="https://camo.githubusercontent.com/b8e3838eeccbca09b5bcd5500565007465d9b78fb31f4feaebcfd0460088ee5d/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f38363532623731302d373463312d313165622d383566362d3666616337376330633962332e706e67" alt></p>
+<h2 id="一、执行上下文"><a href="#一、执行上下文" class="headerlink" title="一、执行上下文"></a>一、执行上下文</h2><p>简单的来说，执行上下文是一种对<code>Javascript</code>代码执行环境的抽象概念，也就是说只要有<code>Javascript</code>代码运行，那么它就一定是运行在执行上下文中<br><a id="more"></a><br>执行上下文的类型分为三种：</p>
+<ul>
+<li>全局执行上下文：只有一个，浏览器中的全局对象就是 <code>window</code>对象，<code>this</code> 指向这个全局对象</li>
+<li>函数执行上下文：存在无数个，只有在函数被调用的时候才会被创建，每次调用函数都会创建一个新的执行上下文</li>
+<li>Eval 函数执行上下文： 指的是运行在 <code>eval</code> 函数中的代码，很少用而且不建议使用</li>
+</ul>
+<p>下面给出全局上下文和函数上下文的例子：</p>
+<p><img src="https://camo.githubusercontent.com/bf3e37b530742a332f574326e94cd5479b327f3871aafeab588ded7bd16eb5cf/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f39306464336236302d373463312d313165622d383566362d3666616337376330633962332e706e67" alt></p>
+<p>紫色框住的部分为全局上下文，蓝色和橘色框起来的是不同的函数上下文。只有全局上下文（的变量）能被其他任何上下文访问</p>
+<p>可以有任意多个函数上下文，每次调用函数创建一个新的上下文，会创建一个私有作用域，函数内部声明的任何变量都不能在当前函数作用域外部直接访问</p>
+<h2 id="二、生命周期"><a href="#二、生命周期" class="headerlink" title="二、生命周期"></a>二、生命周期</h2><p>执行上下文的生命周期包括三个阶段：创建阶段 → 执行阶段 → 回收阶段</p>
+<h3 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h3><p>创建阶段即当函数被调用，但未执行任何其内部代码之前</p>
+<p>创建阶段做了三件事：</p>
+<ul>
+<li>确定 this 的值，也被称为 <code>This Binding</code></li>
+<li>LexicalEnvironment（词法环境） 组件被创建</li>
+<li>VariableEnvironment（变量环境） 组件被创建</li>
+</ul>
+<p>伪代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ExecutionContext = &#123;  </span><br><span class="line">  ThisBinding = &lt;this value&gt;,     // 确定this </span><br><span class="line">  LexicalEnvironment = &#123; ... &#125;,   // 词法环境</span><br><span class="line">  VariableEnvironment = &#123; ... &#125;,  // 变量环境</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="This-Binding"><a href="#This-Binding" class="headerlink" title="This Binding"></a>This Binding</h4><p>确定<code>this</code>的值我们前面讲到，<code>this</code>的值是在执行的时候才能确认，定义的时候不能确认</p>
+<h4 id="词法环境"><a href="#词法环境" class="headerlink" title="词法环境"></a>词法环境</h4><p>词法环境有两个组成部分：</p>
+<ul>
+<li>全局环境：是一个没有外部环境的词法环境，其外部环境引用为<code>null</code>，有一个全局对象，<code>this</code> 的值指向这个全局对象</li>
+<li>函数环境：用户在函数中定义的变量被存储在环境记录中，包含了<code>arguments</code> 对象，外部环境的引用可以是全局环境，也可以是包含内部函数的外部函数环境</li>
+</ul>
+<p>伪代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">GlobalExectionContext = &#123;  <span class="comment">// 全局执行上下文</span></span><br><span class="line">  LexicalEnvironment: &#123;       <span class="comment">// 词法环境</span></span><br><span class="line">    EnvironmentRecord: &#123;     <span class="comment">// 环境记录</span></span><br><span class="line">      Type: <span class="string">"Object"</span>,           <span class="comment">// 全局环境</span></span><br><span class="line">      <span class="comment">// 标识符绑定在这里 </span></span><br><span class="line">      outer: &lt;null          // 对外部环境的引用</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">FunctionExectionContext = &#123; // 函数执行上下文</span><br><span class="line">  LexicalEnvironment: &#123;     // 词法环境</span><br><span class="line">    EnvironmentRecord: &#123;    // 环境记录</span><br><span class="line">      Type: "Declarative",      // 函数环境</span><br><span class="line">      // 标识符绑定在这里      // 对外部环境的引用</span><br><span class="line">      outer: &lt;Global or outer function environment reference </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="变量环境"><a href="#变量环境" class="headerlink" title="变量环境"></a>变量环境</h4><p>变量环境也是一个词法环境，因此它具有上面定义的词法环境的所有属性</p>
+<p>在 ES6 中，词法环境和变量环境的区别在于前者用于存储函数声明和变量（ <code>let</code> 和 <code>const</code> ）绑定，而后者仅用于存储变量（ <code>var</code> ）绑定</p>
+<p>举个例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">20</span>;  </span><br><span class="line"><span class="keyword">const</span> b = <span class="number">30</span>;  </span><br><span class="line"><span class="keyword">var</span> c;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">multiply</span>(<span class="params">e, f</span>) </span>&#123;  </span><br><span class="line"> <span class="keyword">var</span> g = <span class="number">20</span>;  </span><br><span class="line"> <span class="keyword">return</span> e * f * g;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">c = multiply(<span class="number">20</span>, <span class="number">30</span>);</span><br></pre></td></tr></table></figure>
+<p>执行上下文如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">GlobalExectionContext = &#123;</span><br><span class="line"></span><br><span class="line">  ThisBinding: &lt;Global Object&gt;,</span><br><span class="line"></span><br><span class="line">  LexicalEnvironment: &#123;  // 词法环境</span><br><span class="line">    EnvironmentRecord: &#123;  </span><br><span class="line">      Type: "Object",  </span><br><span class="line">      // 标识符绑定在这里  </span><br><span class="line">      a: &lt; uninitialized &gt;,  </span><br><span class="line">      b: &lt; uninitialized &gt;,  </span><br><span class="line">      multiply: &lt; func  </span><br><span class="line">    &#125;  </span><br><span class="line">    outer: &lt;null </span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  VariableEnvironment: &#123;  // 变量环境</span><br><span class="line">    EnvironmentRecord: &#123;  </span><br><span class="line">      Type: "Object",  </span><br><span class="line">      // 标识符绑定在这里  </span><br><span class="line">      c: undefined,  </span><br><span class="line">    &#125;  </span><br><span class="line">    outer: &lt;null </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">FunctionExectionContext = &#123;  </span><br><span class="line">   </span><br><span class="line">  ThisBinding: &lt;Global Object&gt;,</span><br><span class="line"></span><br><span class="line">  LexicalEnvironment: &#123;  </span><br><span class="line">    EnvironmentRecord: &#123;  </span><br><span class="line">      Type: "Declarative",  </span><br><span class="line">      // 标识符绑定在这里  </span><br><span class="line">      Arguments: &#123;0: 20, 1: 30, length: 2&#125;,  </span><br><span class="line">    &#125;,  </span><br><span class="line">    outer: &lt;GlobalLexicalEnvironment </span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  VariableEnvironment: &#123;  </span><br><span class="line">    EnvironmentRecord: &#123;  </span><br><span class="line">      Type: "Declarative",  </span><br><span class="line">      // 标识符绑定在这里  </span><br><span class="line">      g: undefined  </span><br><span class="line">    &#125;,  </span><br><span class="line">    outer: &lt;GlobalLexicalEnvironment </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>留意上面的代码，<code>let</code>和<code>const</code>定义的变量<code>a</code>和<code>b</code>在创建阶段没有被赋值，但<code>var</code>声明的变量从在创建阶段被赋值为<code>undefined</code></p>
+<p>这是因为，创建阶段，会在代码中扫描变量和函数声明，然后将函数声明存储在环境中</p>
+<p>但变量会被初始化为<code>undefined</code>(<code>var</code>声明的情况下)和保持<code>uninitialized</code>(未初始化状态)(使用<code>let</code>和<code>const</code>声明的情况下)</p>
+<p>这就是变量提升的实际原因</p>
+<h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><p>在这阶段，执行变量赋值、代码执行</p>
+<p>如果 <code>Javascript</code> 引擎在源代码中声明的实际位置找不到变量的值，那么将为其分配 <code>undefined</code> 值</p>
+<h3 id="回收阶段"><a href="#回收阶段" class="headerlink" title="回收阶段"></a>回收阶段</h3><p>执行上下文出栈等待虚拟机回收执行上下文</p>
+<h2 id="三、执行栈"><a href="#三、执行栈" class="headerlink" title="三、执行栈"></a>三、执行栈</h2><p>执行栈，也叫调用栈，具有 LIFO（后进先出）结构，用于存储在代码执行期间创建的所有执行上下文</p>
+<p><img src="https://camo.githubusercontent.com/6459d6b614b5c2fe391d71c26ed81c18adcdd6f85c55780ebb8b1940d44259cc/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f39656461303331302d373463312d313165622d616239302d6439616538313462323430642e706e67" alt></p>
+<p>当<code>Javascript</code>引擎开始执行你第一行脚本代码的时候，它就会创建一个全局执行上下文然后将它压到执行栈中</p>
+<p>每当引擎碰到一个函数的时候，它就会创建一个函数执行上下文，然后将这个执行上下文压到执行栈中</p>
+<p>引擎会执行位于执行栈栈顶的执行上下文(一般是函数执行上下文)，当该函数执行结束后，对应的执行上下文就会被弹出，然后控制流程到达执行栈的下一个执行上下文</p>
+<p>举个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">'Hello World!'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">first</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Inside first function'</span>);</span><br><span class="line">  second();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Again inside first function'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">second</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Inside second function'</span>);</span><br><span class="line">&#125;</span><br><span class="line">first();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Inside Global Execution Context'</span>);</span><br></pre></td></tr></table></figure>
+<p>转化成图的形式</p>
+<p><img src="https://camo.githubusercontent.com/1d18ad66da5b95d98fe93481d1a7f537ab14e8c4974f70fb7210657c622ba1d2/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f61633131613630302d373463312d313165622d616239302d6439616538313462323430642e706e67" alt></p>
+<p>简单分析一下流程：</p>
+<ul>
+<li>创建全局上下文请压入执行栈</li>
+<li><code>first</code>函数被调用，创建函数执行上下文并压入栈</li>
+<li>执行<code>first</code>函数过程遇到<code>second</code>函数，再创建一个函数执行上下文并压入栈</li>
+<li><code>second</code>函数执行完毕，对应的函数执行上下文被推出执行栈，执行下一个执行上下文<code>first</code>函数</li>
+<li><code>first</code>函数执行完毕，对应的函数执行上下文也被推出栈中，然后执行全局上下文</li>
+<li>所有代码执行完毕，全局上下文也会被推出栈中，程序结束</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/107552264" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/107552264</a></li>
+</ul>
+
+                                                                            
+                                                        </div>
+                                                        <footer class="entry-meta entry-footer">
+                                                            
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+
+                                                                
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+                                                                
+                                                                
+                                                                
+                                                                    
+                        <div id="vcomments" style="margin-top: 20px;"></div>
+                        <script src="/js/Valine.min.js"></script>
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <script type="text/javascript">
+                            new Valine({
+                                el: '#vcomments',
+                                placeholder: '说点什么吧...',
+                                appId: 'ukMmYdN5OJN3yJ6reejhduyJ-9Nh9j0Va',
+                                appKey: 'K0KrIsh1h4zVTP6xds7nh5Qe',
+                                avatar:'hide' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                                // avatar:'wavatar' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                            })
+                        </script>
+                        
+                                                                
+                                                        </footer>
+                                        </div>
+                                        
+                                            
+<nav id="article-nav">
+  
+    <a href="/2021/07/10/前端/JS中内存泄漏的几种情况？/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS中内存泄漏的几种情况？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/10/前端/JS事件循环的理解/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS事件循环的理解</div>
+    </a>
+  
+</nav>
+
+                                                
+</article>
+
+<!-- Table of Contents -->
+
+    <aside id="sidebar">
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">
+                文章目录
+            </strong>
+            
+                <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、执行上下文"><span class="nav-number">1.</span> <span class="nav-text">一、执行上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、生命周期"><span class="nav-number">2.</span> <span class="nav-text">二、生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建阶段"><span class="nav-number">2.1.</span> <span class="nav-text">创建阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#This-Binding"><span class="nav-number">2.1.1.</span> <span class="nav-text">This Binding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#词法环境"><span class="nav-number">2.1.2.</span> <span class="nav-text">词法环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量环境"><span class="nav-number">2.1.3.</span> <span class="nav-text">变量环境</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行阶段"><span class="nav-number">2.2.</span> <span class="nav-text">执行阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回收阶段"><span class="nav-number">2.3.</span> <span class="nav-text">回收阶段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、执行栈"><span class="nav-number">3.</span> <span class="nav-text">三、执行栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol>
+                    
+        </div>
+    </aside>
+    </section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+    
+                <div class="clearfix container footCon">
+                    <div class="cup-wrap">
+                        <div class="cup">
+                            <div class="cup__mouse"></div>
+                            <div class="cup__eyes"></div>
+                            <!-- <div class="cup__label"></div> -->
+                        </div>
+                        <div class="cup-shadow"></div>
+                    </div>
+                    <!-- 小耳朵 All Rights Reserved.  -->
+                    <div class="footText">小耳朵，让世界听见我们的声音。</div>
+                    <div class="site-info">
+                        Copyright © 
+                        2021 xerduo. 
+                        <!-- All rights reserved.  -->
+                            
+                    </div>
+                    <!-- <div class="site-credit">
+                        Theme by
+                            <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+                    </div> -->
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/cursor-effects.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script  src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+<script>
+  // https://github.com/stevenjoezhang/live2d-widget
+  // https://blog.csdn.net/wang_123_zy/article/details/87181892
+  L2Dwidget.init({
+      "model": {
+          jsonPath: "https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.model.json",
+          "scale": 1
+      },
+      "display": {
+          "position": "left",
+          "width": 100,
+          "height": 200,
+          "hOffset": 30, // 水平
+          "vOffset": -108 // 垂直
+      },
+      "mobile": {
+          "show": false,
+          "scale": 0.5
+      },
+      "react": {
+          "opacityDefault": 0.9,
+          "opacityOnHover": 0.2
+      }
+  });
+</script>
+<!-- 文章被访问时页面URL会自动推送给百度 -->
+<!-- <script>
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script> -->
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  <!-- 飞鸟动画背景 -->
+  <!-- <script src="/js/three.min.js"></script>
+  <script src="/js/vanta.birds.min.js"></script>
+  <script>
+    const effect = VANTA.BIRDS({
+      el: "#container",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      backgroundColor: 0xffffff,
+      birdSize: 0.50,
+      wingSpan: 15.00,
+      speedLimit: 2.00,
+      separation: 100.00,
+      alignment: 48.00,
+      cohesion: 41.00,
+      quantity: 3.00
+    })
+  </script> -->
+</body>
+</html>

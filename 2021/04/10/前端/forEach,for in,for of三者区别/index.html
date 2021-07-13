@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>foreach、for in 、 for of三者的区别 | 小耳朵</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <meta name="keywords" content="demo">
+  
+  
+  
+  
+  <meta name="description" content="for循环除了这三种方法以外还有一种最原始的遍历，它用来遍历数组，for循环中可以使用return、break等来中断循环。">
+<meta name="keywords" content="demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="forEach、for in 、 for of三者的区别">
+<meta property="og:url" content="http://xerduo.com/2021/04/10/前端/forEach,for in,for of三者区别/index.html">
+<meta property="og:site_name" content="小耳朵">
+<meta property="og:description" content="for循环除了这三种方法以外还有一种最原始的遍历，它用来遍历数组，for循环中可以使用return、break等来中断循环。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-04-10T03:43:51.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="forEach、for in 、 for of三者的区别">
+<meta name="twitter:description" content="for循环除了这三种方法以外还有一种最原始的遍历，它用来遍历数组，for循环中可以使用return、break等来中断循环。">
+  
+    <link rel="alternate" href="/atom.xml" title="小耳朵" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  
+  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css"> -->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <!-- <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style> -->
+    
+  <!-- <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all"> -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50" id="cbody">
+
+
+  <header id="allheader" class="site-header" role="banner">
+    <div id="marco">
+        <div id="cielo"></div>
+        <div id="luna"></div>
+        <div id="gato"></div>
+        <div id="muro"></div>
+        <div id="edificios"></div>
+    </div>
+    <div class="clearfix container headCon">
+        <div class="site-branding">
+
+            <div class="site-title">
+                <!-- 
+                    <a href="/" title="小耳朵" rel="home">
+                        小耳朵
+                    </a>
+                 -->
+                <div class="titleText">小耳朵</div>
+                <!-- <div class="decText">让世界听见我们的声音</div> -->
+            </div>
+
+            <div class="cat">
+                <div class="ear ear--left"></div>
+                <div class="ear ear--right"></div>
+                <div class="face">
+                    <div class="eye eye--left">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="eye eye--right">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="muzzle"></div>
+                </div>
+            </div>
+
+            
+
+                    <nav id="main-navigation" class="main-navigation" role="navigation">
+                        <a class="nav-open">导航</a>
+                        <a class="nav-close">Close</a>
+                        <div class="clearfix sf-menu">
+
+                            <ul id="main-nav" class="nmenu sf-js-enabled">
+                                
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/">
+                                            首页
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/archives">
+                                            归档
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/categories">
+                                            分类
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/tags">
+                                            标签
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/about">
+                                            关于
+                                        </a>
+                                    </li>
+                                    
+                            </ul>
+                        </div>
+                    </nav>
+
+
+        </div>
+    </div>
+</header>
+
+<!-- 
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  </script>
+ -->
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-前端/forEach,for in,for of三者区别" style="width: 66%; float:left;"
+     class="article article-type-
+        post" itemscope itemprop="blogPost" >
+            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+                
+                    
+                        <header class="article-header">
+                            
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      forEach、for in 、 for of三者的区别
+    </h1>
+  
+
+                        </header>
+                        
+                            <div class="article-meta">
+                                
+    发表于
+    <a href="/2021/04/10/前端/forEach,for in,for of三者区别/" class="article-date">
+        <time datetime="2021-04-10T02:12:22.000Z" itemprop="datePublished">
+            <!-- 2021-04-10 10:04:00 -->
+            2021-04-10 10:12:22
+        </time>
+    </a>
+    
+                                    
+                            </div>
+                            <div class="article-entry" itemprop="articleBody">
+                                
+                                                                        <h1 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h1><p>除了这三种方法以外还有一种最原始的遍历，它用来遍历数组，for循环中可以使用return、break等来中断循环。<br><a id="more"></a><br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span> ; i&lt; arr.length ; i++)&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(arr[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h1><p> 对数组的每一个元素执行一次提供的函数（不能使用return、break等中断循环），不改变原数组，无返回值undefined。<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line">arr.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">val, index, arr</span>) </span>&#123; <span class="comment">// val是当前元素，index当前元素索引，arr数组</span></span><br><span class="line">    <span class="built_in">console</span>.log(val + <span class="string">','</span> + index)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">a,0</span></span><br><span class="line"><span class="comment">b,1</span></span><br><span class="line"><span class="comment">c,2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="for…in"><a href="#for…in" class="headerlink" title="for…in"></a>for…in</h1><p>循环遍历的值都是数据结构的键值<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">a</span>: <span class="string">'1'</span>, <span class="attr">b</span>: <span class="string">'2'</span>, <span class="attr">c</span>: <span class="string">'3'</span>&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> o <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(o)    <span class="comment">//遍历的实际上是对象的属性名称 a,b,c</span></span><br><span class="line">    <span class="built_in">console</span>.log(obj[o])  <span class="comment">//这个才是属性对应的值1，2，3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>for…in循环有几个缺点。</strong> </p>
+<p>1、数组的键名是数字，但是for…in循环是以字符串作为键名“0”、“1”、“2”等等。<br>2、for…in循环不仅遍历数字键名，还会遍历手动添加的其他键，甚至包括原型链上的键。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.objCustom = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;; </span><br><span class="line"><span class="built_in">Array</span>.prototype.arrCustom = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">3</span>, <span class="number">5</span>];</span><br><span class="line">arr.foo = <span class="string">'hello'</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> arr) &#123;</span><br><span class="line">   <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果是：</span></span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// foo</span></span><br><span class="line"><span class="comment">// arrCustom</span></span><br><span class="line"><span class="comment">// objCustom</span></span><br></pre></td></tr></table></figure></p>
+<p>3、某些情况下，for…in循环会以任意顺序遍历键名。（先把当中的非负整数键提出来，排序好输出，然后将剩下的定义时的顺序输出）<br>4、不可以使用return、break等来中断循环</p>
+<p>总之，for…in循环主要是为遍历对象而设计的，不适用于遍历数组。</p>
+<h1 id="for…of"><a href="#for…of" class="headerlink" title="for…of"></a>for…of</h1><p>ES6中新增加的语法，用来循环获取一对键值对中的值，可以使用return、break等来中断循环</p>
+<p><strong>一个数据结构只有部署了 Symbol.iterator 属性, 才具有 iterator接口可以使用 for of循环。例子中的obj对象没有Symbol.iterator属性 所以会报错。</strong></p>
+<p>哪些数据结构部署了 Symbol.iteratoer属性了呢?</p>
+<p>数组 Array<br>Map<br>Set<br>String<br>arguments对象<br>Nodelist对象, 就是获取的dom列表集合</p>
+<h2 id="循环一个数组"><a href="#循环一个数组" class="headerlink" title="循环一个数组"></a>循环一个数组</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">'China'</span>, <span class="string">'America'</span>, <span class="string">'Korea'</span>]</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> o <span class="keyword">of</span> arr) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(o) <span class="comment">//China, America, Korea</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="循环一个普通对象（报错）"><a href="#循环一个普通对象（报错）" class="headerlink" title="循环一个普通对象（报错）"></a>循环一个普通对象（报错）</h2><p> obj对象没有Symbol.iterator属性 所以会报错。<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">a</span>: <span class="string">'1'</span>, <span class="attr">b</span>: <span class="string">'2'</span>, <span class="attr">c</span>: <span class="string">'3'</span>, <span class="attr">d</span>: <span class="string">'4'</span>&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> o <span class="keyword">of</span> obj) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(o)   <span class="comment">// Uncaught TypeError: obj is not iterabl</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果想让对象可以使用 for of循环怎么办?使用 Object.keys() 获取对象的 key值集合后,再使用 for of，或者使用内置的Object.values()方法获取对象的value值集合再使用for of。<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">a</span>: <span class="string">'1'</span>, <span class="attr">b</span>: <span class="string">'2'</span>, <span class="attr">c</span>: <span class="string">'3'</span>, <span class="attr">d</span>: <span class="string">'4'</span>&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> o <span class="keyword">of</span> <span class="built_in">Object</span>.keys(obj)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(o) <span class="comment">// a,b,c,d</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">a</span>: <span class="string">'1'</span>, <span class="attr">b</span>: <span class="string">'2'</span>, <span class="attr">c</span>: <span class="string">'3'</span>, <span class="attr">d</span>: <span class="string">'4'</span>&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> o <span class="keyword">of</span> <span class="built_in">Object</span>.values(obj)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(o) <span class="comment">// 1,2,3,4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="循环一个字符串"><a href="#循环一个字符串" class="headerlink" title="循环一个字符串"></a>循环一个字符串</h2>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'love'</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> o <span class="keyword">of</span> str) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(o) <span class="comment">// l,o,v,e</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="循环一个Map"><a href="#循环一个Map" class="headerlink" title="循环一个Map"></a>循环一个Map</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> iterable = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="string">"a"</span>, <span class="number">1</span>], [<span class="string">"b"</span>, <span class="number">2</span>], [<span class="string">"c"</span>, <span class="number">3</span>]]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [key, value] <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> entry <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(entry);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// [a, 1]</span></span><br><span class="line"><span class="comment">// [b, 2]</span></span><br><span class="line"><span class="comment">// [c, 3]</span></span><br></pre></td></tr></table></figure>
+<h2 id="循环一个Set"><a href="#循环一个Set" class="headerlink" title="循环一个Set"></a>循环一个Set</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> iterable = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> value <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+                                                                            
+                                                        </div>
+                                                        <footer class="entry-meta entry-footer">
+                                                            
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+
+                                                                
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+                                                                
+                                                                
+                                                                
+                                                                    
+                        <div id="vcomments" style="margin-top: 20px;"></div>
+                        <script src="/js/Valine.min.js"></script>
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <script type="text/javascript">
+                            new Valine({
+                                el: '#vcomments',
+                                placeholder: '说点什么吧...',
+                                appId: 'ukMmYdN5OJN3yJ6reejhduyJ-9Nh9j0Va',
+                                appKey: 'K0KrIsh1h4zVTP6xds7nh5Qe',
+                                avatar:'hide' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                                // avatar:'wavatar' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                            })
+                        </script>
+                        
+                                                                
+                                                        </footer>
+                                        </div>
+                                        
+                                            
+<nav id="article-nav">
+  
+    <a href="/2021/05/18/前端/避坑,fill初始化多维数组/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          避坑,fill初始化多维数组
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/01/前端/函数参数是按值传递的/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">函数参数是按值传递的</div>
+    </a>
+  
+</nav>
+
+                                                
+</article>
+
+<!-- Table of Contents -->
+
+    <aside id="sidebar">
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">
+                文章目录
+            </strong>
+            
+                <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#for循环"><span class="nav-number">1.</span> <span class="nav-text">for循环</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#forEach"><span class="nav-number">2.</span> <span class="nav-text">forEach</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#for…in"><span class="nav-number">3.</span> <span class="nav-text">for…in</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#for…of"><span class="nav-number">4.</span> <span class="nav-text">for…of</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#循环一个数组"><span class="nav-number">4.1.</span> <span class="nav-text">循环一个数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环一个普通对象（报错）"><span class="nav-number">4.2.</span> <span class="nav-text">循环一个普通对象（报错）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环一个字符串"><span class="nav-number">4.3.</span> <span class="nav-text">循环一个字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环一个Map"><span class="nav-number">4.4.</span> <span class="nav-text">循环一个Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环一个Set"><span class="nav-number">4.5.</span> <span class="nav-text">循环一个Set</span></a></li></ol></li></ol>
+                    
+        </div>
+    </aside>
+    </section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+    
+                <div class="clearfix container footCon">
+                    <div class="cup-wrap">
+                        <div class="cup">
+                            <div class="cup__mouse"></div>
+                            <div class="cup__eyes"></div>
+                            <!-- <div class="cup__label"></div> -->
+                        </div>
+                        <div class="cup-shadow"></div>
+                    </div>
+                    <!-- 小耳朵 All Rights Reserved.  -->
+                    <div class="footText">小耳朵，让世界听见我们的声音。</div>
+                    <div class="site-info">
+                        Copyright © 
+                        2021 xerduo. 
+                        <!-- All rights reserved.  -->
+                            
+                    </div>
+                    <!-- <div class="site-credit">
+                        Theme by
+                            <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+                    </div> -->
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/cursor-effects.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script  src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+<script>
+  // https://github.com/stevenjoezhang/live2d-widget
+  // https://blog.csdn.net/wang_123_zy/article/details/87181892
+  L2Dwidget.init({
+      "model": {
+          jsonPath: "https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.model.json",
+          "scale": 1
+      },
+      "display": {
+          "position": "left",
+          "width": 100,
+          "height": 200,
+          "hOffset": 30, // 水平
+          "vOffset": -108 // 垂直
+      },
+      "mobile": {
+          "show": false,
+          "scale": 0.5
+      },
+      "react": {
+          "opacityDefault": 0.9,
+          "opacityOnHover": 0.2
+      }
+  });
+</script>
+<!-- 文章被访问时页面URL会自动推送给百度 -->
+<!-- <script>
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script> -->
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  <!-- 飞鸟动画背景 -->
+  <!-- <script src="/js/three.min.js"></script>
+  <script src="/js/vanta.birds.min.js"></script>
+  <script>
+    const effect = VANTA.BIRDS({
+      el: "#container",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      backgroundColor: 0xffffff,
+      birdSize: 0.50,
+      wingSpan: 15.00,
+      speedLimit: 2.00,
+      separation: 100.00,
+      alignment: 48.00,
+      cohesion: 41.00,
+      quantity: 3.00
+    })
+  </script> -->
+</body>
+</html>

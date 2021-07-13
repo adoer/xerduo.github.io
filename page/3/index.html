@@ -152,7 +152,25 @@ var themeMenus = {};
     </div>
 </header>
 
-<!--  -->
+<!-- 
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  </script>
+ -->
 
   <div id="container">
     <div id="wrap">
@@ -161,7 +179,7 @@ var themeMenus = {};
         
           <section id="main">
   
-    <article id="post-深拷贝浅拷贝的区别？如何实现一个深拷贝？"  class="article article-type-
+    <article id="post-前端/谈谈this对象的理解"  class="article article-type-
         post" itemscope itemprop="blogPost" >
             <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
                 
@@ -170,7 +188,232 @@ var themeMenus = {};
                             
   
     <h1 class="thumb bb" itemprop="name">
-      <a class="text-gradient-a article-title" href="/2021/06/30/深拷贝浅拷贝的区别？如何实现一个深拷贝？/">
+      <a class="text-gradient-a article-title" href="/2021/07/01/前端/谈谈this对象的理解/">
+        <span class="t1">谈谈this对象的理解</span>
+        <span class="t2 text-gradient">
+          <span>
+            谈谈this对象的理解
+          </span>
+        </span>
+      </a>
+    </h1>
+  
+
+                        </header>
+                        
+                            <div class="article-meta">
+                                
+    发表于
+    <a href="/2021/07/01/前端/谈谈this对象的理解/" class="article-date">
+        <time datetime="2021-06-30T16:53:58.000Z" itemprop="datePublished">
+            <!-- 2021-07-01 00:07:00 -->
+            2021-07-01 00:53:58
+        </time>
+    </a>
+    
+                                    
+                            </div>
+                            <div class="article-entry" itemprop="articleBody">
+                                
+                                    
+
+                                                    
+                                                                    <div class="entry-summary" style="margin-left:0;">
+                                                                        
+一、定义函数的 this 关键字在 JavaScript 中的表现略有不同，此外，在严格模式和非严格模式之间也会有一些差别
+在绝大多数情况下，函数的调用方式决定了 this 的值（运行时绑定）
+this 关键字是函数运行时自动生成的一个内部对象，只能在函数内部使用，总指向调用它的对象举个例子：
+123456789101112131415161718192021222324function ...
+                                                                            
+
+                                                                                
+                                                                                    <p class="article-more-link">
+                                                                                        <a href="/2021/07/01/前端/谈谈this对象的理解/#more">
+                                                                                            阅读全文 ...
+                                                                                        </a>
+                                                                                    </p>
+                                                                    </div>
+                                                                    
+                                                        </div>
+                                                        <footer class="entry-meta entry-footer">
+                                                            
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+
+                                                                
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+                                                                
+                                                                
+                                                                
+                                                        </footer>
+                                        </div>
+                                        
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-前端/JS作用域链的理解"  class="article article-type-
+        post" itemscope itemprop="blogPost" >
+            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+                
+                    
+                        <header class="article-header">
+                            
+  
+    <h1 class="thumb bb" itemprop="name">
+      <a class="text-gradient-a article-title" href="/2021/07/01/前端/JS作用域链的理解/">
+        <span class="t1">JS作用域链的理解</span>
+        <span class="t2 text-gradient">
+          <span>
+            JS作用域链的理解
+          </span>
+        </span>
+      </a>
+    </h1>
+  
+
+                        </header>
+                        
+                            <div class="article-meta">
+                                
+    发表于
+    <a href="/2021/07/01/前端/JS作用域链的理解/" class="article-date">
+        <time datetime="2021-06-30T16:51:32.000Z" itemprop="datePublished">
+            <!-- 2021-07-01 00:07:00 -->
+            2021-07-01 00:51:32
+        </time>
+    </a>
+    
+                                    
+                            </div>
+                            <div class="article-entry" itemprop="articleBody">
+                                
+                                    
+
+                                                    
+                                                                    <div class="entry-summary" style="margin-left:0;">
+                                                                        一、作用域作用域，即变量（变量作用域又称上下文）和函数生效（能被访问）的区域或集合
+换句话说，作用域决定了代码区块中变量和其他资源的可见性举个例子
+12345function myFunction() &#123;    let inVariable = "函数内部变量";&#125;myFunction();//要先执行这个函数，否则根本不知道里面是啥console.log(inVaria...
+                                                                            
+
+                                                                                
+                                                                                    <p class="article-more-link">
+                                                                                        <a href="/2021/07/01/前端/JS作用域链的理解/#more">
+                                                                                            阅读全文 ...
+                                                                                        </a>
+                                                                                    </p>
+                                                                    </div>
+                                                                    
+                                                        </div>
+                                                        <footer class="entry-meta entry-footer">
+                                                            
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+
+                                                                
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+                                                                
+                                                                
+                                                                
+                                                        </footer>
+                                        </div>
+                                        
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-前端/对闭包的理解？闭包使用场景"  class="article article-type-
+        post" itemscope itemprop="blogPost" >
+            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+                
+                    
+                        <header class="article-header">
+                            
+  
+    <h1 class="thumb bb" itemprop="name">
+      <a class="text-gradient-a article-title" href="/2021/07/01/前端/对闭包的理解？闭包使用场景/">
+        <span class="t1">对闭包的理解？闭包使用场景</span>
+        <span class="t2 text-gradient">
+          <span>
+            对闭包的理解？闭包使用场景
+          </span>
+        </span>
+      </a>
+    </h1>
+  
+
+                        </header>
+                        
+                            <div class="article-meta">
+                                
+    发表于
+    <a href="/2021/07/01/前端/对闭包的理解？闭包使用场景/" class="article-date">
+        <time datetime="2021-06-30T16:15:35.000Z" itemprop="datePublished">
+            <!-- 2021-07-01 00:07:00 -->
+            2021-07-01 00:15:35
+        </time>
+    </a>
+    
+                                    
+                            </div>
+                            <div class="article-entry" itemprop="articleBody">
+                                
+                                    
+
+                                                    
+                                                                    <div class="entry-summary" style="margin-left:0;">
+                                                                        一、是什么一个函数和对其周围状态（lexical environment，词法环境）的引用捆绑在一起（或者说函数被引用包围），这样的组合就是闭包（closure）也就是说，闭包让你可以在一个内层函数中访问到其外层函数的作用域
+在 JavaScript中，每当创建一个函数，闭包就会在函数创建的同时被创建出来，作为函数内部与外部连接起来的一座桥梁
+下面给出一个简单的例子
+12345678func...
+                                                                            
+
+                                                                                
+                                                                                    <p class="article-more-link">
+                                                                                        <a href="/2021/07/01/前端/对闭包的理解？闭包使用场景/#more">
+                                                                                            阅读全文 ...
+                                                                                        </a>
+                                                                                    </p>
+                                                                    </div>
+                                                                    
+                                                        </div>
+                                                        <footer class="entry-meta entry-footer">
+                                                            
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+
+                                                                
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+                                                                
+                                                                
+                                                                
+                                                        </footer>
+                                        </div>
+                                        
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-前端/深拷贝浅拷贝的区别？如何实现一个深拷贝？"  class="article article-type-
+        post" itemscope itemprop="blogPost" >
+            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+                
+                    
+                        <header class="article-header">
+                            
+  
+    <h1 class="thumb bb" itemprop="name">
+      <a class="text-gradient-a article-title" href="/2021/06/30/前端/深拷贝浅拷贝的区别？如何实现一个深拷贝？/">
         <span class="t1">深拷贝浅拷贝的区别？如何实现一个深拷贝？</span>
         <span class="t2 text-gradient">
           <span>
@@ -186,7 +429,7 @@ var themeMenus = {};
                             <div class="article-meta">
                                 
     发表于
-    <a href="/2021/06/30/深拷贝浅拷贝的区别？如何实现一个深拷贝？/" class="article-date">
+    <a href="/2021/06/30/前端/深拷贝浅拷贝的区别？如何实现一个深拷贝？/" class="article-date">
         <time datetime="2021-06-30T15:59:50.000Z" itemprop="datePublished">
             <!-- 2021-06-30 23:06:00 -->
             2021-06-30 23:59:50
@@ -215,7 +458,7 @@ var themeMenus = {};
 
                                                                                 
                                                                                     <p class="article-more-link">
-                                                                                        <a href="/2021/06/30/深拷贝浅拷贝的区别？如何实现一个深拷贝？/#more">
+                                                                                        <a href="/2021/06/30/前端/深拷贝浅拷贝的区别？如何实现一个深拷贝？/#more">
                                                                                             阅读全文 ...
                                                                                         </a>
                                                                                     </p>
@@ -242,7 +485,7 @@ var themeMenus = {};
 <!-- Table of Contents -->
 
   
-    <article id="post-JS中两个等号和三个等号的区别"  class="article article-type-
+    <article id="post-前端/JS中两个等号和三个等号的区别"  class="article article-type-
         post" itemscope itemprop="blogPost" >
             <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
                 
@@ -251,7 +494,7 @@ var themeMenus = {};
                             
   
     <h1 class="thumb bb" itemprop="name">
-      <a class="text-gradient-a article-title" href="/2021/06/30/JS中两个等号和三个等号的区别/">
+      <a class="text-gradient-a article-title" href="/2021/06/30/前端/JS中两个等号和三个等号的区别/">
         <span class="t1">JS中两个等号和三个等号的区别</span>
         <span class="t2 text-gradient">
           <span>
@@ -267,7 +510,7 @@ var themeMenus = {};
                             <div class="article-meta">
                                 
     发表于
-    <a href="/2021/06/30/JS中两个等号和三个等号的区别/" class="article-date">
+    <a href="/2021/06/30/前端/JS中两个等号和三个等号的区别/" class="article-date">
         <time datetime="2021-06-29T16:28:16.000Z" itemprop="datePublished">
             <!-- 2021-06-30 00:06:00 -->
             2021-06-30 00:28:16
@@ -291,7 +534,7 @@ var themeMenus = {};
 
                                                                                 
                                                                                     <p class="article-more-link">
-                                                                                        <a href="/2021/06/30/JS中两个等号和三个等号的区别/#more">
+                                                                                        <a href="/2021/06/30/前端/JS中两个等号和三个等号的区别/#more">
                                                                                             阅读全文 ...
                                                                                         </a>
                                                                                     </p>
@@ -318,7 +561,7 @@ var themeMenus = {};
 <!-- Table of Contents -->
 
   
-    <article id="post-JS字符串的常用方法"  class="article article-type-
+    <article id="post-前端/JS字符串的常用方法"  class="article article-type-
         post" itemscope itemprop="blogPost" >
             <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
                 
@@ -327,7 +570,7 @@ var themeMenus = {};
                             
   
     <h1 class="thumb bb" itemprop="name">
-      <a class="text-gradient-a article-title" href="/2021/06/29/JS字符串的常用方法/">
+      <a class="text-gradient-a article-title" href="/2021/06/29/前端/JS字符串的常用方法/">
         <span class="t1">JS字符串的常用方法</span>
         <span class="t2 text-gradient">
           <span>
@@ -343,7 +586,7 @@ var themeMenus = {};
                             <div class="article-meta">
                                 
     发表于
-    <a href="/2021/06/29/JS字符串的常用方法/" class="article-date">
+    <a href="/2021/06/29/前端/JS字符串的常用方法/" class="article-date">
         <time datetime="2021-06-29T14:59:18.000Z" itemprop="datePublished">
             <!-- 2021-06-29 22:06:00 -->
             2021-06-29 22:59:18
@@ -365,7 +608,7 @@ var themeMenus = {};
 
                                                                                 
                                                                                     <p class="article-more-link">
-                                                                                        <a href="/2021/06/29/JS字符串的常用方法/#more">
+                                                                                        <a href="/2021/06/29/前端/JS字符串的常用方法/#more">
                                                                                             阅读全文 ...
                                                                                         </a>
                                                                                     </p>
@@ -392,7 +635,7 @@ var themeMenus = {};
 <!-- Table of Contents -->
 
   
-    <article id="post-JS数组的常用方法"  class="article article-type-
+    <article id="post-前端/JS数组的常用方法"  class="article article-type-
         post" itemscope itemprop="blogPost" >
             <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
                 
@@ -401,7 +644,7 @@ var themeMenus = {};
                             
   
     <h1 class="thumb bb" itemprop="name">
-      <a class="text-gradient-a article-title" href="/2021/06/29/JS数组的常用方法/">
+      <a class="text-gradient-a article-title" href="/2021/06/29/前端/JS数组的常用方法/">
         <span class="t1">JS数组的常用方法</span>
         <span class="t2 text-gradient">
           <span>
@@ -417,7 +660,7 @@ var themeMenus = {};
                             <div class="article-meta">
                                 
     发表于
-    <a href="/2021/06/29/JS数组的常用方法/" class="article-date">
+    <a href="/2021/06/29/前端/JS数组的常用方法/" class="article-date">
         <time datetime="2021-06-29T14:23:53.000Z" itemprop="datePublished">
             <!-- 2021-06-29 22:06:00 -->
             2021-06-29 22:23:53
@@ -441,7 +684,7 @@ push()push()方法接收任意数量...
 
                                                                                 
                                                                                     <p class="article-more-link">
-                                                                                        <a href="/2021/06/29/JS数组的常用方法/#more">
+                                                                                        <a href="/2021/06/29/前端/JS数组的常用方法/#more">
                                                                                             阅读全文 ...
                                                                                         </a>
                                                                                     </p>
@@ -468,7 +711,7 @@ push()push()方法接收任意数量...
 <!-- Table of Contents -->
 
   
-    <article id="post-JS中的数据类型以及区别"  class="article article-type-
+    <article id="post-前端/JS中的数据类型以及区别"  class="article article-type-
         post" itemscope itemprop="blogPost" >
             <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
                 
@@ -477,7 +720,7 @@ push()push()方法接收任意数量...
                             
   
     <h1 class="thumb bb" itemprop="name">
-      <a class="text-gradient-a article-title" href="/2021/06/28/JS中的数据类型以及区别/">
+      <a class="text-gradient-a article-title" href="/2021/06/28/前端/JS中的数据类型以及区别/">
         <span class="t1">JS中的数据类型以及区别</span>
         <span class="t2 text-gradient">
           <span>
@@ -493,7 +736,7 @@ push()push()方法接收任意数量...
                             <div class="article-meta">
                                 
     发表于
-    <a href="/2021/06/28/JS中的数据类型以及区别/" class="article-date">
+    <a href="/2021/06/28/前端/JS中的数据类型以及区别/" class="article-date">
         <time datetime="2021-06-28T15:34:44.000Z" itemprop="datePublished">
             <!-- 2021-06-28 23:06:00 -->
             2021-06-28 23:34:44
@@ -514,7 +757,7 @@ ECMAScript 有 6 种简单数据类型（也称为原始类型）：Undefined、
 
                                                                                 
                                                                                     <p class="article-more-link">
-                                                                                        <a href="/2021/06/28/JS中的数据类型以及区别/#more">
+                                                                                        <a href="/2021/06/28/前端/JS中的数据类型以及区别/#more">
                                                                                             阅读全文 ...
                                                                                         </a>
                                                                                     </p>
@@ -541,7 +784,7 @@ ECMAScript 有 6 种简单数据类型（也称为原始类型）：Undefined、
 <!-- Table of Contents -->
 
   
-    <article id="post-call,apply,bind的用法区别解析"  class="article article-type-
+    <article id="post-前端/call,apply,bind的用法区别解析"  class="article article-type-
         post" itemscope itemprop="blogPost" >
             <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
                 
@@ -550,7 +793,7 @@ ECMAScript 有 6 种简单数据类型（也称为原始类型）：Undefined、
                             
   
     <h1 class="thumb bb" itemprop="name">
-      <a class="text-gradient-a article-title" href="/2021/06/26/call,apply,bind的用法区别解析/">
+      <a class="text-gradient-a article-title" href="/2021/06/26/前端/call,apply,bind的用法区别解析/">
         <span class="t1">call,apply,bind的用法区别解析</span>
         <span class="t2 text-gradient">
           <span>
@@ -566,7 +809,7 @@ ECMAScript 有 6 种简单数据类型（也称为原始类型）：Undefined、
                             <div class="article-meta">
                                 
     发表于
-    <a href="/2021/06/26/call,apply,bind的用法区别解析/" class="article-date">
+    <a href="/2021/06/26/前端/call,apply,bind的用法区别解析/" class="article-date">
         <time datetime="2021-06-26T09:05:46.000Z" itemprop="datePublished">
             <!-- 2021-06-26 17:06:00 -->
             2021-06-26 17:05:46
@@ -589,7 +832,7 @@ ECMAScript 有 6 种简单数据类型（也称为原始类型）：Undefined、
 
                                                                                 
                                                                                     <p class="article-more-link">
-                                                                                        <a href="/2021/06/26/call,apply,bind的用法区别解析/#more">
+                                                                                        <a href="/2021/06/26/前端/call,apply,bind的用法区别解析/#more">
                                                                                             阅读全文 ...
                                                                                         </a>
                                                                                     </p>
@@ -616,7 +859,7 @@ ECMAScript 有 6 种简单数据类型（也称为原始类型）：Undefined、
 <!-- Table of Contents -->
 
   
-    <article id="post-JS中的new操作符的原理解析"  class="article article-type-
+    <article id="post-前端/JS中的new操作符的原理解析"  class="article article-type-
         post" itemscope itemprop="blogPost" >
             <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
                 
@@ -625,7 +868,7 @@ ECMAScript 有 6 种简单数据类型（也称为原始类型）：Undefined、
                             
   
     <h1 class="thumb bb" itemprop="name">
-      <a class="text-gradient-a article-title" href="/2021/06/25/JS中的new操作符的原理解析/">
+      <a class="text-gradient-a article-title" href="/2021/06/25/前端/JS中的new操作符的原理解析/">
         <span class="t1">JS中的new操作符的原理解析</span>
         <span class="t2 text-gradient">
           <span>
@@ -641,7 +884,7 @@ ECMAScript 有 6 种简单数据类型（也称为原始类型）：Undefined、
                             <div class="article-meta">
                                 
     发表于
-    <a href="/2021/06/25/JS中的new操作符的原理解析/" class="article-date">
+    <a href="/2021/06/25/前端/JS中的new操作符的原理解析/" class="article-date">
         <time datetime="2021-06-25T15:05:12.000Z" itemprop="datePublished">
             <!-- 2021-06-25 23:06:00 -->
             2021-06-25 23:05:12
@@ -661,225 +904,7 @@ ECMAScript 有 6 种简单数据类型（也称为原始类型）：Undefined、
 
                                                                                 
                                                                                     <p class="article-more-link">
-                                                                                        <a href="/2021/06/25/JS中的new操作符的原理解析/#more">
-                                                                                            阅读全文 ...
-                                                                                        </a>
-                                                                                    </p>
-                                                                    </div>
-                                                                    
-                                                        </div>
-                                                        <footer class="entry-meta entry-footer">
-                                                            
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/前端/">前端</a>
-
-                                                                
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-                                                                
-                                                                
-                                                                
-                                                        </footer>
-                                        </div>
-                                        
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-JS原型与原型链"  class="article article-type-
-        post" itemscope itemprop="blogPost" >
-            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-                
-                    
-                        <header class="article-header">
-                            
-  
-    <h1 class="thumb bb" itemprop="name">
-      <a class="text-gradient-a article-title" href="/2021/06/20/JS原型与原型链/">
-        <span class="t1">JS原型与原型链</span>
-        <span class="t2 text-gradient">
-          <span>
-            JS原型与原型链
-          </span>
-        </span>
-      </a>
-    </h1>
-  
-
-                        </header>
-                        
-                            <div class="article-meta">
-                                
-    发表于
-    <a href="/2021/06/20/JS原型与原型链/" class="article-date">
-        <time datetime="2021-06-20T15:19:26.000Z" itemprop="datePublished">
-            <!-- 2021-06-20 23:06:00 -->
-            2021-06-20 23:19:26
-        </time>
-    </a>
-    
-                                    
-                            </div>
-                            <div class="article-entry" itemprop="articleBody">
-                                
-                                    
-
-                                                    
-                                                                    <div class="entry-summary" style="margin-left:0;">
-                                                                        原型和原型链这几个要点是理解原型的关键：1、所有的引用类型（数组、函数、对象）可以自由扩展属性（除null以外）。2、所有的引用类型都有一个’_ _ proto_ _ ‘属性(也叫隐式原型，它是一个普通的对象)。3、所有的函数都有一个’prototype’属性(这也叫显式原型，它也是一个普通的对象)。4、所有引用类型，它的’_ _ proto_ _’属性指向它的构造函数的’prototype...
-                                                                            
-
-                                                                                
-                                                                                    <p class="article-more-link">
-                                                                                        <a href="/2021/06/20/JS原型与原型链/#more">
-                                                                                            阅读全文 ...
-                                                                                        </a>
-                                                                                    </p>
-                                                                    </div>
-                                                                    
-                                                        </div>
-                                                        <footer class="entry-meta entry-footer">
-                                                            
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/前端/">前端</a>
-
-                                                                
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-                                                                
-                                                                
-                                                                
-                                                        </footer>
-                                        </div>
-                                        
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-避坑,fill初始化多维数组"  class="article article-type-
-        post" itemscope itemprop="blogPost" >
-            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-                
-                    
-                        <header class="article-header">
-                            
-  
-    <h1 class="thumb bb" itemprop="name">
-      <a class="text-gradient-a article-title" href="/2021/05/18/避坑,fill初始化多维数组/">
-        <span class="t1">避坑,fill初始化多维数组</span>
-        <span class="t2 text-gradient">
-          <span>
-            避坑,fill初始化多维数组
-          </span>
-        </span>
-      </a>
-    </h1>
-  
-
-                        </header>
-                        
-                            <div class="article-meta">
-                                
-    发表于
-    <a href="/2021/05/18/避坑,fill初始化多维数组/" class="article-date">
-        <time datetime="2021-05-18T14:39:17.000Z" itemprop="datePublished">
-            <!-- 2021-05-18 22:05:00 -->
-            2021-05-18 22:39:17
-        </time>
-    </a>
-    
-                                    
-                            </div>
-                            <div class="article-entry" itemprop="articleBody">
-                                
-                                    
-
-                                                    
-                                                                    <div class="entry-summary" style="margin-left:0;">
-                                                                        避坑,fill初始化多维数组数组实例的 fill(),使用给定值，填充一个数组。例如： 12let a = new Array(5).fill(0);console.log(a); // 输出结果为[0, 0, 0, 0, 0]
- 使用fill()创建二维数组12let arr=new Array(3).fill(new Array(3).fill(0))console.log(arr); ...
-                                                                            
-
-                                                                                
-                                                                                    <p class="article-more-link">
-                                                                                        <a href="/2021/05/18/避坑,fill初始化多维数组/#more">
-                                                                                            阅读全文 ...
-                                                                                        </a>
-                                                                                    </p>
-                                                                    </div>
-                                                                    
-                                                        </div>
-                                                        <footer class="entry-meta entry-footer">
-                                                            
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/前端/">前端</a>
-
-                                                                
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-                                                                
-                                                                
-                                                                
-                                                        </footer>
-                                        </div>
-                                        
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-forEach,for in,for of三者区别"  class="article article-type-
-        post" itemscope itemprop="blogPost" >
-            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-                
-                    
-                        <header class="article-header">
-                            
-  
-    <h1 class="thumb bb" itemprop="name">
-      <a class="text-gradient-a article-title" href="/2021/04/10/forEach,for in,for of三者区别/">
-        <span class="t1">forEach、for in 、 for of三者的区别</span>
-        <span class="t2 text-gradient">
-          <span>
-            forEach、for in 、 for of三者的区别
-          </span>
-        </span>
-      </a>
-    </h1>
-  
-
-                        </header>
-                        
-                            <div class="article-meta">
-                                
-    发表于
-    <a href="/2021/04/10/forEach,for in,for of三者区别/" class="article-date">
-        <time datetime="2021-04-10T02:12:22.000Z" itemprop="datePublished">
-            <!-- 2021-04-10 10:04:00 -->
-            2021-04-10 10:12:22
-        </time>
-    </a>
-    
-                                    
-                            </div>
-                            <div class="article-entry" itemprop="articleBody">
-                                
-                                    
-
-                                                    
-                                                                    <div class="entry-summary" style="margin-left:0;">
-                                                                        for循环除了这三种方法以外还有一种最原始的遍历，它用来遍历数组，for循环中可以使用return、break等来中断循环。 123456789let arr = [1,2,3]for(let i = 0 ; i&lt; arr.length ; i++)&#123;	console.log(arr[i])&#125;/* 输出结果123*/
-forEach 对数组的每一个元素执行一次提供的...
-                                                                            
-
-                                                                                
-                                                                                    <p class="article-more-link">
-                                                                                        <a href="/2021/04/10/forEach,for in,for of三者区别/#more">
+                                                                                        <a href="/2021/06/25/前端/JS中的new操作符的原理解析/#more">
                                                                                             阅读全文 ...
                                                                                         </a>
                                                                                     </p>
@@ -981,7 +1006,61 @@ forEach 对数组的每一个元素执行一次提供的...
                                         
 
                                             <h6 style="margin: 0;">
-                                                <a href="/2021/07/13/Vue渲染器的核心Diff算法/">
+                                                <a href="/2021/07/13/生活/驾驶知识/">
+                                                    驾驶笔记
+                                                </a>
+                                            </h6>
+                                            <span>
+                                                2021-07-13
+                                            </span>
+                                    </div>
+
+                    </li>
+                    
+                    <li class="clearfix">
+
+                        
+                                    <div class="widget-entry-summary" style="margin: 0;">
+                                        
+
+                                            <h6 style="margin: 0;">
+                                                <a href="/2021/07/13/后端/Java程序基本结构/">
+                                                    Java程序基本结构
+                                                </a>
+                                            </h6>
+                                            <span>
+                                                2021-07-13
+                                            </span>
+                                    </div>
+
+                    </li>
+                    
+                    <li class="clearfix">
+
+                        
+                                    <div class="widget-entry-summary" style="margin: 0;">
+                                        
+
+                                            <h6 style="margin: 0;">
+                                                <a href="/2021/07/13/前端/为什么Vue中的v-if和v-for不建议一起用/">
+                                                    为什么Vue中的v-if和v-for不建议一起用
+                                                </a>
+                                            </h6>
+                                            <span>
+                                                2021-07-13
+                                            </span>
+                                    </div>
+
+                    </li>
+                    
+                    <li class="clearfix">
+
+                        
+                                    <div class="widget-entry-summary" style="margin: 0;">
+                                        
+
+                                            <h6 style="margin: 0;">
+                                                <a href="/2021/07/13/前端/Vue渲染器的核心Diff算法/">
                                                     Vue渲染器的核心Diff算法
                                                 </a>
                                             </h6>
@@ -999,7 +1078,7 @@ forEach 对数组的每一个元素执行一次提供的...
                                         
 
                                             <h6 style="margin: 0;">
-                                                <a href="/2021/07/13/Vue生命周期的理解/">
+                                                <a href="/2021/07/13/前端/Vue生命周期的理解/">
                                                     Vue生命周期的理解
                                                 </a>
                                             </h6>
@@ -1017,66 +1096,12 @@ forEach 对数组的每一个元素执行一次提供的...
                                         
 
                                             <h6 style="margin: 0;">
-                                                <a href="/2021/07/13/Vue中的v-show和v-if怎么理解/">
+                                                <a href="/2021/07/13/前端/Vue中的v-show和v-if怎么理解/">
                                                     Vue中的v-show和v-if怎么理解
                                                 </a>
                                             </h6>
                                             <span>
                                                 2021-07-13
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/07/13/Vue双向数据绑定/">
-                                                    Vue双向数据绑定
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-07-13
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/07/12/对vue的理解/">
-                                                    对vue的理解
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-07-12
-                                            </span>
-                                    </div>
-
-                    </li>
-                    
-                    <li class="clearfix">
-
-                        
-                                    <div class="widget-entry-summary" style="margin: 0;">
-                                        
-
-                                            <h6 style="margin: 0;">
-                                                <a href="/2021/07/11/能实现多少种水平垂直居中的布局？/">
-                                                    能实现多少种水平垂直居中的布局？
-                                                </a>
-                                            </h6>
-                                            <span>
-                                                2021-07-11
                                             </span>
                                     </div>
 
@@ -1091,7 +1116,7 @@ forEach 对数组的每一个元素执行一次提供的...
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">35</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/">后端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1101,7 +1126,7 @@ forEach 对数组的每一个元素执行一次提供的...
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue2/">Vue2</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/游戏/">游戏</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue2/">Vue2</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/游戏/">游戏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/驾驶/">驾驶</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1111,7 +1136,7 @@ forEach 对数组的每一个元素执行一次提供的...
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Vue2/" style="font-size: 15px;">Vue2</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/游戏/" style="font-size: 10px;">游戏</a>
+      <a href="/tags/CSS/" style="font-size: 13.33px;">CSS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Vue2/" style="font-size: 16.67px;">Vue2</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/游戏/" style="font-size: 10px;">游戏</a> <a href="/tags/驾驶/" style="font-size: 10px;">驾驶</a>
     </div>
   </div>
 
@@ -1121,7 +1146,7 @@ forEach 对数组的每一个元素执行一次提供的...
     <h3 class="widget-title">归档</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
