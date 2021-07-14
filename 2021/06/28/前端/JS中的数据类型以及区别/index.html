@@ -111,8 +111,11 @@ var themeMenus = {};
             
 
                     <nav id="main-navigation" class="main-navigation" role="navigation">
-                        <a class="nav-open">导航</a>
-                        <a class="nav-close">Close</a>
+                        <a class="nav-open">
+                            <i class="fa fa-align-justify open"></i>
+                            <i class="fa fa-close closeIcon"></i>
+                        </a>
+                        <!-- <a class="nav-close">Close</a> -->
                         <div class="clearfix sf-menu">
 
                             <ul id="main-nav" class="nmenu sf-js-enabled">
@@ -156,12 +159,31 @@ var themeMenus = {};
     </div>
 </header>
 
-<!--  -->
+<!-- 
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  </script>
+ -->
 
   <div id="container">
     <div id="wrap">
             
       <div id="content" class="outer">
+        
         
           <section id="main" style="float:none;"><article id="post-前端/JS中的数据类型以及区别" style="width: 66%; float:left;"
      class="article article-type-

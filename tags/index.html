@@ -105,8 +105,11 @@ var themeMenus = {};
             
 
                     <nav id="main-navigation" class="main-navigation" role="navigation">
-                        <a class="nav-open">导航</a>
-                        <a class="nav-close">Close</a>
+                        <a class="nav-open">
+                            <i class="fa fa-align-justify open"></i>
+                            <i class="fa fa-close closeIcon"></i>
+                        </a>
+                        <!-- <a class="nav-close">Close</a> -->
                         <div class="clearfix sf-menu">
 
                             <ul id="main-nav" class="nmenu sf-js-enabled">
@@ -150,12 +153,33 @@ var themeMenus = {};
     </div>
 </header>
 
-<!--  -->
+<!-- 
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  </script>
+ -->
 
   <div id="container">
     <div id="wrap">
             
       <div id="content" class="outer">
+        
+          <input type="text" class="search-mobile form-control search-form-submit" placeholder="搜索...">
+        
         
           <section id="main"><div class="archives-wrap" style="margin: 0px;">
     <div class="row">
@@ -172,9 +196,9 @@ var themeMenus = {};
         <!-- 
         <div id='tag_cloud' class="tags">
             
-                <a href="#JavaScript" title="JavaScript" rel="24">JavaScript</a>
-            
                 <a href="#CSS" title="CSS" rel="5">CSS</a>
+            
+                <a href="#JavaScript" title="JavaScript" rel="24">JavaScript</a>
             
                 <a href="#Vue2" title="Vue2" rel="6">Vue2</a>
             
