@@ -20,15 +20,14 @@
 <meta property="og:site_name" content="小耳朵">
 <meta property="og:description" content="一、执行上下文简单的来说，执行上下文是一种对Javascript代码执行环境的抽象概念，也就是说只要有Javascript代码运行，那么它就一定是运行在执行上下文中">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://camo.githubusercontent.com/b8e3838eeccbca09b5bcd5500565007465d9b78fb31f4feaebcfd0460088ee5d/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f38363532623731302d373463312d313165622d383566362d3666616337376330633962332e706e67">
 <meta property="og:image" content="https://camo.githubusercontent.com/bf3e37b530742a332f574326e94cd5479b327f3871aafeab588ded7bd16eb5cf/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f39306464336236302d373463312d313165622d383566362d3666616337376330633962332e706e67">
 <meta property="og:image" content="https://camo.githubusercontent.com/6459d6b614b5c2fe391d71c26ed81c18adcdd6f85c55780ebb8b1940d44259cc/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f39656461303331302d373463312d313165622d616239302d6439616538313462323430642e706e67">
 <meta property="og:image" content="https://camo.githubusercontent.com/1d18ad66da5b95d98fe93481d1a7f537ab14e8c4974f70fb7210657c622ba1d2/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f61633131613630302d373463312d313165622d616239302d6439616538313462323430642e706e67">
-<meta property="og:updated_time" content="2021-07-10T02:27:49.463Z">
+<meta property="og:updated_time" content="2021-07-14T12:24:33.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="执行上下文和执行栈是什么？">
 <meta name="twitter:description" content="一、执行上下文简单的来说，执行上下文是一种对Javascript代码执行环境的抽象概念，也就是说只要有Javascript代码运行，那么它就一定是运行在执行上下文中">
-<meta name="twitter:image" content="https://camo.githubusercontent.com/b8e3838eeccbca09b5bcd5500565007465d9b78fb31f4feaebcfd0460088ee5d/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f38363532623731302d373463312d313165622d383566362d3666616337376330633962332e706e67">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/bf3e37b530742a332f574326e94cd5479b327f3871aafeab588ded7bd16eb5cf/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f39306464336236302d373463312d313165622d383566362d3666616337376330633962332e706e67">
   
     <link rel="alternate" href="/atom.xml" title="小耳朵" type="application/atom+xml">
   
@@ -164,25 +163,7 @@ var themeMenus = {};
     </div>
 </header>
 
-<!-- 
-  <div style="background: #fff; width: 100%;">
-
-      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
-        <img id="originBg" width="100%" alt="" src="">
-      </div>
-
-  </div>
-
-  <script>
-      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
-      var random = Math.floor((Math.random() * imgUrls.length ));
-      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
-        document.getElementById("originBg").src=imgUrls[random];
-      } else {
-        document.getElementById("originBg").src='/' + imgUrls[random];
-      }
-  </script>
- -->
+<!--  -->
 
   <div id="container">
     <div id="wrap">
@@ -220,8 +201,7 @@ var themeMenus = {};
                             </div>
                             <div class="article-entry" itemprop="articleBody">
                                 
-                                                                        <p><img src="https://camo.githubusercontent.com/b8e3838eeccbca09b5bcd5500565007465d9b78fb31f4feaebcfd0460088ee5d/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f38363532623731302d373463312d313165622d383566362d3666616337376330633962332e706e67" alt></p>
-<h2 id="一、执行上下文"><a href="#一、执行上下文" class="headerlink" title="一、执行上下文"></a>一、执行上下文</h2><p>简单的来说，执行上下文是一种对<code>Javascript</code>代码执行环境的抽象概念，也就是说只要有<code>Javascript</code>代码运行，那么它就一定是运行在执行上下文中<br><a id="more"></a><br>执行上下文的类型分为三种：</p>
+                                                                        <h2 id="一、执行上下文"><a href="#一、执行上下文" class="headerlink" title="一、执行上下文"></a>一、执行上下文</h2><p>简单的来说，执行上下文是一种对<code>Javascript</code>代码执行环境的抽象概念，也就是说只要有<code>Javascript</code>代码运行，那么它就一定是运行在执行上下文中<br><a id="more"></a><br>执行上下文的类型分为三种：</p>
 <ul>
 <li>全局执行上下文：只有一个，浏览器中的全局对象就是 <code>window</code>对象，<code>this</code> 指向这个全局对象</li>
 <li>函数执行上下文：存在无数个，只有在函数被调用的时候才会被创建，每次调用函数都会创建一个新的执行上下文</li>
