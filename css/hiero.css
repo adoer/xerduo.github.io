@@ -444,12 +444,16 @@ object {
 	background: #060608;
 }
 .search-mobile{
+	display: none;
 	margin-bottom: 30px;
 	margin-top: -14px;
 	border-color: #000;
 	border-radius: 2px !important;
 }
 @media only screen and (max-width: 60em) {
+	.search-mobile{
+		display: block;
+	}
 	.nav-open {
 		display: block;
 		cursor: pointer;
