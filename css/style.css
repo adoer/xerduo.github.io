@@ -218,6 +218,8 @@ body {
   max-width: 1040px;
   margin: 40px auto;
   padding: 0 20px;
+  padding-top: 40px;
+  margin-top: 0;
 }
 .outer:before,
 .outer:after {
