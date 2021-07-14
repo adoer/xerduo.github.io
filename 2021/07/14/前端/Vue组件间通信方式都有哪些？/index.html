@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>vue组件间通信方式都有哪些？ | 小耳朵</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <meta name="keywords" content="demo">
+  
+  
+  
+  
+  <meta name="description" content="一、组件间通信的概念">
+<meta name="keywords" content="demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue组件间通信方式都有哪些？">
+<meta property="og:url" content="http://xerduo.com/2021/07/14/前端/Vue组件间通信方式都有哪些？/index.html">
+<meta property="og:site_name" content="小耳朵">
+<meta property="og:description" content="一、组件间通信的概念">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://camo.githubusercontent.com/41389964a4d8cb201f3c1c1c268d17d933c33f39b733333b16adf41cba636461/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f38356239323430302d336163612d313165622d616239302d6439616538313462323430642e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/b7f08ff2fed277b55b66927cbfc6b4e749485aed8a5a1eb9c5af95d2b1e837db/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f38663830613637302d336163612d313165622d616239302d6439616538313462323430642e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/c82de9bcf70e6fbacc3f9b64f32eb43b64f6d67b6c2fe809c83e36eaaed8ee2d/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f66613230376364302d336163612d313165622d616239302d6439616538313462323430642e706e67">
+<meta property="og:updated_time" content="2021-07-14T09:14:23.966Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue组件间通信方式都有哪些？">
+<meta name="twitter:description" content="一、组件间通信的概念">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/41389964a4d8cb201f3c1c1c268d17d933c33f39b733333b16adf41cba636461/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f38356239323430302d336163612d313165622d616239302d6439616538313462323430642e706e67">
+  
+    <link rel="alternate" href="/atom.xml" title="小耳朵" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  
+  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css"> -->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <!-- <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style> -->
+    
+  <!-- <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all"> -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50" id="cbody">
+
+
+  <header id="allheader" class="site-header" role="banner">
+    <div id="marco">
+        <div id="cielo"></div>
+        <div id="luna"></div>
+        <div id="gato"></div>
+        <div id="muro"></div>
+        <div id="edificios"></div>
+    </div>
+    <div class="clearfix container headCon">
+        <div class="site-branding">
+
+            <div class="site-title">
+                <!-- 
+                    <a href="/" title="小耳朵" rel="home">
+                        小耳朵
+                    </a>
+                 -->
+                <div class="titleText">小耳朵</div>
+                <!-- <div class="decText">让世界听见我们的声音</div> -->
+            </div>
+
+            <div class="cat">
+                <div class="ear ear--left"></div>
+                <div class="ear ear--right"></div>
+                <div class="face">
+                    <div class="eye eye--left">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="eye eye--right">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="muzzle"></div>
+                </div>
+            </div>
+
+            
+
+                    <nav id="main-navigation" class="main-navigation" role="navigation">
+                        <a class="nav-open">
+                            <i class="fa fa-align-justify open"></i>
+                            <i class="fa fa-close closeIcon"></i>
+                        </a>
+                        <!-- <a class="nav-close">Close</a> -->
+                        <div class="clearfix sf-menu">
+
+                            <ul id="main-nav" class="nmenu sf-js-enabled">
+                                
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/">
+                                            首页
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/archives">
+                                            归档
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/categories">
+                                            分类
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/tags">
+                                            标签
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/about">
+                                            关于
+                                        </a>
+                                    </li>
+                                    
+                            </ul>
+                        </div>
+                    </nav>
+
+
+        </div>
+    </div>
+</header>
+
+<!-- 
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  </script>
+ -->
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+        
+          <section id="main" style="float:none;"><article id="post-前端/Vue组件间通信方式都有哪些？" style="width: 66%; float:left;"
+     class="article article-type-
+        post" itemscope itemprop="blogPost" >
+            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+                
+                    
+                        <header class="article-header">
+                            
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Vue组件间通信方式都有哪些？
+    </h1>
+  
+
+                        </header>
+                        
+                            <div class="article-meta">
+                                
+    发表于
+    <a href="/2021/07/14/前端/Vue组件间通信方式都有哪些？/" class="article-date">
+        <time datetime="2021-07-14T09:11:41.000Z" itemprop="datePublished">
+            <!-- 2021-07-14 17:07:00 -->
+            2021-07-14 17:11:41
+        </time>
+    </a>
+    
+                                    
+                            </div>
+                            <div class="article-entry" itemprop="articleBody">
+                                
+                                                                        <h2 id="一、组件间通信的概念"><a href="#一、组件间通信的概念" class="headerlink" title="一、组件间通信的概念"></a>一、组件间通信的概念</h2><a id="more"></a>
+<p>开始之前，我们把<strong>组件间通信</strong>这个词进行拆分</p>
+<ul>
+<li>组件</li>
+<li>通信</li>
+</ul>
+<p>都知道组件是<code>vue</code>最强大的功能之一，<code>vue</code>中每一个<code>.vue</code>我们都可以视之为一个组件通信指的是发送者通过某种媒体以某种格式来传递信息到收信者以达到某个目的。广义上，任何信息的交通都是通信<strong>组件间通信</strong>即指组件(<code>.vue</code>)通过某种方式来传递信息以达到某个目的举个栗子我们在使用<code>UI</code>框架中的<code>table</code>组件，可能会往<code>table</code>组件中传入某些数据，这个本质就形成了组件之间的通信</p>
+<h2 id="二、组件间通信解决了什么"><a href="#二、组件间通信解决了什么" class="headerlink" title="二、组件间通信解决了什么"></a>二、组件间通信解决了什么</h2><p>在古代，人们通过驿站、飞鸽传书、烽火报警、符号、语言、眼神、触碰等方式进行信息传递，到了今天，随着科技水平的飞速发展，通信基本完全利用有线或无线电完成，相继出现了有线电话、固定电话、无线电话、手机、互联网甚至视频电话等各种通信方式从上面这段话，我们可以看到通信的本质是信息同步，共享回到<code>vue</code>中，每个组件之间的都有独自的作用域，组件间的数据是无法共享的但实际开发工作中我们常常需要让组件之间共享数据，这也是组件通信的目的要让它们互相之间能进行通讯，这样才能构成一个有机的完整系统</p>
+<h2 id="二、组件间通信的分类"><a href="#二、组件间通信的分类" class="headerlink" title="二、组件间通信的分类"></a>二、组件间通信的分类</h2><p>组件间通信的分类可以分成以下</p>
+<ul>
+<li>父子组件之间的通信</li>
+<li>兄弟组件之间的通信</li>
+<li>祖孙与后代组件之间的通信</li>
+<li>非关系组件间之间的通信</li>
+</ul>
+<p>关系图:</p>
+<p><img src="https://camo.githubusercontent.com/41389964a4d8cb201f3c1c1c268d17d933c33f39b733333b16adf41cba636461/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f38356239323430302d336163612d313165622d616239302d6439616538313462323430642e706e67" alt></p>
+<h2 id="三、组件间通信的方案"><a href="#三、组件间通信的方案" class="headerlink" title="三、组件间通信的方案"></a>三、组件间通信的方案</h2><p>整理<code>vue</code>中8种常规的通信方案</p>
+<ol>
+<li>通过 props 传递</li>
+<li>通过 $emit 触发自定义事件</li>
+<li>使用 ref</li>
+<li>EventBus</li>
+<li>$parent 或$root</li>
+<li>attrs 与 listeners</li>
+<li>Provide 与 Inject</li>
+<li>Vuex</li>
+</ol>
+<h3 id="props传递数据"><a href="#props传递数据" class="headerlink" title="props传递数据"></a>props传递数据</h3><p><img src="https://camo.githubusercontent.com/b7f08ff2fed277b55b66927cbfc6b4e749485aed8a5a1eb9c5af95d2b1e837db/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f38663830613637302d336163612d313165622d616239302d6439616538313462323430642e706e67" alt></p>
+<ul>
+<li>适用场景：父组件传递数据给子组件</li>
+<li>子组件设置<code>props</code>属性，定义接收父组件传递过来的参数</li>
+<li>父组件在使用子组件标签中通过字面量来传递值</li>
+</ul>
+<p><code>Children.vue</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">props:&#123;  </span><br><span class="line">    <span class="comment">// 字符串形式  </span></span><br><span class="line"> name:<span class="built_in">String</span> <span class="comment">// 接收的类型参数  </span></span><br><span class="line">    <span class="comment">// 对象形式  </span></span><br><span class="line">    age:&#123;    </span><br><span class="line">        type:<span class="built_in">Number</span>, <span class="comment">// 接收的类型为数值  </span></span><br><span class="line">        defaule:<span class="number">18</span>,  <span class="comment">// 默认值为18  </span></span><br><span class="line">       <span class="built_in">require</span>:<span class="literal">true</span> <span class="comment">// age属性必须传递  </span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Father.vue</code>组件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Children name=<span class="string">"jack"</span> age=<span class="number">18</span> /</span><br></pre></td></tr></table></figure>
+<h3 id="emit-触发自定义事件"><a href="#emit-触发自定义事件" class="headerlink" title="$emit 触发自定义事件"></a>$emit 触发自定义事件</h3><ul>
+<li>适用场景：子组件传递数据给父组件</li>
+<li>子组件通过<code>$emit触发</code>自定义事件，<code>$emit</code>第二个参数为传递的数值</li>
+<li>父组件绑定监听器获取到子组件传递过来的参数</li>
+</ul>
+<p><code>Chilfen.vue</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$emit(<span class="string">'add'</span>, good)</span><br></pre></td></tr></table></figure>
+<p><code>Father.vue</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Children @add=<span class="string">"cartAdd($event)"</span> /</span><br></pre></td></tr></table></figure>
+<h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h3><ul>
+<li>父组件在使用子组件的时候设置<code>ref</code></li>
+<li>父组件通过设置子组件<code>ref</code>来获取数据</li>
+</ul>
+<p>父组件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Children ref=<span class="string">"foo"</span> / </span><br><span class="line">  </span><br><span class="line"><span class="keyword">this</span>.$refs.foo  <span class="comment">// 获取子组件实例，通过子组件实例我们就能拿到对应的数据</span></span><br></pre></td></tr></table></figure>
+<h3 id="EventBus"><a href="#EventBus" class="headerlink" title="EventBus"></a>EventBus</h3><ul>
+<li>使用场景：兄弟组件传值</li>
+<li>创建一个中央时间总线<code>EventBus</code></li>
+<li>兄弟组件通过<code>$emit</code>触发自定义事件，<code>$emit</code>第二个参数为传递的数值</li>
+<li>另一个兄弟组件通过<code>$on</code>监听自定义事件</li>
+</ul>
+<p><code>Bus.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个中央时间总线类  </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bus</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">constructor</span>() &#123;  </span><br><span class="line">    <span class="keyword">this</span>.callbacks = &#123;&#125;;   <span class="comment">// 存放事件的名字  </span></span><br><span class="line">  &#125;  </span><br><span class="line">  $on(name, fn) &#123;  </span><br><span class="line">    <span class="keyword">this</span>.callbacks[name] = <span class="keyword">this</span>.callbacks[name] || [];  </span><br><span class="line">    <span class="keyword">this</span>.callbacks[name].push(fn);  </span><br><span class="line">  &#125;  </span><br><span class="line">  $emit(name, args) &#123;  </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.callbacks[name]) &#123;  </span><br><span class="line">      <span class="keyword">this</span>.callbacks[name].forEach(<span class="function">(<span class="params">cb</span>) =&gt;</span> cb(args));  </span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// main.js  </span></span><br><span class="line">Vue.prototype.$bus = <span class="keyword">new</span> Bus() <span class="comment">// 将$bus挂载到vue实例的原型上  </span></span><br><span class="line"><span class="comment">// 另一种方式  </span></span><br><span class="line">Vue.prototype.$bus = <span class="keyword">new</span> Vue() <span class="comment">// Vue已经实现了Bus的功能</span></span><br></pre></td></tr></table></figure>
+<p><code>Children1.vue</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$bus.$emit(<span class="string">'foo'</span>)</span><br></pre></td></tr></table></figure>
+<p><code>Children2.vue</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$bus.$on(<span class="string">'foo'</span>, <span class="keyword">this</span>.handle)</span><br></pre></td></tr></table></figure>
+<h3 id="parent-或-root"><a href="#parent-或-root" class="headerlink" title="$parent 或$ root"></a>$parent 或$ root</h3><ul>
+<li>通过共同祖辈<code>$parent</code>或者<code>$root</code>搭建通信侨联</li>
+</ul>
+<p>兄弟组件</p>
+<p><code>this.$parent.on(&#39;add&#39;,this.add)</code></p>
+<p>另一个兄弟组件</p>
+<p><code>this.$parent.emit(&#39;add&#39;)</code></p>
+<h3 id="attrs-与-listeners"><a href="#attrs-与-listeners" class="headerlink" title="$attrs 与$ listeners"></a>$attrs 与$ listeners</h3><ul>
+<li>适用场景：祖先传递数据给子孙</li>
+<li>设置批量向下传属性<code>$attrs</code>和 <code>$listeners</code></li>
+<li>包含了父级作用域中不作为 <code>prop</code> 被识别 (且获取) 的特性绑定 ( class 和 style 除外)。</li>
+<li>可以通过 <code>v-bind=&quot;$attrs&quot;</code> 传⼊内部组件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// child：并未在props中声明foo  </span></span><br><span class="line">&lt;p&gt;&#123;&#123;$attrs.foo&#125;&#125;&lt;<span class="regexp">/p </span></span><br><span class="line"><span class="regexp">  </span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ parent  </span></span><br><span class="line"><span class="regexp">&lt;HelloWorld foo="foo"/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给Grandson隔代传值，communication/index.vue  </span></span><br><span class="line">&lt;Child2 msg=<span class="string">"lalala"</span> @some-event=<span class="string">"onSomeEvent"</span>&gt;&lt;<span class="regexp">/Child2 </span></span><br><span class="line"><span class="regexp">  </span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ Child2做展开  </span></span><br><span class="line"><span class="regexp">&lt;Grandson v-bind="$attrs" v-on="$listeners"&gt;&lt;/</span>Grandson </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Grandson使⽤  </span></span><br><span class="line">&lt;div @click=<span class="string">"$emit('some-event', 'msg from grandson')"</span> </span><br><span class="line">&#123;&#123;msg&#125;&#125;  </span><br><span class="line">&lt;<span class="regexp">/div</span></span><br></pre></td></tr></table></figure>
+<h3 id="provide-与-inject"><a href="#provide-与-inject" class="headerlink" title="provide 与 inject"></a>provide 与 inject</h3><ul>
+<li>在祖先组件定义<code>provide</code>属性，返回传递的值</li>
+<li>在后代组件通过<code>inject</code>接收组件传递过来的值</li>
+</ul>
+<p>祖先组件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">provide()&#123;  </span><br><span class="line">    <span class="keyword">return</span> &#123;  </span><br><span class="line">        foo:<span class="string">'foo'</span>  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>后代组件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inject:[<span class="string">'foo'</span>] <span class="comment">// 获取到祖先组件传递过来的值</span></span><br></pre></td></tr></table></figure>
+<h3 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a><code>vuex</code></h3><ul>
+<li>适用场景: 复杂关系的组件数据传递</li>
+<li><code>Vuex</code>作用相当于一个用来存储共享变量的容器<br><img src="https://camo.githubusercontent.com/c82de9bcf70e6fbacc3f9b64f32eb43b64f6d67b6c2fe809c83e36eaaed8ee2d/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f66613230376364302d336163612d313165622d616239302d6439616538313462323430642e706e67" alt></li>
+<li><code>state</code>用来存放共享变量的地方</li>
+<li><code>getter</code>，可以增加一个<code>getter</code>派生状态，(相当于<code>store</code>中的计算属性），用来获得共享变量的值</li>
+<li><code>mutations</code>用来存放修改<code>state</code>的方法。</li>
+<li><code>actions</code>也是用来存放修改state的方法，不过<code>action</code>是在<code>mutations</code>的基础上进行。常用来做一些异步操作</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>父子关系的组件数据传递选择 <code>props</code>  与 <code>$emit</code>进行传递，也可选择<code>ref</code></li>
+<li>兄弟关系的组件数据传递可选择<code>$bus</code>，其次可以选择<code>$parent</code>进行传递</li>
+<li>祖先与后代组件数据传递可选择<code>attrs</code>与<code>listeners</code>或者 <code>Provide</code>与 <code>Inject</code></li>
+<li>复杂关系的组件数据传递可以通过<code>vuex</code>存放共享的变量</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://juejin.cn/post/6844903990052782094#heading-0" target="_blank" rel="noopener">https://juejin.cn/post/6844903990052782094#heading-0</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%5C%E9%5C%80%5C%9A%5C%E4%5C%BF%5C%A1" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/\%E9\%80\%9A\%E4\%BF\%A1</a></li>
+<li><a href="https://vue3js.cn/docs/zh" target="_blank" rel="noopener">https://vue3js.cn/docs/zh</a></li>
+</ul>
+
+                                                                            
+                                                        </div>
+                                                        <footer class="entry-meta entry-footer">
+                                                            
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+
+                                                                
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue2/">Vue2</a></li></ul>
+
+                                                                
+                                                                
+                                                                
+                                                                    
+                        <div id="vcomments" style="margin-top: 20px;"></div>
+                        <script src="/js/Valine.min.js"></script>
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <script type="text/javascript">
+                            new Valine({
+                                el: '#vcomments',
+                                placeholder: '说点什么吧...',
+                                appId: 'ukMmYdN5OJN3yJ6reejhduyJ-9Nh9j0Va',
+                                appKey: 'K0KrIsh1h4zVTP6xds7nh5Qe',
+                                avatar:'hide' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                                // avatar:'wavatar' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                            })
+                        </script>
+                        
+                                                                
+                                                        </footer>
+                                        </div>
+                                        
+                                            
+<nav id="article-nav">
+  
+    <a href="/2021/07/14/前端/Vue3有了解过吗？能说说跟Vue2的区别吗？/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Vue3有了解过吗？能说说跟Vue2的区别吗？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/13/生活/驾驶知识/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">驾驶笔记</div>
+    </a>
+  
+</nav>
+
+                                                
+</article>
+
+<!-- Table of Contents -->
+
+    <aside id="sidebar">
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">
+                文章目录
+            </strong>
+            
+                <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、组件间通信的概念"><span class="nav-number">1.</span> <span class="nav-text">一、组件间通信的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、组件间通信解决了什么"><span class="nav-number">2.</span> <span class="nav-text">二、组件间通信解决了什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、组件间通信的分类"><span class="nav-number">3.</span> <span class="nav-text">二、组件间通信的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、组件间通信的方案"><span class="nav-number">4.</span> <span class="nav-text">三、组件间通信的方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#props传递数据"><span class="nav-number">4.1.</span> <span class="nav-text">props传递数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#emit-触发自定义事件"><span class="nav-number">4.2.</span> <span class="nav-text">$emit 触发自定义事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ref"><span class="nav-number">4.3.</span> <span class="nav-text">ref</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EventBus"><span class="nav-number">4.4.</span> <span class="nav-text">EventBus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parent-或-root"><span class="nav-number">4.5.</span> <span class="nav-text">$parent 或$ root</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attrs-与-listeners"><span class="nav-number">4.6.</span> <span class="nav-text">$attrs 与$ listeners</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#provide-与-inject"><span class="nav-number">4.7.</span> <span class="nav-text">provide 与 inject</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vuex"><span class="nav-number">4.8.</span> <span class="nav-text">vuex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.9.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol>
+                    
+        </div>
+    </aside>
+    </section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+    
+                <div class="clearfix container footCon">
+                    <div class="cup-wrap">
+                        <div class="cup">
+                            <div class="cup__mouse"></div>
+                            <div class="cup__eyes"></div>
+                            <!-- <div class="cup__label"></div> -->
+                        </div>
+                        <div class="cup-shadow"></div>
+                    </div>
+                    <!-- 小耳朵 All Rights Reserved.  -->
+                    <div class="footText">小耳朵，让世界听见我们的声音。</div>
+                    <div class="site-info">
+                        Copyright © 
+                        2021 xerduo. 
+                        <!-- All rights reserved.  -->
+                            
+                    </div>
+                    <!-- <div class="site-credit">
+                        Theme by
+                            <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+                    </div> -->
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/cursor-effects.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script  src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+<script>
+  // https://github.com/stevenjoezhang/live2d-widget
+  // https://blog.csdn.net/wang_123_zy/article/details/87181892
+  L2Dwidget.init({
+      "model": {
+          jsonPath: "https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.model.json",
+          "scale": 1
+      },
+      "display": {
+          "position": "left",
+          "width": 100,
+          "height": 200,
+          "hOffset": 30, // 水平
+          "vOffset": -108 // 垂直
+      },
+      "mobile": {
+          "show": false,
+          "scale": 0.5
+      },
+      "react": {
+          "opacityDefault": 0.9,
+          "opacityOnHover": 0.2
+      }
+  });
+</script>
+<!-- 文章被访问时页面URL会自动推送给百度 -->
+<!-- <script>
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script> -->
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  <!-- 飞鸟动画背景 -->
+  <!-- <script src="/js/three.min.js"></script>
+  <script src="/js/vanta.birds.min.js"></script>
+  <script>
+    const effect = VANTA.BIRDS({
+      el: "#container",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      backgroundColor: 0xffffff,
+      birdSize: 0.50,
+      wingSpan: 15.00,
+      speedLimit: 2.00,
+      separation: 100.00,
+      alignment: 48.00,
+      cohesion: 41.00,
+      quantity: 3.00
+    })
+  </script> -->
+</body>
+</html>
