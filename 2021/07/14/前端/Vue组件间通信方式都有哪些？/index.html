@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://camo.githubusercontent.com/41389964a4d8cb201f3c1c1c268d17d933c33f39b733333b16adf41cba636461/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f38356239323430302d336163612d313165622d616239302d6439616538313462323430642e706e67">
 <meta property="og:image" content="https://camo.githubusercontent.com/b7f08ff2fed277b55b66927cbfc6b4e749485aed8a5a1eb9c5af95d2b1e837db/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f38663830613637302d336163612d313165622d616239302d6439616538313462323430642e706e67">
 <meta property="og:image" content="https://camo.githubusercontent.com/c82de9bcf70e6fbacc3f9b64f32eb43b64f6d67b6c2fe809c83e36eaaed8ee2d/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f66613230376364302d336163612d313165622d616239302d6439616538313462323430642e706e67">
-<meta property="og:updated_time" content="2021-07-14T09:14:23.966Z">
+<meta property="og:updated_time" content="2021-07-14T23:22:15.720Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue组件间通信方式都有哪些？">
 <meta name="twitter:description" content="一、组件间通信的概念">
@@ -163,7 +163,25 @@ var themeMenus = {};
     </div>
 </header>
 
-<!--  -->
+<!-- 
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  </script>
+ -->
 
   <div id="container">
     <div id="wrap">
@@ -266,14 +284,14 @@ var themeMenus = {};
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$bus.$emit(<span class="string">'foo'</span>)</span><br></pre></td></tr></table></figure>
 <p><code>Children2.vue</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$bus.$on(<span class="string">'foo'</span>, <span class="keyword">this</span>.handle)</span><br></pre></td></tr></table></figure>
-<h3 id="parent-或-root"><a href="#parent-或-root" class="headerlink" title="$parent 或$ root"></a>$parent 或$ root</h3><ul>
+<h3 id="parent-或-root"><a href="#parent-或-root" class="headerlink" title="$parent 或 $root"></a>$parent 或 $root</h3><ul>
 <li>通过共同祖辈<code>$parent</code>或者<code>$root</code>搭建通信侨联</li>
 </ul>
 <p>兄弟组件</p>
 <p><code>this.$parent.on(&#39;add&#39;,this.add)</code></p>
 <p>另一个兄弟组件</p>
 <p><code>this.$parent.emit(&#39;add&#39;)</code></p>
-<h3 id="attrs-与-listeners"><a href="#attrs-与-listeners" class="headerlink" title="$attrs 与$ listeners"></a>$attrs 与$ listeners</h3><ul>
+<h3 id="attrs-与-listeners"><a href="#attrs-与-listeners" class="headerlink" title="$attrs 与 $listeners"></a>$attrs 与 $listeners</h3><ul>
 <li>适用场景：祖先传递数据给子孙</li>
 <li>设置批量向下传属性<code>$attrs</code>和 <code>$listeners</code></li>
 <li>包含了父级作用域中不作为 <code>prop</code> 被识别 (且获取) 的特性绑定 ( class 和 style 除外)。</li>
@@ -374,7 +392,7 @@ var themeMenus = {};
                 文章目录
             </strong>
             
-                <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、组件间通信的概念"><span class="nav-number">1.</span> <span class="nav-text">一、组件间通信的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、组件间通信解决了什么"><span class="nav-number">2.</span> <span class="nav-text">二、组件间通信解决了什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、组件间通信的分类"><span class="nav-number">3.</span> <span class="nav-text">二、组件间通信的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、组件间通信的方案"><span class="nav-number">4.</span> <span class="nav-text">三、组件间通信的方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#props传递数据"><span class="nav-number">4.1.</span> <span class="nav-text">props传递数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#emit-触发自定义事件"><span class="nav-number">4.2.</span> <span class="nav-text">$emit 触发自定义事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ref"><span class="nav-number">4.3.</span> <span class="nav-text">ref</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EventBus"><span class="nav-number">4.4.</span> <span class="nav-text">EventBus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parent-或-root"><span class="nav-number">4.5.</span> <span class="nav-text">$parent 或$ root</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attrs-与-listeners"><span class="nav-number">4.6.</span> <span class="nav-text">$attrs 与$ listeners</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#provide-与-inject"><span class="nav-number">4.7.</span> <span class="nav-text">provide 与 inject</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vuex"><span class="nav-number">4.8.</span> <span class="nav-text">vuex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.9.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol>
+                <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、组件间通信的概念"><span class="nav-number">1.</span> <span class="nav-text">一、组件间通信的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、组件间通信解决了什么"><span class="nav-number">2.</span> <span class="nav-text">二、组件间通信解决了什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、组件间通信的分类"><span class="nav-number">3.</span> <span class="nav-text">二、组件间通信的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、组件间通信的方案"><span class="nav-number">4.</span> <span class="nav-text">三、组件间通信的方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#props传递数据"><span class="nav-number">4.1.</span> <span class="nav-text">props传递数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#emit-触发自定义事件"><span class="nav-number">4.2.</span> <span class="nav-text">$emit 触发自定义事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ref"><span class="nav-number">4.3.</span> <span class="nav-text">ref</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EventBus"><span class="nav-number">4.4.</span> <span class="nav-text">EventBus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parent-或-root"><span class="nav-number">4.5.</span> <span class="nav-text">$parent 或 $root</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attrs-与-listeners"><span class="nav-number">4.6.</span> <span class="nav-text">$attrs 与 $listeners</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#provide-与-inject"><span class="nav-number">4.7.</span> <span class="nav-text">provide 与 inject</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vuex"><span class="nav-number">4.8.</span> <span class="nav-text">vuex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.9.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol>
                     
         </div>
     </aside>
