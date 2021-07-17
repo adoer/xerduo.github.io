@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>什么是http？http和https的区别？ | 小耳朵</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <meta name="keywords" content="demo">
+  
+  
+  
+  
+  <meta name="description" content="一、HTTPHTTP (HyperText Transfer Protocol)，即超文本运输协议，是实现网络通信的一种规范">
+<meta name="keywords" content="demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是HTTP？HTTP和HTTPS的区别？">
+<meta property="og:url" content="http://xerduo.com/2021/07/17/计算机网络/什么是HTTP？HTTP和HTTPS的区别？/index.html">
+<meta property="og:site_name" content="小耳朵">
+<meta property="og:description" content="一、HTTPHTTP (HyperText Transfer Protocol)，即超文本运输协议，是实现网络通信的一种规范">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://camo.githubusercontent.com/fc1d8f6b511091dbcb212708c7698c1b03509c58fe9e1a7ee40f48b8ff35b849/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f66646131313962302d623230622d313165622d383566362d3666616337376330633962332e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/74467b23b30f05f5a1b441acbab976cba8bebf22635ff1bb9ecaaae7ac0335a5/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f30373863353063302d623230632d313165622d616239302d6439616538313462323430642e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/8e98f093484c5552b8a77f6e51c3ee6fea8e3af2e3c23184976f111f94775a6b/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f30653430396663302d623230632d313165622d383566362d3666616337376330633962332e706e67">
+<meta property="og:updated_time" content="2021-07-17T14:37:10.287Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="什么是HTTP？HTTP和HTTPS的区别？">
+<meta name="twitter:description" content="一、HTTPHTTP (HyperText Transfer Protocol)，即超文本运输协议，是实现网络通信的一种规范">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/fc1d8f6b511091dbcb212708c7698c1b03509c58fe9e1a7ee40f48b8ff35b849/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f66646131313962302d623230622d313165622d383566362d3666616337376330633962332e706e67">
+  
+    <link rel="alternate" href="/atom.xml" title="小耳朵" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  
+  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css"> -->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <!-- <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style> -->
+    
+  <!-- <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all"> -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50" id="cbody">
+
+
+  <header id="allheader" class="site-header" role="banner">
+    <div id="marco">
+        <div id="cielo"></div>
+        <div id="luna"></div>
+        <div id="gato"></div>
+        <div id="muro"></div>
+        <div id="edificios"></div>
+    </div>
+    <div class="clearfix container headCon">
+        <div class="site-branding">
+
+            <div class="site-title">
+                <!-- 
+                    <a href="/" title="小耳朵" rel="home">
+                        小耳朵
+                    </a>
+                 -->
+                <div class="titleText">小耳朵</div>
+                <!-- <div class="decText">让世界听见我们的声音</div> -->
+            </div>
+
+            <div class="cat">
+                <div class="ear ear--left"></div>
+                <div class="ear ear--right"></div>
+                <div class="face">
+                    <div class="eye eye--left">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="eye eye--right">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="muzzle"></div>
+                </div>
+            </div>
+
+            
+
+                    <nav id="main-navigation" class="main-navigation" role="navigation">
+                        <a class="nav-open">
+                            <i class="fa fa-align-justify open"></i>
+                            <i class="fa fa-close closeIcon"></i>
+                        </a>
+                        <!-- <a class="nav-close">Close</a> -->
+                        <div class="clearfix sf-menu">
+
+                            <ul id="main-nav" class="nmenu sf-js-enabled">
+                                
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/">
+                                            首页
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/archives">
+                                            归档
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/categories">
+                                            分类
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/tags">
+                                            标签
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/about">
+                                            关于
+                                        </a>
+                                    </li>
+                                    
+                            </ul>
+                        </div>
+                    </nav>
+
+
+        </div>
+    </div>
+</header>
+
+<!-- 
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  </script>
+ -->
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+        
+          <section id="main" style="float:none;"><article id="post-计算机网络/什么是HTTP？HTTP和HTTPS的区别？" style="width: 66%; float:left;"
+     class="article article-type-
+        post" itemscope itemprop="blogPost" >
+            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+                
+                    
+                        <header class="article-header">
+                            
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      什么是HTTP？HTTP和HTTPS的区别？
+    </h1>
+  
+
+                        </header>
+                        
+                            <div class="article-meta">
+                                
+    发表于
+    <a href="/2021/07/17/计算机网络/什么是HTTP？HTTP和HTTPS的区别？/" class="article-date">
+        <time datetime="2021-07-17T14:25:21.000Z" itemprop="datePublished">
+            <!-- 2021-07-17 22:07:00 -->
+            2021-07-17 22:25:21
+        </time>
+    </a>
+    
+                                    
+                            </div>
+                            <div class="article-entry" itemprop="articleBody">
+                                
+                                                                        <h2 id="一、HTTP"><a href="#一、HTTP" class="headerlink" title="一、HTTP"></a>一、HTTP</h2><p><code>HTTP</code> (HyperText Transfer Protocol)，即超文本运输协议，是实现网络通信的一种规范<br><a id="more"></a><br><img src="https://camo.githubusercontent.com/fc1d8f6b511091dbcb212708c7698c1b03509c58fe9e1a7ee40f48b8ff35b849/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f66646131313962302d623230622d313165622d383566362d3666616337376330633962332e706e67" alt></p>
+<p>在计算机和网络世界有，存在不同的协议，如广播协议、寻址协议、路由协议等等……</p>
+<p>而<code>HTTP</code>是一个传输协议，即将数据由A传到B或将B传输到A，并且 A 与 B 之间能够存放很多第三方，如： A&lt;=&gt;X&lt;=&gt;Y&lt;=&gt;Z&lt;=&gt;B</p>
+<p>传输的数据并不是计算机底层中的二进制包，而是完整的、有意义的数据，如HTML 文件, 图片文件, 查询结果等超文本，能够被上层应用识别</p>
+<p>在实际应用中，<code>HTTP</code>常被用于在<code>Web</code>浏览器和网站服务器之间传递信息，以明文方式发送内容，不提供任何方式的数据加密</p>
+<p>特点如下：</p>
+<ul>
+<li>支持客户/服务器模式</li>
+<li>简单快速：客户向服务器请求服务时，只需传送请求方法和路径。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快</li>
+<li>灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记</li>
+<li>无连接：无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间</li>
+<li>无状态：HTTP协议无法根据之前的状态进行本次的请求处理</li>
+</ul>
+<h2 id="二、HTTPS"><a href="#二、HTTPS" class="headerlink" title="二、HTTPS"></a>二、HTTPS</h2><p>在上述介绍<code>HTTP</code>中，了解到<code>HTTP</code>传递信息是以明文的形式发送内容，这并不安全。而<code>HTTPS</code>出现正是为了解决<code>HTTP</code>不安全的特性</p>
+<p>为了保证这些隐私数据能加密传输，让<code>HTTP</code>运行安全的<code>SSL/TLS</code>协议上，即 HTTPS = HTTP + SSL/TLS，通过 <code>SSL</code>证书来验证服务器的身份，并为浏览器和服务器之间的通信进行加密</p>
+<p><code>SSL</code> 协议位于<code>TCP/IP</code> 协议与各种应用层协议之间，浏览器和服务器在使用 <code>SSL</code> 建立连接时需要选择一组恰当的加密算法来实现安全通信，为数据通讯提供安全支持</p>
+<p><img src="https://camo.githubusercontent.com/74467b23b30f05f5a1b441acbab976cba8bebf22635ff1bb9ecaaae7ac0335a5/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f30373863353063302d623230632d313165622d616239302d6439616538313462323430642e706e67" alt></p>
+<p>流程图如下所示：</p>
+<p><img src="https://camo.githubusercontent.com/8e98f093484c5552b8a77f6e51c3ee6fea8e3af2e3c23184976f111f94775a6b/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f30653430396663302d623230632d313165622d383566362d3666616337376330633962332e706e67" alt></p>
+<ul>
+<li>首先客户端通过URL访问服务器建立SSL连接</li>
+<li>服务端收到客户端请求后，会将网站支持的证书信息（证书中包含公钥）传送一份给客户端</li>
+<li>客户端的服务器开始协商SSL连接的安全等级，也就是信息加密的等级</li>
+<li>客户端的浏览器根据双方同意的安全等级，建立会话密钥，然后利用网站的公钥将会话密钥加密，并传送给网站</li>
+<li>服务器利用自己的私钥解密出会话密钥</li>
+<li>服务器利用会话密钥加密与客户端之间的通信</li>
+</ul>
+<h2 id="三、区别"><a href="#三、区别" class="headerlink" title="三、区别"></a>三、区别</h2><ul>
+<li>HTTPS是HTTP协议的安全版本，HTTP协议的数据传输是明文的，是不安全的，HTTPS使用了SSL/TLS协议进行了加密处理，相对更安全</li>
+<li>HTTP 和 HTTPS 使用连接方式不同，默认端口也不一样，HTTP是80，HTTPS是443</li>
+<li>HTTPS 由于需要设计加密以及多次握手，性能方面不如 HTTP</li>
+<li>HTTPS需要SSL，SSL 证书需要钱，功能越强大的证书费用越高</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://www.cnblogs.com/klb561/p/10289199.html" target="_blank" rel="noopener">https://www.cnblogs.com/klb561/p/10289199.html</a></li>
+<li><a href="https://www.jianshu.com/p/205c0fc51c97" target="_blank" rel="noopener">https://www.jianshu.com/p/205c0fc51c97</a></li>
+<li><a href="https://vue3js.cn/interview" target="_blank" rel="noopener">https://vue3js.cn/interview</a></li>
+</ul>
+
+                                                                            
+                                                        </div>
+                                                        <footer class="entry-meta entry-footer">
+                                                            
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/计算机网络/">计算机网络</a>
+
+                                                                
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li></ul>
+
+                                                                
+                                                                
+                                                                
+                                                                    
+                        <div id="vcomments" style="margin-top: 20px;"></div>
+                        <script src="/js/Valine.min.js"></script>
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <script type="text/javascript">
+                            new Valine({
+                                el: '#vcomments',
+                                placeholder: '说点什么吧...',
+                                appId: 'ukMmYdN5OJN3yJ6reejhduyJ-9Nh9j0Va',
+                                appKey: 'K0KrIsh1h4zVTP6xds7nh5Qe',
+                                avatar:'hide' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                                // avatar:'wavatar' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                            })
+                        </script>
+                        
+                                                                
+                                                        </footer>
+                                        </div>
+                                        
+                                            
+<nav id="article-nav">
+  
+  
+    <a href="/2021/07/16/前端/ES6中的Promise及使用场景/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ES6中的Promise及使用场景</div>
+    </a>
+  
+</nav>
+
+                                                
+</article>
+
+<!-- Table of Contents -->
+
+    <aside id="sidebar">
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">
+                文章目录
+            </strong>
+            
+                <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、HTTP"><span class="nav-number">1.</span> <span class="nav-text">一、HTTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、HTTPS"><span class="nav-number">2.</span> <span class="nav-text">二、HTTPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、区别"><span class="nav-number">3.</span> <span class="nav-text">三、区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol>
+                    
+        </div>
+    </aside>
+    </section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+    
+                <div class="clearfix container footCon">
+                    <div class="cup-wrap">
+                        <div class="cup">
+                            <div class="cup__mouse"></div>
+                            <div class="cup__eyes"></div>
+                            <!-- <div class="cup__label"></div> -->
+                        </div>
+                        <div class="cup-shadow"></div>
+                    </div>
+                    <!-- 小耳朵 All Rights Reserved.  -->
+                    <div class="footText">小耳朵，让世界听见我们的声音。</div>
+                    <div class="site-info">
+                        Copyright © 
+                        2021 xerduo. 
+                        <!-- All rights reserved.  -->
+                            
+                    </div>
+                    <!-- <div class="site-credit">
+                        Theme by
+                            <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+                    </div> -->
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/cursor-effects.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script  src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+<script>
+  // https://github.com/stevenjoezhang/live2d-widget
+  // https://blog.csdn.net/wang_123_zy/article/details/87181892
+  L2Dwidget.init({
+      "model": {
+          jsonPath: "https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.model.json",
+          "scale": 1
+      },
+      "display": {
+          "position": "left",
+          "width": 100,
+          "height": 200,
+          "hOffset": 30, // 水平
+          "vOffset": -108 // 垂直
+      },
+      "mobile": {
+          "show": false,
+          "scale": 0.5
+      },
+      "react": {
+          "opacityDefault": 0.9,
+          "opacityOnHover": 0.2
+      }
+  });
+</script>
+<!-- 文章被访问时页面URL会自动推送给百度 -->
+<!-- <script>
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script> -->
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  <!-- 飞鸟动画背景 -->
+  <!-- <script src="/js/three.min.js"></script>
+  <script src="/js/vanta.birds.min.js"></script>
+  <script>
+    const effect = VANTA.BIRDS({
+      el: "#container",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      backgroundColor: 0xffffff,
+      birdSize: 0.50,
+      wingSpan: 15.00,
+      speedLimit: 2.00,
+      separation: 100.00,
+      alignment: 48.00,
+      cohesion: 41.00,
+      quantity: 3.00
+    })
+  </script> -->
+</body>
+</html>
