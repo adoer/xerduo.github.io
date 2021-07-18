@@ -1252,6 +1252,7 @@ body.search .page .entry-footer {
     height: 88px;
     width: 113.1px;
     margin-bottom: -20px;
+		display: block;
   }
   
   .ear {

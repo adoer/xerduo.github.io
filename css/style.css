@@ -216,7 +216,7 @@ body {
 }
 .outer {
   max-width: 1040px;
-  margin: 40px auto;
+  margin: 100px auto;
   padding: 0 20px;
   padding-top: 40px;
   margin-top: 0;
@@ -521,10 +521,10 @@ a.article-title:hover {
   opacity: 0;
 }
 .text-gradient-a .text-gradient span {
-  background-image: -webkit-linear-gradient(270deg, transparent 97.5%, #035bd6 0);
-  background-image: -moz-linear-gradient(270deg, transparent 97.5%, #035bd6 0);
-  background-image: -ms-linear-gradient(270deg, transparent 97.5%, #035bd6 0);
-  background-image: linear-gradient(180deg, transparent 97.5%, #035bd6 0);
+  background-image: -webkit-linear-gradient(270deg, transparent 97.5%, #ff2828 0);
+  background-image: -moz-linear-gradient(270deg, transparent 97.5%, #ff2828 0);
+  background-image: -ms-linear-gradient(270deg, transparent 97.5%, #ff2828 0);
+  background-image: linear-gradient(180deg, transparent 97.5%, #ff2828 0);
   background-repeat: no-repeat;
   -webkit-background-size: 0 100%;
   -moz-background-size: 0 100%;
@@ -1271,7 +1271,7 @@ a.article-title:hover {
       display: none */
 }
 #page-nav .current {
-  color: #333;
+  color: #ff2828;
   font-weight: bold;
 }
 #page-nav .space {
