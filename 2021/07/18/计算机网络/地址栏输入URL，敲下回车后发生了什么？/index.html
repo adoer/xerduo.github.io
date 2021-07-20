@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>地址栏输入url，敲下回车后发生了什么？ | 小耳朵</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <meta name="keywords" content="demo">
+  
+  
+  
+  
+  <meta name="description" content="一、简单分析简单的分析，从输入 URL到回车后发生的行为如下：">
+<meta name="keywords" content="demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="地址栏输入URL，敲下回车后发生了什么？">
+<meta property="og:url" content="http://xerduo.com/2021/07/18/计算机网络/地址栏输入URL，敲下回车后发生了什么？/index.html">
+<meta property="og:site_name" content="小耳朵">
+<meta property="og:description" content="一、简单分析简单的分析，从输入 URL到回车后发生的行为如下：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://camo.githubusercontent.com/aadb07cae34f090d86f41e7966a7e220d1afab8f86aa94162f1dae77dd0c782f/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f32376130633639302d626466342d313165622d616239302d6439616538313462323430642e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/2b7e893e7f7bfb080d212835fc77921ce1304997042895ff1e422d5ee88bbd72/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f33333066623737302d626466342d313165622d383566362d3666616337376330633962332e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/27c96e5f5481bd2e3923d18ad05b6c9437adcdca2d7ba123da7034d270d0b0e9/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f61643735303739302d626466342d313165622d383566362d3666616337376330633962332e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/6d633f62c42eb3f99502b7d2e9658910ee4bd7c32de5e2bf61027a836dcbddd4/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f62626362363066302d626466342d313165622d616239302d6439616538313462323430642e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/2dc7c0636b07575bd1396451e6ad87d7c578249fbfa9e54b5b9e136a25cf6a1a/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f63356665303134302d626466342d313165622d616239302d6439616538313462323430642e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/327ffd61eefe5383cc039dc2fc35f6e41964dec5339b835ea907d6bd62a2416e/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f64623762646464302d626466342d313165622d383566362d3666616337376330633962332e706e67">
+<meta property="og:updated_time" content="2021-07-18T14:18:23.255Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="地址栏输入URL，敲下回车后发生了什么？">
+<meta name="twitter:description" content="一、简单分析简单的分析，从输入 URL到回车后发生的行为如下：">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/aadb07cae34f090d86f41e7966a7e220d1afab8f86aa94162f1dae77dd0c782f/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f32376130633639302d626466342d313165622d616239302d6439616538313462323430642e706e67">
+  
+    <link rel="alternate" href="/atom.xml" title="小耳朵" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  
+  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css"> -->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <!-- <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style> -->
+    
+  <!-- <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all"> -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+  <!-- <script>
+    // 随机排序数组
+    function shuffle(arr) { 
+      let i = arr.length; 
+      while (i) { 
+          let j = Math.floor(Math.random() * i--); 
+          [arr[j], arr[i]] = [arr[i], arr[j]]; 
+      } 
+      return arr;
+    }
+    window.randArr = [];
+    function getRandArr(num){
+      for(var i = 1;i<=num;i++){
+        randArr.push(i);
+      }
+      randArr = shuffle(randArr).slice();
+    }
+    getRandArr(47);
+    console.log(randArr);
+  </script> -->
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50" id="cbody">
+
+
+  <header id="allheader" class="site-header" role="banner">
+    <div id="marco">
+        <div id="cielo"></div>
+        <div id="luna"></div>
+        <div id="gato"></div>
+        <div id="muro"></div>
+        <div id="edificios"></div>
+    </div>
+    <div class="clearfix container headCon">
+        <div class="site-branding">
+
+            <div class="site-title">
+                <!-- 
+                    <a href="/" title="小耳朵" rel="home">
+                        小耳朵
+                    </a>
+                 -->
+                <div class="titleText">小耳朵</div>
+                <!-- <div class="decText">让世界听见我们的声音</div> -->
+            </div>
+
+            <a class="cat" href="/">
+                <div class="ear ear--left"></div>
+                <div class="ear ear--right"></div>
+                <div class="face">
+                    <div class="eye eye--left">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="eye eye--right">
+                        <div class="eye-pupil"></div>
+                    </div>
+                    <div class="muzzle"></div>
+                </div>
+            </a>
+
+            
+
+                    <nav id="main-navigation" class="main-navigation" role="navigation">
+                        <a class="nav-open">
+                            <i class="fa fa-align-justify open"></i>
+                            <i class="fa fa-close closeIcon"></i>
+                        </a>
+                        <!-- <a class="nav-close">Close</a> -->
+                        <div class="clearfix sf-menu">
+
+                            <ul id="main-nav" class="nmenu sf-js-enabled">
+                                
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/">
+                                            首页
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/archives">
+                                            归档
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/categories">
+                                            分类
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/tags">
+                                            标签
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                        <a class="" href="/about">
+                                            关于
+                                        </a>
+                                    </li>
+                                    
+                            </ul>
+                        </div>
+                    </nav>
+
+
+        </div>
+    </div>
+</header>
+
+<!--  -->
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+        
+          <section id="main" style="float:none;"><article id="post-计算机网络/地址栏输入URL，敲下回车后发生了什么？" style="width: 66%; float:left;"
+     class="article article-type-
+        post" itemscope itemprop="blogPost" >
+            <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+                
+                    
+                        <header class="article-header">
+                            
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      地址栏输入URL，敲下回车后发生了什么？
+    </h1>
+  
+
+                        </header>
+                        
+                            <div class="article-meta">
+                                
+    发表于
+    <a href="/2021/07/18/计算机网络/地址栏输入URL，敲下回车后发生了什么？/" class="article-date">
+        <time datetime="2021-07-18T14:17:44.000Z" itemprop="datePublished">
+            <!-- 2021-07-18 22:07:00 -->
+            2021-07-18 22:17:44
+        </time>
+    </a>
+    
+                                    
+                            </div>
+                            <div class="article-entry" itemprop="articleBody">
+                                
+                                                                        <h2 id="一、简单分析"><a href="#一、简单分析" class="headerlink" title="一、简单分析"></a>一、简单分析</h2><p>简单的分析，从输入 <code>URL</code>到回车后发生的行为如下：<br><a id="more"></a></p>
+<ul>
+<li>URL解析</li>
+<li>DNS 查询</li>
+<li>TCP 连接</li>
+<li>HTTP 请求</li>
+<li>响应请求</li>
+<li>页面渲染</li>
+</ul>
+<h2 id="二、详细分析"><a href="#二、详细分析" class="headerlink" title="二、详细分析"></a>二、详细分析</h2><h3 id="URL解析"><a href="#URL解析" class="headerlink" title="URL解析"></a>URL解析</h3><p>首先判断你输入的是一个合法的<code>URL</code> 还是一个待搜索的关键词，并且根据你输入的内容进行对应操作</p>
+<p><code>URL</code>的解析第过程中的第一步，一个<code>url</code>的结构解析如下：</p>
+<p><img src="https://camo.githubusercontent.com/aadb07cae34f090d86f41e7966a7e220d1afab8f86aa94162f1dae77dd0c782f/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f32376130633639302d626466342d313165622d616239302d6439616538313462323430642e706e67" alt></p>
+<h3 id="DNS查询"><a href="#DNS查询" class="headerlink" title="DNS查询"></a>DNS查询</h3><p>在之前文章中讲过<code>DNS</code>的查询，这里就不再讲述了</p>
+<p>整个查询过程如下图所示：</p>
+<p><img src="https://camo.githubusercontent.com/2b7e893e7f7bfb080d212835fc77921ce1304997042895ff1e422d5ee88bbd72/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f33333066623737302d626466342d313165622d383566362d3666616337376330633962332e706e67" alt></p>
+<p>最终，获取到了域名对应的目标服务器<code>IP</code>地址</p>
+<h3 id="TCP连接"><a href="#TCP连接" class="headerlink" title="TCP连接"></a>TCP连接</h3><p>在之前文章中，了解到<code>tcp</code>是一种面向有连接的传输层协议</p>
+<p>在确定目标服务器服务器的<code>IP</code>地址后，则经历三次握手建立<code>TCP</code>连接，流程如下：</p>
+<p><img src="https://camo.githubusercontent.com/27c96e5f5481bd2e3923d18ad05b6c9437adcdca2d7ba123da7034d270d0b0e9/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f61643735303739302d626466342d313165622d383566362d3666616337376330633962332e706e67" alt></p>
+<h3 id="发送-http-请求"><a href="#发送-http-请求" class="headerlink" title="发送 http 请求"></a>发送 http 请求</h3><p>当建立<code>tcp</code>连接之后，就可以在这基础上进行通信，浏览器发送 <code>http</code> 请求到目标服务器</p>
+<p>请求的内容包括：</p>
+<ul>
+<li>请求行</li>
+<li>请求头</li>
+<li>请求主体</li>
+</ul>
+<p><img src="https://camo.githubusercontent.com/6d633f62c42eb3f99502b7d2e9658910ee4bd7c32de5e2bf61027a836dcbddd4/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f62626362363066302d626466342d313165622d616239302d6439616538313462323430642e706e67" alt></p>
+<h3 id="响应请求"><a href="#响应请求" class="headerlink" title="响应请求"></a>响应请求</h3><p>当服务器接收到浏览器的请求之后，就会进行逻辑操作，处理完成之后返回一个<code>HTTP</code>响应消息，包括：</p>
+<ul>
+<li>状态行</li>
+<li>响应头</li>
+<li>响应正文</li>
+</ul>
+<p><img src="https://camo.githubusercontent.com/2dc7c0636b07575bd1396451e6ad87d7c578249fbfa9e54b5b9e136a25cf6a1a/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f63356665303134302d626466342d313165622d616239302d6439616538313462323430642e706e67" alt></p>
+<p>在服务器响应之后，由于现在<code>http</code>默认开始长连接<code>keep-alive</code>，当页面关闭之后，<code>tcp</code>链接则会经过四次挥手完成断开</p>
+<h3 id="页面渲染"><a href="#页面渲染" class="headerlink" title="页面渲染"></a>页面渲染</h3><p>当浏览器接收到服务器响应的资源后，首先会对资源进行解析：</p>
+<ul>
+<li>查看响应头的信息，根据不同的指示做对应处理，比如重定向，存储cookie，解压gzip，缓存资源等等</li>
+<li>查看响应头的 Content-Type的值，根据不同的资源类型采用不同的解析方式</li>
+</ul>
+<p>关于页面的渲染过程如下：</p>
+<ul>
+<li>解析HTML，构建 DOM 树</li>
+<li>解析 CSS ，生成 CSS 规则树</li>
+<li>合并 DOM 树和 CSS 规则，生成 render 树</li>
+<li>布局 render 树（ Layout / reflow ），负责各元素尺寸、位置的计算</li>
+<li>绘制 render 树（ paint ），绘制页面像素信息</li>
+<li>浏览器会将各层的信息发送给 GPU，GPU 会将各层合成（ composite ），显示在屏幕上</li>
+</ul>
+<p><img src="https://camo.githubusercontent.com/327ffd61eefe5383cc039dc2fc35f6e41964dec5339b835ea907d6bd62a2416e/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f64623762646464302d626466342d313165622d383566362d3666616337376330633962332e706e67" alt></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://github.com/febobo/web-interview/issues/141" target="_blank" rel="noopener"> 面试官：DNS协议 是什么？说说DNS 完整的查询过程? #141</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/80551769" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/80551769</a></li>
+</ul>
+
+                                                                            
+                                                        </div>
+                                                        <footer class="entry-meta entry-footer">
+                                                            
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/计算机网络/">计算机网络</a>
+
+                                                                
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li></ul>
+
+                                                                
+                                                                
+                                                                
+                                                                    
+                        <div id="vcomments" style="margin-top: 20px;"></div>
+                        <script src="/js/Valine.min.js"></script>
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <!-- <script charset="utf-8" type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+                        <script type="text/javascript">
+                            new Valine({
+                                el: '#vcomments',
+                                placeholder: '说点什么吧...',
+                                appId: '7EUrtQqv6g96EfOynGqGl78K-gzGzoHsz',
+                                appKey: 'faEhpCLYm4m03XARX4XQaDeD',
+                               /*  appId: 'ukMmYdN5OJN3yJ6reejhduyJ-9Nh9j0Va',
+                                appKey: 'K0KrIsh1h4zVTP6xds7nh5Qe', */
+                                avatar:'retro' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                                // avatar:'hide' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                                // avatar:'wavatar' // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+                            })
+                        </script>
+                        
+                                                                
+                                                        </footer>
+                                        </div>
+                                        
+                                            
+<nav id="article-nav">
+  
+    <a href="/2021/07/18/计算机网络/TCP为什么需要三次握手和四次挥手？/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          TCP为什么需要三次握手和四次挥手？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/18/计算机网络/HTTP常见的请求头有哪些？作用？/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">HTTP常见的请求头有哪些？作用？</div>
+    </a>
+  
+</nav>
+
+                                        
+</article>
+
+<!-- Table of Contents -->
+
+    <aside id="sidebar">
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">
+                文章目录
+            </strong>
+            
+                <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、简单分析"><span class="nav-number">1.</span> <span class="nav-text">一、简单分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、详细分析"><span class="nav-number">2.</span> <span class="nav-text">二、详细分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#URL解析"><span class="nav-number">2.1.</span> <span class="nav-text">URL解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS查询"><span class="nav-number">2.2.</span> <span class="nav-text">DNS查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP连接"><span class="nav-number">2.3.</span> <span class="nav-text">TCP连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送-http-请求"><span class="nav-number">2.4.</span> <span class="nav-text">发送 http 请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应请求"><span class="nav-number">2.5.</span> <span class="nav-text">响应请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面渲染"><span class="nav-number">2.6.</span> <span class="nav-text">页面渲染</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol>
+                    
+        </div>
+    </aside>
+    </section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+    
+                <div class="clearfix container footCon">
+                    <div class="cup-wrap">
+                        <div class="cup">
+                            <div class="cup__mouse"></div>
+                            <div class="cup__eyes"></div>
+                            <!-- <div class="cup__label"></div> -->
+                        </div>
+                        <div class="cup-shadow"></div>
+                    </div>
+                    <!-- 小耳朵 All Rights Reserved.  -->
+                    <div class="footText">小耳朵，让世界听见我们的声音。</div>
+                    <div class="site-info">
+                        Copyright © 
+                        2021 xerduo. 
+                        <!-- All rights reserved.  -->
+                            
+                    </div>
+                    <!-- <div class="site-credit">
+                        Theme by
+                            <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+                    </div> -->
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/cursor-effects.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script  src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+<script>
+  // https://github.com/stevenjoezhang/live2d-widget
+  // https://blog.csdn.net/wang_123_zy/article/details/87181892
+  L2Dwidget.init({
+      "model": {
+          jsonPath: "https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.model.json",
+          "scale": 1
+      },
+      "display": {
+          "position": "left",
+          "width": 100,
+          "height": 200,
+          "hOffset": 30, // 水平
+          "vOffset": -108 // 垂直
+      },
+      "mobile": {
+          "show": false,
+          "scale": 0.5
+      },
+      "react": {
+          "opacityDefault": 0.9,
+          "opacityOnHover": 0.2
+      }
+  });
+</script>
+<!-- 文章被访问时页面URL会自动推送给百度 -->
+<!-- <script>
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script> -->
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  <!-- 飞鸟动画背景 -->
+  <!-- <script src="/js/three.min.js"></script>
+  <script src="/js/vanta.birds.min.js"></script>
+  <script>
+    const effect = VANTA.BIRDS({
+      el: "#container",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      backgroundColor: 0xffffff,
+      birdSize: 0.50,
+      wingSpan: 15.00,
+      speedLimit: 2.00,
+      separation: 100.00,
+      alignment: 48.00,
+      cohesion: 41.00,
+      quantity: 3.00
+    })
+  </script> -->
+</body>
+</html>
